@@ -16,9 +16,11 @@ defmodule Z19rpwWeb.Router do
       post "/identity/callback", AuthenticationController, :identity_callback
     end
 
+    resources "/users", UserController, only: [:create]
+
     pipe_through :authenticated
 
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit, :create]
   end
 
   # Enables LiveDashboard only for development

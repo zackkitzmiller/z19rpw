@@ -13,7 +13,7 @@ defmodule Z19rpwWeb.AuthenticationController do
   def handle_user_conn(user, conn) do
     case user do
       {:ok, user} ->
-        {:ok, jwt, _full_claims} = Z19rpw.Guardian.encode_and_sign(user, %{})
+        {:ok, jwt, _full_claims} = Z19rpw.Guardian.encode_and_sign(user, %{}, permissions: user.permissions)
         conn
         |> put_resp_header("authorization", "Bearer #{jwt}")
         |> json(%{data: %{token: jwt}})

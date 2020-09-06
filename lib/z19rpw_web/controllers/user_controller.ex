@@ -4,6 +4,9 @@ defmodule Z19rpwWeb.UserController do
   alias Z19rpw.Accounts
   alias Z19rpw.Accounts.User
 
+  plug Guardian.Permissions, [ensure: %{default: [:read_users]}] when action in [:show]
+  plug Guardian.Permissions, [ensure: %{default: [:write_users]}] when action in [:update, :delete]
+
   action_fallback Z19rpwWeb.FallbackController
 
   def index(conn, _params) do

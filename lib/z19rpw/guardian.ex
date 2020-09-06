@@ -1,5 +1,6 @@
 defmodule Z19rpw.Guardian do
   use Guardian, otp_app: :z19rpw
+  use Guardian.Permissions, encoding: Guardian.Permissions.BitwiseEncoding
 
   def subject_for_token(%{id: id}, _claims) do
     {:ok, to_string(id)}
@@ -15,5 +16,12 @@ defmodule Z19rpw.Guardian do
 
   def resource_from_claims(_claims) do
     {:error, :no_claims_sub}
+  end
+
+  def build_claims(claims ,_resource, opts) do
+    claims =
+      claims
+      |> encode_permissions_into_claims!(Keyword.get(opts, :permissions))
+    {:ok, claims}
   end
 end
