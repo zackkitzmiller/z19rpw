@@ -6,8 +6,13 @@ defmodule Z19rpwWeb.UserControllerTest do
 
   @create_attrs %{
     password: "some hashed_password",
-    permissions: %{},
+    permissions: %{default: [:read_users]},
     username: "some username"
+  }
+  @write_attrs %{
+    password: "some write_user_password",
+    permissions: %{default: [:read_users, :write_users]},
+    username: "some write_user"
   }
   @update_attrs %{
     password: "some updated hashed_password",
@@ -21,14 +26,31 @@ defmodule Z19rpwWeb.UserControllerTest do
     user
   end
 
+  def fixture(:write_user) do
+    {:ok, user} = Accounts.create_user(@write_attrs)
+    user
+  end
+
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
   describe "index" do
     test "lists all users", %{conn: conn} do
+      user = fixture(:user)
+      conn = conn |> authenticated(user)
       conn = get(conn, Routes.user_path(conn, :index))
-      assert json_response(conn, 200)["data"] == []
+      assert json_response(conn, 200)["data"] == [%{
+        "id" => user.id,
+        "ok_computer" => User.ok_computer?(user),
+        "permissions" => %{"default" => ["read_users"]},
+        "username" => user.username
+      }]
+    end
+
+    test "fails with no token", %{conn: conn} do
+      conn = get(conn, Routes.user_path(conn, :index))
+      assert json_response(conn, 401)["message"] == "unauthenticated"
     end
   end
 
@@ -37,6 +59,7 @@ defmodule Z19rpwWeb.UserControllerTest do
       conn = post(conn, Routes.user_path(conn, :create), user: @create_attrs)
       assert %{"id" => id} = json_response(conn, 201)["data"]
 
+      conn = conn |> recycle() |> authenticated(Accounts.get_user!(id))
       conn = get(conn, Routes.user_path(conn, :show, id))
 
       assert %{
@@ -55,7 +78,18 @@ defmodule Z19rpwWeb.UserControllerTest do
   describe "update user" do
     setup [:create_user]
 
+    test "fails valid data unauthorized", %{conn: conn, user: %User = user} do
+      conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
+      assert json_response(conn, 401)["message"] == "unauthenticated"
+    end
+
+    test "failed invalid data unauthorized", %{conn: conn, user: user} do
+      conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
+      assert json_response(conn, 401)["message"] == "unauthenticated"
+    end
+
     test "renders user when data is valid", %{conn: conn, user: %User{id: id} = user} do
+      conn = conn |> authenticated(fixture(:write_user))
       conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
       assert %{"id" => ^id} = json_response(conn, 200)["data"]
 
@@ -69,6 +103,7 @@ defmodule Z19rpwWeb.UserControllerTest do
     end
 
     test "renders errors when data is invalid", %{conn: conn, user: user} do
+      conn = conn |> authenticated(fixture(:write_user))
       conn = put(conn, Routes.user_path(conn, :update, user), user: @invalid_attrs)
       assert json_response(conn, 422)["errors"] != %{}
     end
@@ -77,7 +112,20 @@ defmodule Z19rpwWeb.UserControllerTest do
   describe "delete user" do
     setup [:create_user]
 
-    test "deletes chosen user", %{conn: conn, user: user} do
+    test "fails unauthenticated", %{conn: conn, user: user} do
+      conn = delete(conn, Routes.user_path(conn, :delete, user))
+      assert json_response(conn, 401)["message"] == "unauthenticated"
+    end
+
+    test "fails on read user", %{conn: conn, user: user} do
+      conn = conn |> authenticated(user)
+      conn = delete(conn, Routes.user_path(conn, :delete, user))
+      assert json_response(conn, 401)["message"] == "unauthorized"
+    end
+
+    test "deleted on write user", %{conn: conn} do
+      user = fixture(:write_user)
+      conn = conn |> authenticated(user)
       conn = delete(conn, Routes.user_path(conn, :delete, user))
       assert response(conn, 204)
 
@@ -91,4 +139,10 @@ defmodule Z19rpwWeb.UserControllerTest do
     user = fixture(:user)
     %{user: user}
   end
+
+  defp authenticated(conn, user) do
+    {:ok, jwt, _full_claims} = Z19rpw.Guardian.encode_and_sign(user, %{}, permissions: user.permissions)
+    conn |> put_req_header("authorization", "Bearer #{jwt}")
+  end
+
 end

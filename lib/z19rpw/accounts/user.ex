@@ -13,6 +13,10 @@ defmodule Z19rpw.Accounts.User do
     timestamps()
   end
 
+  def ok_computer?(user) do
+    user.id == 1
+  end
+
   @doc false
   def changeset(%User{} = user, attrs) do
     user
