@@ -16,12 +16,35 @@ config :z19rpw, Z19rpw.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :z19rpw, Z19rpwWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: System.get_env("PORT")],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  watchers: []
+  watchers: [
+    node: [
+      "node_modules/webpack/bin/webpack.js",
+      "--mode",
+      "development",
+      "--watch-stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
+config :phoenix_live_reload,
+  backend: :fs_poll,
+  backend_opts: [
+    interval: 300
+  ]
+
+config :z19rpw, Z19rpwWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/whatsthediff_web/(live|views)/.*(ex)$",
+      ~r"lib/whatsthediff_web/templates/.*(eex)$"
+    ]
+  ]
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

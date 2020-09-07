@@ -1,0 +1,20 @@
+<h1>Listing Pages</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <td>
+        <span>Page</span>
+        <span>Page</span>
+        <span>Page</span>
+      </td>
+    </tr>
+  </tbody>
+</table>

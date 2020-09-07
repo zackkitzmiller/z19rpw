@@ -20,7 +20,7 @@ defmodule Z19rpw.MixProject do
   def application do
     [
       mod: {Z19rpw.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :os_mon]
     ]
   end
 
@@ -47,7 +47,9 @@ defmodule Z19rpw.MixProject do
       {:ueberauth_identity, "~> 0.2"},
       {:guardian, "~> 2.0"},
       {:comeonin, "~> 5.0"},
-      {:bcrypt_elixir, "~> 2.0"}
+      {:bcrypt_elixir, "~> 2.0"},
+      {:phoenix_live_reload, "~> 1.2"},
+      {:libcluster, "~> 3.0"}
     ]
   end
 
@@ -59,7 +61,7 @@ defmodule Z19rpw.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup"],
+      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]

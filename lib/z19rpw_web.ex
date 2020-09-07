@@ -60,6 +60,7 @@ defmodule Z19rpwWeb do
 
   defp view_helpers do
     quote do
+      use Phoenix.HTML
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
 
