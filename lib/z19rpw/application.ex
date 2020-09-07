@@ -6,7 +6,11 @@ defmodule Z19rpw.Application do
   use Application
 
   def start(_type, _args) do
+
+    topologies = Application.get_env(:libcluster, :topologies) || []
+
     children = [
+      {Cluster.Supervisor, [topologies, [name: Z19rpw.ClusterSupervisor]]},
       # Start the Ecto repository
       Z19rpw.Repo,
       # Start the Telemetry supervisor

@@ -12,7 +12,7 @@ config :z19rpw,
 
 # Configures the endpoint
 config :z19rpw, Z19rpwWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "127.0.0.1"],
   secret_key_base: "QM/B52O3HH0VhIN+6ENj1rh/kkBP3/LQdC/zNhTTicdnsQphALeKyFVIW3/KmCiR",
   render_errors: [view: Z19rpwWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Z19rpw.PubSub,
@@ -48,6 +48,10 @@ config :z19rpw, Z19rpwWeb.Plug.AuthAccessPipeline,
   module: Z19rpw.Guardian,
   error_handler: Z19rpwWeb.Plug.AuthErrorHandler
 
+
+config :libcluster, topologies: [
+    z19rpw: [
+      strategy: Elixir.Cluster.Strategy.Gossip]]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
