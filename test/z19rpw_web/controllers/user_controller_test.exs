@@ -78,7 +78,7 @@ defmodule Z19rpwWeb.UserControllerTest do
   describe "update user" do
     setup [:create_user]
 
-    test "fails valid data unauthorized", %{conn: conn, user: %User = user} do
+    test "fails valid data unauthorized", %{conn: conn, user: %User{} = user} do
       conn = put(conn, Routes.user_path(conn, :update, user), user: @update_attrs)
       assert json_response(conn, 401)["message"] == "unauthenticated"
     end
