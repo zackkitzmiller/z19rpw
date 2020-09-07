@@ -41,8 +41,8 @@ config :z19rpw, Z19rpwWeb.Endpoint,
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/whatsthediff_web/(live|views)/.*(ex)$",
-      ~r"lib/whatsthediff_web/templates/.*(eex)$"
+      ~r"lib/z19rpw_web/(live|views)/.*(ex)$",
+      ~r"lib/z19rpw_web/templates/.*(eex)$"
     ]
   ]
 # ## SSL Support
