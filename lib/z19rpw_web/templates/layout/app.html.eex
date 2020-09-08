@@ -4,27 +4,61 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Whatsthediff · Phoenix Framework</title>
+    <title>z19r</title>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
   <body>
-    <header>
-      <section class="container">
-        <nav role="navigation">
-          <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+              <h1 class="title">zack kitzmiller ♥️'s you</h1>
+          </h1>
+          <h2 class="subtitle">
+              software engineer. former new yorker &mdash; current chicagoan
+          </h2>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <nav class="tabs">
+          <div class="container">
+            <ul>
+              <li><a>github</a></li>
+              <li><a>twitter</a></li>
+              <li><a>linkedin</a></li>
+              <li><a>tiwterr</a></li>
+              <li><a>blog</a></li>
+              <li><a>src</a></li>
+            </ul>
+          </div>
         </nav>
-      </section>
-    </header>
-    <main role="main" class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
-    </main>
+      </div>
+    </section>
+
+    <section role="main" class="section">
+      <div class="container">
+        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%= @inner_content %>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <footer class="fooooter">
+          <div class="content has-text-left">
+            <p>
+              <span class="icon has-text-primary">
+                <i class="fas fa-copyright"></i>
+              </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, postgres,
+              and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
+              venmo name on the receipt printer sitting on my desk and i'll send you $100.
+            </p>
+          </div>
+        </footer>
+      </div>
+    </section>
   </body>
 </html>
