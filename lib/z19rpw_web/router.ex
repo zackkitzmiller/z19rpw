@@ -20,7 +20,7 @@ defmodule Z19rpwWeb.Router do
   scope "/", Z19rpwWeb do
     pipe_through :browser
     get "/", PageController, :index
-    live "/ok-computer", RadioheadLive
+    live "/ok-computer", RadioheadLive, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
   scope "/api", Z19rpwWeb do
