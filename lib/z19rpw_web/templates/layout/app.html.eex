@@ -57,6 +57,7 @@
               and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
               venmo name on the receipt printer sitting on my desk and i'll send you $100.
             </p>
+            <p><small>served by <%= @hostname %> in <%= System.monotonic_time(:microsecond) - @start_time %>µs</small></p>
           </div>
         </footer>
       </div>

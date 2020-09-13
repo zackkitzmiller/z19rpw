@@ -10,6 +10,7 @@ defmodule Z19rpwWeb.Router do
   end
 
   pipeline :browser do
+    plug :set_statistics
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
@@ -51,5 +52,11 @@ defmodule Z19rpwWeb.Router do
       pipe_through [:fetch_session, :protect_from_forgery]
       live_dashboard "/dashboard", metrics: Z19rpwWeb.Telemetry
     end
+  end
+
+  defp set_statistics(conn, _opts) do
+    conn
+      |> assign(:hostname, String.downcase(System.get_env("HOSTNAME")))
+      |> assign(:start_time, System.monotonic_time(:microsecond))
   end
 end
