@@ -28,3 +28,5 @@ z19rpw-*.tar
 /priv/static/
 
 /assets/node_modules/
+
+.elixir_ls
