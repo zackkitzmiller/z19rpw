@@ -30,3 +30,4 @@ z19rpw-*.tar
 /assets/node_modules/
 
 .elixir_ls
+/key.json

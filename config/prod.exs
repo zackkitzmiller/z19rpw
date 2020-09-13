@@ -10,7 +10,7 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :z19rpw, Z19rpwWeb.Endpoint,
-  url: [host: "0.0.0.0", port: 80],
+  url: [host: "z19r.pw", port: 80],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
@@ -52,4 +52,17 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs which loads secrets
 # and configuration from environment variables.
+
+config :libcluster,
+  topologies: [
+    z19rpw: [
+      strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+      config: [
+        service: "z19rpw-headless-service",
+        application_name: "z19rpw",
+        polling_interval: 10_000
+      ]
+    ]
+  ]
+
 import_config "prod.secret.exs"
