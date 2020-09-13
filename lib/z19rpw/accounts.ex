@@ -38,8 +38,8 @@ defmodule Z19rpw.Accounts do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
-  def get_user_by_username_and_password(nil, password), do: {:error, :invalid}
-  def get_user_by_username_and_password(username, nil), do: {:error, :invalid}
+  def get_user_by_username_and_password(nil, _password), do: {:error, :invalid}
+  def get_user_by_username_and_password(_username, nil), do: {:error, :invalid}
 
   def get_user_by_username_and_password(username, password) do
     with %User{} = user <- Repo.get_by(User, username: String.downcase(username)),
