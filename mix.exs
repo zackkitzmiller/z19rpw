@@ -47,10 +47,10 @@ defmodule Z19rpw.MixProject do
       {:ueberauth, "~> 0.6.0"},
       {:ueberauth_identity, "~> 0.2"},
       {:guardian, "~> 2.0"},
-      {:comeonin, "~> 5.0"},
       {:bcrypt_elixir, "~> 2.0"},
       {:phoenix_live_reload, "~> 1.2"},
-      {:libcluster, "~> 3.0"}
+      {:libcluster, "~> 3.0"},
+      {:file_system, git: "https://github.com/falood/file_system.git", override: true}
     ]
   end
 
