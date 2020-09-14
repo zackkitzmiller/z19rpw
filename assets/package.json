@@ -2,10 +2,6 @@
   "repository": {},
   "description": " ",
   "license": "MIT",
-  "scripts": {
-    "deploy": "webpack --mode production",
-    "watch": "webpack --mode development --watch"
-  },
   "dependencies": {
     "bulma": "^0.9.0",
     "phoenix": "file:../deps/phoenix",
@@ -26,5 +22,12 @@
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "4.41.5",
     "webpack-cli": "^3.3.2"
+  },
+  "scripts": {
+    "test": "mocha ./test/**/*.js --exit -r @babel/register -r jsdom-global/register",
+    "docs": "documentation build js/phoenix.js -f html -o ../doc/js",
+    "build": "webpack --mode production",
+    "watch": "webpack --mode development --watch",
+    "deploy": "webpack --mode production"
   }
 }
