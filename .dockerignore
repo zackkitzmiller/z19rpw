@@ -3,7 +3,6 @@ _build/
 .git/
 .vscode/
 deps/
-priv/static/
 k8s/
 test/
 .dockerignore
