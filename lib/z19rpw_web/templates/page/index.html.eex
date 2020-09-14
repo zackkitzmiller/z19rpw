@@ -1,8 +1,86 @@
-<div>
-  <ol>
-    <li><%= link("forrst", to: "https://zurb.com/blog/zurb-acquires-forrst", target: "_blank") %></li>
-    <li><%= link("seatgeek", to: "https://seatgeek.com", target: "_blank") %></li>
-    <li><%= link("venmo", to: "https://venmo.com", target: "_blank") %></li>
-    <li><%= link("grabango", to: "https://grabango.com", target: "_blank") %></li>
-  </ol>
+<div class="columns is-multiline">
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="https://grabango.com/wp-content/uploads/2020/08/Grabango_Round_Red-1.png" alt="grabango">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
+            <p class="subtitle is-6">current</p>
+          </div>
+        </div>
+
+        <div class="content">
+          staff sortware engineer. leading payments efforts and general arcitecture
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="<%= Routes.static_path(@conn, "/images/venmo.png") %>" alt="venmo">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= link("venmo", to: "https://venmo.com", target: "_blank") %></p>
+            <p class="subtitle is-6">sept '19 &ndash; jun '20</p>
+          </div>
+        </div>
+
+        <div class="content">
+          member of the technical staff ii
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="<%= Routes.static_path(@conn, "/images/seatgeek.png") %>" alt="seatgeek">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= link("seatgeek", to: "https://seatgeek.com", target: "_blank") %></p>
+            <p class="subtitle is-6">jan '12 &ndash; sept '19</p>
+          </div>
+        </div>
+
+        <div class="content">
+          sr software engineer ii. fraud, payments, marketplace, lots more. manager &ndash; resilience engineering
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column is-half">
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <img src="<%= Routes.static_path(@conn, "/images/forrst.png") %>" alt="forrst">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= link("forrst", to: "https://techcrunch.com/2012/03/26/design-community-colourlovers-acquires-forrst/", target: "_blank") %></p>
+            <p class="subtitle is-6">jan '11 &ndash; sept '11</p>
+          </div>
+        </div>
+
+        <div class="content">
+          the software engineer. worked with kyle
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
