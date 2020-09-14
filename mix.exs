@@ -50,6 +50,7 @@ defmodule Z19rpw.MixProject do
       {:bcrypt_elixir, "~> 2.0"},
       {:phoenix_live_reload, "~> 1.2"},
       {:libcluster, "~> 3.0"},
+      {:timex, "~>3.5"},
       {:file_system, git: "https://github.com/falood/file_system.git", override: true}
     ]
   end
