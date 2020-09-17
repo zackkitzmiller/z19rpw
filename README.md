@@ -37,7 +37,7 @@ this is a little more involved. z19rpw is hosted in a k8s cluster on gcp. there'
     * you've got the z19rpw elixir service
     * you've got the cloud_sql_proxy which reads the config from a secret volume stored in googleville somewhere
         * generated with `kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.json
-kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.json` where `key.json` was configured in GCP's UI. I gotta figure that out, i forget how i did it.
+kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.json` where `key.json` was configured in console.gcp's iam groups.
 * there's a static IP address that I got with `gcloud compute addresses create z19rpw-ip` or something
 
 ## release
