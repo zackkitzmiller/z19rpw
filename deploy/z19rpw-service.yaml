@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-09-13T02:19:00Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app: z19rpw
+  name: z19rpw-service
+  namespace: default
+  resourceVersion: "5643"
+  selfLink: /api/v1/namespaces/default/services/z19rpw-service
+  uid: 3991066a-ca09-41ef-b8dd-c46133ed2e56
+spec:
+  clusterIP: 10.39.252.84
+  externalTrafficPolicy: Cluster
+  loadBalancerIP: 34.121.246.81
+  ports:
+  - nodePort: 30570
+    port: 80
+    protocol: TCP
+    targetPort: 4000
+  selector:
+    app: z19rpw
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 34.121.246.81
