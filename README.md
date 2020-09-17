@@ -1,19 +1,47 @@
 # Z19rpw
 
-To start your Phoenix server:
+zack kitzmiller's personal website
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+## Pull Requests
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+As I've always done in the past, pull requests are welcome. I'm not a designer, and I don't really care. If you want to make some improvements or.. make things worse, go ahead. Pull down the repo, make some changes, and I'll deploy when I merge the PR in.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## running locally
 
-## Learn more
+There's not much to this,
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```
+$ hub clone zackkitzmiller/z19rpw
+$ mix deps.get
+$ mix phx.server
+```
+
+## tests
+
+sure, i have that
+
+```
+mix test
+```
+
+## deploy
+
+this is a little more involved. z19rpw is hosted in a k8s cluster on gcp. there's a few pieces
+
+* headless services (ClusterIP) that just lets elixir discover eachother with libcluster
+* a regular service that acts as in ingress
+* a coupl'a secrets, mostly just db connection shit
+* speaking of, the db is a postgres goog storage instance
+* then the deployment
+    * currently there are two containers per pod
+    * you've got the z19rpw elixir service
+    * you've got the cloud_sql_proxy which reads the config from a secret volume stored in googleville somewhere
+        * generated with `kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.json
+kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.json` where `key.json` was configured in GCP's UI. I gotta figure that out, i forget how i did it.
+* there's a static IP address that I got with `gcloud compute addresses create z19rpw-ip` or something
+
+## release
+
+```
+$ ./deploy/release.sh
+```
