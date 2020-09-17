@@ -28,7 +28,7 @@ mix test
 
 this is a little more involved. z19rpw is hosted in a k8s cluster on gcp. there's a few pieces
 
-* headless services (ClusterIP) that just lets elixir discover eachother with libcluster
+* headless services (ClusterIP) that just lets elixir discover eachother with [libcluster](https://github.com/bitwalker/libcluster)
 * a regular service that acts as in ingress
 * a coupl'a secrets, mostly just db connection shit
 * speaking of, the db is a postgres goog storage instance
