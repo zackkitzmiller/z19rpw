@@ -14,6 +14,7 @@ defmodule Z19rpwWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -22,6 +23,13 @@ defmodule Z19rpwWeb.Router do
     pipe_through :browser
     get "/", PageController, :index
     live "/ok-computer", RadioheadLive, layout: {Z19rpwWeb.LayoutView, "app.html"}
+
+    live "/posts", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/new", PostLive.Index, :new, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
+
+    live "/posts/:id", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:id/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
   scope "/api", Z19rpwWeb do

@@ -1,0 +1,34 @@
+<section class="articles">
+  <div class="column is-12">
+    <%= for post <- @posts do %>
+    <div class="card article">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content has-text-centered">
+            <p class="title article-title"><%= post.title %></p>
+              <div class="tags has-addons level-item">
+                  <span class="tag is-rounded is-info">@zackkitzmiller</span>
+                  <span class="tag is-rounded">May 10, 2018</span>
+              </div>
+          </div>
+        </div>
+        <div class="content article-body">
+          <p><%= post.body %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</section>
+
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, Z19rpwWeb.PostLive.FormComponent,
+    id: @post.id || :new,
+    title: @page_title,
+    action: @live_action,
+    post: @post,
+    return_to: Routes.post_index_path(@socket, :index) %>
+<% end %>
+
+<span><%= live_patch "⚽️", to: Routes.post_index_path(@socket, :new) %></span>

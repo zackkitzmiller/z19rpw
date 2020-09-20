@@ -24,6 +24,8 @@ defmodule Z19rpwWeb do
       import Plug.Conn
       import Z19rpwWeb.Gettext
       alias Z19rpwWeb.Router.Helpers, as: Routes
+
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -80,9 +82,12 @@ defmodule Z19rpwWeb do
     quote do
       use Phoenix.HTML
       # Import basic rendering functionality (render, render_layout, etc)
-      import Phoenix.View
       import Phoenix.LiveView.Helpers
+
+      import Phoenix.View
+
       import Z19rpwWeb.ErrorHelpers
+      import Z19rpwWeb.LiveHelpers
       import Z19rpwWeb.Gettext
       alias Z19rpwWeb.Router.Helpers, as: Routes
     end
