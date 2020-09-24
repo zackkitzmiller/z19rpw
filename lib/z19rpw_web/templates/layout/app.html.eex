@@ -58,7 +58,7 @@
             <p><small>served by <%= @hostname %> in
             <%= Timex.Format.Duration.Formatters.Humanized.format(
                   Timex.Duration.from_microseconds(
-                    System.monotonic_time(:microsecond) - @start_time)) %></small></p>
+                    System.monotonic_time(:microsecond) - @start_time)) %> &mdash; <%= node() %></small></p>
           </div>
         </footer>
       </div>
