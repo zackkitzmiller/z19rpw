@@ -3,7 +3,7 @@ defmodule Z19rpw.Blog.Post do
   import Ecto.Changeset
 
   schema "posts" do
-    field :author, :integer
+    field :author, :integer, default: 1
     field :body, :string
     field :title, :string
 
@@ -13,7 +13,7 @@ defmodule Z19rpw.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :author, :body])
-    |> validate_required([:title, :author, :body])
+    |> cast(attrs, [:title, :body])
+    |> validate_required([:title, :body])
   end
 end

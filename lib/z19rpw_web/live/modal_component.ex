@@ -12,8 +12,13 @@ defmodule Z19rpwWeb.ModalComponent do
       phx-page-loading>
 
       <div class="phx-modal-content">
-        <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
-        <%= live_component @socket, @component, @opts %>
+        <div class="modal is-active">
+          <div class="modal-background"></div>
+          <div class="modal-content">
+            <%= live_patch raw("&times;"), to: @return_to, class: "phx-modal-close" %>
+            <%= live_component @socket, @component, @opts %>
+          </div>
+        </div>
       </div>
     </div>
     """

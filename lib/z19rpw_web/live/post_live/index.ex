@@ -1,6 +1,8 @@
 defmodule Z19rpwWeb.PostLive.Index do
   use Z19rpwWeb, :live_view
 
+  import Earmark
+
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
 

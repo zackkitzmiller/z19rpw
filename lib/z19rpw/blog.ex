@@ -18,7 +18,7 @@ defmodule Z19rpw.Blog do
 
   """
   def list_posts do
-    Repo.all(Post)
+    Repo.all(from Post, order_by: [desc: :id])
   end
 
   @doc """
