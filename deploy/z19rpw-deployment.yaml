@@ -43,48 +43,8 @@ spec:
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
-      - command:
-        - /cloud_sql_proxy
-        - -instances=z19r-com:us-central1:zrk19pw=tcp:5432
-        - -credential_file=/secrets/service_account.json
-        image: gcr.io/cloudsql-docker/gce-proxy:1.17
-        imagePullPolicy: IfNotPresent
-        name: cloud-sql-proxy
-        resources: {}
-        securityContext:
-          runAsNonRoot: true
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-        volumeMounts:
-        - mountPath: /secrets/
-          name: s3kretz
-          readOnly: true
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
-      volumes:
-      - name: s3kretz
-        secret:
-          defaultMode: 420
-          secretName: z19rpw-dbc
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2020-09-13T04:13:19Z"
-    lastUpdateTime: "2020-09-14T04:30:28Z"
-    message: ReplicaSet "z19rpw-599c7fd68c" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  - lastTransitionTime: "2020-09-16T22:42:11Z"
-    lastUpdateTime: "2020-09-16T22:42:11Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  observedGeneration: 27
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1

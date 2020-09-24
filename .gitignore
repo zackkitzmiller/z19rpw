@@ -31,3 +31,4 @@ z19rpw-*.tar
 
 .elixir_ls
 /key.json
+/cockroach-data
