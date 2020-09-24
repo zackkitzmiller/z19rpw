@@ -45,3 +45,47 @@ kubectl create secret generic z19rpw-dbc --from-file=service_account.json=key.js
 ```
 $ ./deploy/release.sh
 ```
+
+## Environments
+* Dev - Local Environment
+    - Port 4000
+    - DNS: None
+    - DB: Cockroach (Homebrew)
+    - Ingress: None
+    - Mesh: None
+    - Service Deploy: None
+* Staging - k3s Pi Cluster
+    - Port 4000
+    - DNS: None
+    - DB: Postgres
+    - Ingress: Traefic
+    - Mesh: Traefic
+    - Service Deploy: Yes - Custom (service-staging)
+* Prod
+    - Port 80:443
+    - DNS: Yes (z19r.pw)
+    - DB: Cockroach (k8s)
+    - Ingress: GKE
+    - Mesh: None
+    - Service Deploy: Yes - -service w/ ingress.yaml
+
+
+Dev environment is OK.
+
+### Not Working
+* Dev
+    - Livereload
+    - Node Watcher
+    - Libcluster (Not Needed)
+
+* Staging
+    - No DNS
+    - Postgres DB
+    - 32 bit architecture
+
+* Prod
+    - No Traefic
+
+
+Move to envoy from traefic (I think so)
+
