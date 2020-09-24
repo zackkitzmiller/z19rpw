@@ -48,10 +48,13 @@ defmodule Z19rpw.MixProject do
       {:ueberauth_identity, "~> 0.2"},
       {:guardian, "~> 2.0"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:phoenix_live_reload, "~> 1.2"},
+      {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:libcluster, "~> 3.0"},
       {:timex, "~>3.5"},
-      {:file_system, git: "https://github.com/falood/file_system.git", override: true}
+      {:file_system, git: "https://github.com/falood/file_system.git", override: true},
+      {:floki, ">= 0.0.0", only: :test},
+      {:phoenix_html, "~> 2.11"},
+      {:earmark, "~> 1.4.10"}
     ]
   end
 
