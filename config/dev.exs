@@ -2,10 +2,11 @@ use Mix.Config
 
 # Configure your database
 config :z19rpw, Z19rpw.Repo,
-  username: "zackkitzmiller",
-  password: "password",
-  database: "z19rpw_dev",
+  username: "root",
+  password: "",
+  database: "defaultdb",
   hostname: "localhost",
+  port: 26257,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
