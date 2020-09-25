@@ -30,7 +30,7 @@
               <li><a>twitter</a></li>
               <li><a>linkedin</a></li>
               <li><a>tiwterr</a></li>
-              <li><a>blog</a></li>
+              <li><a href="/posts">blog</a></li>
               <li><a>src</a></li>
             </ul>
           </div>
