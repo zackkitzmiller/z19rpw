@@ -1,17 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    deployment.kubernetes.io/revision: "21"
-  creationTimestamp: "2020-09-13T02:17:04Z"
-  generation: 27
   labels:
     app: z19rpw
   name: z19rpw
   namespace: default
-  resourceVersion: "1301619"
-  selfLink: /apis/apps/v1/namespaces/default/deployments/z19rpw
-  uid: 1e7b202c-c125-485f-ba70-5b287a89ecb2
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -48,3 +41,30 @@ spec:
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
+      serviceAccountName: cockroach-prod-cockroachdb
+      volumes:
+      - name: client-certs
+        emptyDir: {}
+      initContainers:
+      # The init-certs container sends a certificate signing request to the
+      # kubernetes cluster.
+      # You can see pending requests using: kubectl get csr
+      # CSRs can be approved using:         kubectl certificate approve <csr name>
+      #
+      # In addition to the client certificate and key, the init-certs entrypoint will symlink
+      # the cluster CA to the certs directory.
+      - name: init-certs
+        image: cockroachdb/cockroach-k8s-request-cert:0.3
+        imagePullPolicy: IfNotPresent
+        command:
+        - "/bin/ash"
+        - "-ecx"
+        - "/request-cert -namespace=${POD_NAMESPACE} -certs-dir=/cockroach-certs -type=client -user=app -symlink-ca-from=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+        env:
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        volumeMounts:
+        - name: client-certs
+          mountPath: /cockroach-certs
