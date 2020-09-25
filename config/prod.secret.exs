@@ -12,9 +12,10 @@ database_url =
     """
 
 config :z19rpw, Z19rpw.Repo,
-  # ssl: true,
+  ssl: true,
   url: database_url,
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  show_sensitive_data_on_connection_error: true
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||

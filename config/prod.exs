@@ -11,10 +11,11 @@ use Mix.Config
 # before starting your production server.
 config :z19rpw, Z19rpwWeb.Endpoint,
   url: [host: "z19r.pw", port: 80],
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  cache_static_manifest: "priv/static/cache_manifest.json",
+  debug_errors: true
 
 # Do not print debug messages in production
-config :logger, level: :info
+config :logger, level: :debug
 
 # ## SSL Support
 #
