@@ -33,3 +33,4 @@ z19rpw-*.tar
 /key.json
 /cockroach-data
 /z19rpw_dev.sql
+/deploy/.current_tag
