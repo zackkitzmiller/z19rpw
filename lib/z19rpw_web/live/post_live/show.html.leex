@@ -1,32 +1,32 @@
-<h1>Show Post</h1>
-
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, Z19rpwWeb.PostLive.FormComponent,
     id: @post.id,
     title: @page_title,
     action: @live_action,
     post: @post,
-    return_to: Routes.post_show_path(@socket, :show, @post) %>
+    return_to: Routes.post_show_path(@socket, :show, @post.slug) %>
 <% end %>
 
-<ul>
+<section class="articles">
+  <div class="column is-12">
+    <div class="card article">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content has-text-centered">
+            <p class="title article-title"><%= @post.title %></p>
+              <div class="tags has-addons level-item">
+                  <span class="tag is-rounded is-info">@zackkitzmiller</span>
+                  <span class="tag is-rounded">May 10, 2018</span>
+              </div>
+          </div>
+        </div>
+        <div class="content article-body">
+          <%=  raw @post.body |> Earmark.as_html!  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @post.title %>
-  </li>
-
-  <li>
-    <strong>Author:</strong>
-    <%= @post.author %>
-  </li>
-
-  <li>
-    <strong>Body:</strong>
-    <%= @post.body %>
-  </li>
-
-</ul>
-
-<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post), class: "button" %></span>
+<span><%= live_patch "Edit", to: Routes.post_show_path(@socket, :edit, @post.slug), class: "button" %></span>
 <span><%= live_redirect "Back", to: Routes.post_index_path(@socket, :index) %></span>

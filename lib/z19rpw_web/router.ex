@@ -29,7 +29,7 @@ defmodule Z19rpwWeb.Router do
     live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
     live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
-    live "/posts/:id/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
   scope "/api", Z19rpwWeb do
