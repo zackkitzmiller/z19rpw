@@ -6,6 +6,8 @@ defmodule Z19rpw.Blog.Post do
     field :author, :integer, default: 1
     field :body, :string
     field :title, :string
+    field :status, :string, default: "draft"
+    field :slug, :string
 
     timestamps()
   end

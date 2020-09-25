@@ -18,7 +18,7 @@ defmodule Z19rpw.Blog do
 
   """
   def list_posts do
-    Repo.all(from Post, order_by: [desc: :id])
+    Repo.all(from p in Post, where: p.status != "draft", order_by: [desc: p.id])
   end
 
   @doc """
@@ -36,6 +36,10 @@ defmodule Z19rpw.Blog do
 
   """
   def get_post!(id), do: Repo.get!(Post, id)
+
+  def get_post_by_slug!(slug) do
+    Repo.one!(from p in Post, where: p.slug == ^slug)
+  end
 
   @doc """
   Creates a post.

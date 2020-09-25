@@ -11,7 +11,7 @@ defmodule Z19rpwWeb.Router do
 
   pipeline :browser do
     plug :set_statistics
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "json"]
     plug :fetch_session
     plug :fetch_flash
     plug :fetch_live_flash
@@ -28,7 +28,7 @@ defmodule Z19rpwWeb.Router do
     live "/posts/new", PostLive.Index, :new, layout: {Z19rpwWeb.LayoutView, "app.html"}
     live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
-    live "/posts/:id", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
     live "/posts/:id/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
