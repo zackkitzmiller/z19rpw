@@ -10,8 +10,8 @@ config :z19rpw, Z19rpw.Repo,
   pool_size: 10
 
 config :z19rpw, Z19rpwWeb.Endpoint,
-  url: [host: "http://z19rpw.stag"],
-  http: [port: String.to_integer(System.get_env("PORT") || "4000"]),
+  url: [host: "z19rpw.stag"],
+  http: [port: String.to_integer(System.get_env("PORT") || "4000")],
   debug_errors: true,
   code_reloader: false,
   check_origin: false
