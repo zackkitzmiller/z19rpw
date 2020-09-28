@@ -15,16 +15,8 @@ config :z19rpw, Z19rpwWeb.Endpoint,
     port: System.get_env("PORT") || 4000],
   debug_errors: true,
   code_reloader: false,
-  check_origin: false,
-  watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("../assets", __DIR__)
-    ]
-  ]
+  check_origin: false
 
 config :logger, :console, format: "[$level] $message\n"
 config :phoenix, :stacktrace_depth, 20
+config :z19rpw, Z19rpwWeb.Endpoint, server: true
