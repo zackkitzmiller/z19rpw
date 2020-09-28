@@ -12,7 +12,7 @@ config :z19rpw, Z19rpw.Repo,
 config :z19rpw, Z19rpwWeb.Endpoint,
   http: [
     host: "http://z19rpw.stag",
-    port: System.get_env("PORT") || 4000],
+    port: String.to_integer(System.get_env("PORT") || "4000"],
   debug_errors: true,
   code_reloader: false,
   check_origin: false
