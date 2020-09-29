@@ -1,9 +1,9 @@
 use Mix.Config
 
 config :z19rpw, Z19rpw.Repo,
-  username: "root",
+  username: "app",
   password: "",
-  database: "defaultdb",
+  database: "z19rpw_staging",
   hostname: "cockroachdb-public.default.svc.cluster.local",
   port: 26257,
   show_sensitive_data_on_connection_error: true,
