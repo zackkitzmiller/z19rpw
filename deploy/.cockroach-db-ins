@@ -1,0 +1,4 @@
+"""
+using https://medium.com/@marceloglezer/cockroachdb-on-a-raspberrypi-kubernetes-cluster-7b12a2e497e1
+for managing the staging env's cockroachdb
+"""
