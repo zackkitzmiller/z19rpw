@@ -1,4 +1,5 @@
-<h2><%= @title %></h2>
+<div class="box">
+<h2 class="title"><%= @title %></h2>
 
 <%= f = form_for @changeset, "#",
   id: "post-form",
@@ -6,11 +7,24 @@
   phx_change: "validate",
   phx_submit: "save" %>
 
-  <%= label f, :title %>
-  <%= text_input f, :title %>
+  <div class="field">
+    <%= label f, :title, "what this shit about", class: "label"  %>
+    <div class="control">
+      <%= text_input f, :title, class: "input" %>
+    </div>
+  </div>
 
-  <%= label f, :body %>
-  <%= textarea f, :body %>
+  <div class="field">
+    <%= label f, :body, "go on then...", class: "label" %>
+    <div class="control">
+      <%= textarea f, :body, class: "textarea", rows: 30 %>
+    </div>
+  </div>
 
-  <%= submit "Save", phx_disable_with: "Saving..." %>
+  <div class="field is-grouped">
+    <div class="control">
+      <%= submit "Save", phx_disable_with: "Saving...", class: "button is-primary" %>
+    </div>
+  </div>
 </form>
+</div>
