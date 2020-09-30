@@ -1,7 +1,7 @@
 <%= if @live_action in [:edit] do %>
   <%= live_modal @socket, Z19rpwWeb.PostLive.FormComponent,
     id: @post.id,
-    title: @page_title,
+    title: @post.title,
     action: @live_action,
     post: @post,
     return_to: Routes.post_show_path(@socket, :show, @post.slug) %>
