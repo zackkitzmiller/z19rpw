@@ -9,8 +9,7 @@
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <script async defer data-domain="z19r.pw" src="https://plausible.io/js/plausible.js"></script>
-  </head>
+    <script async defer data-domain="z19r.pw" src="https://stats.z19r.pw/js/index.js"></script>   </head>
   <body>
     <section class="hero is-primary">
       <div class="hero-body">
