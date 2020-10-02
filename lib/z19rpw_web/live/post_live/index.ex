@@ -1,14 +1,14 @@
 defmodule Z19rpwWeb.PostLive.Index do
   use Z19rpwWeb, :live_view
 
-  import Earmark
-
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :posts, list_posts())}
+    if connected?(socket), do: Blog.subscribe()
+
+    {:ok, assign(socket, :posts, list_posts()), temporary_assigns: [posts: []]}
   end
 
   @impl true
@@ -40,6 +40,16 @@ defmodule Z19rpwWeb.PostLive.Index do
     {:ok, _} = Blog.delete_post(post)
 
     {:noreply, assign(socket, :posts, list_posts())}
+  end
+
+  @impl true
+  def handle_info({:post_created, post}, socket) do
+    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  end
+
+  @impl true
+  def handle_info({:post_updated, post}, socket) do
+    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
 
   defp list_posts do

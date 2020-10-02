@@ -29,11 +29,11 @@ defmodule Z19rpwWeb.PostLive.FormComponent do
 
   defp save_post(socket, :edit, post_params) do
     case Blog.update_post(socket.assigns.post, post_params) do
-      {:ok, _post} ->
+      {:ok, post} ->
         {:noreply,
          socket
          |> put_flash(:info, "Post updated successfully")
-         |> push_redirect(to: socket.assigns.return_to)}
+         |> push_redirect(to: Routes.post_show_path(socket, :show, post.slug))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
