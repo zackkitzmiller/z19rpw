@@ -1,7 +1,7 @@
 <section class="articles">
   <div class="column is-12" id="posts" phx-update="prepend">
     <%= for post <- @posts do %>
-      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post %>
+      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: nil %>
     <% end %>
   </div>
 </section>

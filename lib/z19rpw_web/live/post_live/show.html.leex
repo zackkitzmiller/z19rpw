@@ -9,8 +9,6 @@
 
 <section class="articles">
   <div class="column is-12" id="post">
-    <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: @post.id, post: @post %>
-    <span><%= live_redirect "<i class=\"fas fa-chevron-circle-left\"></i>" |> raw, to: Routes.post_index_path(@socket, :index) %></span>
-    <span><%= live_patch "<i class=\"fas fa-edit\"></i>" |> raw, to: Routes.post_show_path(@socket, :edit, @post.slug) %></span>
+    <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: @post.id, post: @post, current_user: @current_user %>
   </div>
 </section>

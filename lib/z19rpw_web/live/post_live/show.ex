@@ -2,10 +2,17 @@ defmodule Z19rpwWeb.PostLive.Show do
   use Z19rpwWeb, :live_view
 
   alias Z19rpw.Blog
+  alias Z19rpwWeb.Credentials
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     if connected?(socket), do: Blog.subscribe()
+
+    current_user = Credentials.get_user(socket, session)
+
+    socket =
+      socket
+      |> assign(:current_user, current_user)
 
     {:ok, socket}
   end
