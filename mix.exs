@@ -44,16 +44,12 @@ defmodule Z19rpw.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:ueberauth, "~> 0.6.0"},
-      {:ueberauth_identity, "~> 0.2"},
-      {:guardian, "~> 2.0"},
-      {:bcrypt_elixir, "~> 2.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:libcluster, "~> 3.0"},
       {:timex, "~>3.5"},
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
-      {:earmark, "~> 1.4.10"}
+      {:earmark, "~> 1.4.10"},
     ]
   end
 

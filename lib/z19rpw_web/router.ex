@@ -5,10 +5,6 @@ defmodule Z19rpwWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :authenticated do
-    plug Z19rpwWeb.Plug.AuthAccessPipeline
-  end
-
   pipeline :browser do
     plug :set_statistics
     plug :accepts, ["html", "json"]
@@ -32,16 +28,8 @@ defmodule Z19rpwWeb.Router do
     live "/posts/:slug/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
-  scope "/api", Z19rpwWeb do
-    pipe_through :api
 
-    scope "/auth" do
-      post "/identity/callback", AuthenticationController, :identity_callback
-    end
 
-    resources "/users", UserController, only: [:create]
-
-    pipe_through :authenticated
 
     resources "/users", UserController, except: [:new, :edit, :create]
   end

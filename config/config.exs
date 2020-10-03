@@ -26,27 +26,8 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-config :ueberauth, Ueberauth,
-  base_path: "/api/auth",
-  providers: [
-    identity: {Ueberauth.Strategy.Identity, [
-      callback_methods: ["POST"],
-      nickname_field: :username,
-      param_nesting: "user",
-      uid_field: :username
-    ]}
   ]
 
-config :z19rpw, Z19rpw.Guardian,
-  issuer: "Z19rpw",
-  secret_key: "9M0XLa4Mu8HIf8heiPYCAheu0LGg24K2oWzVj4Or7KNa+2sUaJUZtvMMCIOwzfL5",
-  permissions: %{
-    default: [:read_users, :write_users]
-  }
-
-config :z19rpw, Z19rpwWeb.Plug.AuthAccessPipeline,
-  module: Z19rpw.Guardian,
-  error_handler: Z19rpwWeb.Plug.AuthErrorHandler
 
 
 config :libcluster, topologies: [

@@ -31,7 +31,6 @@ defmodule Z19rpw.BlogTest do
 
     test "create_post/1 with valid data creates a post" do
       assert {:ok, %Post{} = post} = Blog.create_post(@valid_attrs)
-      assert post.author == 42
       assert post.body == "some body"
       assert post.title == "some title"
     end
@@ -43,7 +42,6 @@ defmodule Z19rpw.BlogTest do
     test "update_post/2 with valid data updates the post" do
       post = post_fixture()
       assert {:ok, %Post{} = post} = Blog.update_post(post, @update_attrs)
-      assert post.author == 43
       assert post.body == "some updated body"
       assert post.title == "some updated title"
     end
