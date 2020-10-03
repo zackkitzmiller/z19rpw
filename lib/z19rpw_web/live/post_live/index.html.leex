@@ -16,4 +16,6 @@
     return_to: Routes.post_index_path(@socket, :index) %>
 <% end %>
 
-<span><%= live_patch "⚽️", to: Routes.post_index_path(@socket, :new) %></span>
+<%= if @current_user do  %>
+  <span><%= live_patch "⚽️", to: Routes.post_index_path(@socket, :new) %></span>
+<% end %>

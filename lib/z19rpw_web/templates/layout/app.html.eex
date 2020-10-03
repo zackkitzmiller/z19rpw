@@ -26,12 +26,18 @@
         <nav class="tabs">
           <div class="container">
             <ul>
-              <li><a>github</a></li>
-              <li><a>twitter</a></li>
-              <li><a>linkedin</a></li>
-              <li><a>tiwterr</a></li>
-              <li><a href="/posts">blog</a></li>
-              <li><a>src</a></li>
+              <li><a href="https://github.com/zackkitzmiller">github</a></li>
+              <li><a href="https://twitter.com/zackkitzmiller">twitter</a></li>
+              <li><a href="https://linkedin.com/in/zack-kitzmiller-3023777a/">linkedin</a></li>
+              <li><a href="https://twitter.com/drunkzackkitz">tiwterr</a></li>
+              <li><%= link "blog", to: Routes.post_index_path(@conn, :index) %></li>
+              <li><a href="https://github.com/zackkitzmiller/z19rpw">src</a></li>
+              <%= if Pow.Plug.current_user(@conn) do %>
+                <%= link "<i class=\"fas fa-lock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :delete), method: :delete %>
+              <% else %>
+                <%= link "<i class=\"fas fa-unlock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :new) %>
+              <% end %>
+              <li>
             </ul>
           </div>
         </nav>

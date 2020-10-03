@@ -50,6 +50,7 @@ defmodule Z19rpw.MixProject do
       {:floki, ">= 0.0.0", only: :test},
       {:phoenix_html, "~> 2.11"},
       {:earmark, "~> 1.4.10"},
+      {:pow, "~> 1.0"}
     ]
   end
 

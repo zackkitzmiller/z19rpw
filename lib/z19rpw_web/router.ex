@@ -1,5 +1,6 @@
 defmodule Z19rpwWeb.Router do
   use Z19rpwWeb, :router
+  use Pow.Phoenix.Router
 
   pipeline :api do
     plug :accepts, ["json"]
@@ -15,23 +16,37 @@ defmodule Z19rpwWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  scope "/", Z19rpwWeb do
-    pipe_through :browser
-    get "/", PageController, :index
-    live "/ok-computer", RadioheadLive, layout: {Z19rpwWeb.LayoutView, "app.html"}
+  pipeline :protected do
+    plug Pow.Plug.RequireAuthenticated,
+      error_handler: Pow.Phoenix.PlugErrorHandler
+  end
 
-    live "/posts", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
+  scope "/" do
+    pipe_through :browser
+    pow_routes()
+  end
+
+  scope "/", Z19rpwWeb do
+    pipe_through [:browser, :protected]
+
     live "/posts/new", PostLive.Index, :new, layout: {Z19rpwWeb.LayoutView, "app.html"}
     live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
-    live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
-    live "/posts/:slug/show/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug/show/edit", PostLive.Show, :edit,
+      layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
+  scope "/", Z19rpwWeb do
+    pipe_through :browser
 
+    get "/", PageController, :index
+    live "/ok-computer", RadioheadLive, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
+    live "/blog", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
+  end
 
-    resources "/users", UserController, except: [:new, :edit, :create]
+  scope "/api", Z19rpwWeb do
   end
 
   # Enables LiveDashboard only for development
@@ -52,7 +67,7 @@ defmodule Z19rpwWeb.Router do
 
   defp set_statistics(conn, _opts) do
     conn
-      |> assign(:hostname, String.downcase(System.get_env("HOSTNAME")))
-      |> assign(:start_time, System.monotonic_time(:microsecond))
+    |> assign(:hostname, String.downcase(System.get_env("HOSTNAME", "nohost")))
+    |> assign(:start_time, System.monotonic_time(:microsecond))
   end
 end

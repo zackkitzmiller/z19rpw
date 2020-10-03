@@ -1,14 +1,21 @@
 defmodule Z19rpwWeb.PostLive.Index do
   use Z19rpwWeb, :live_view
 
+  alias Z19rpwWeb.Credentials
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
 
   @impl true
-  def mount(_params, _session, socket) do
+  def mount(_params, session, socket) do
     if connected?(socket), do: Blog.subscribe()
+    current_user = Credentials.get_user(socket, session)
 
-    {:ok, assign(socket, :posts, list_posts()), temporary_assigns: [posts: []]}
+    socket =
+      socket
+      |> assign(:posts, list_posts())
+      |> assign(:current_user, current_user)
+
+    {:ok, socket, temporary_assigns: [posts: []]}
   end
 
   @impl true
@@ -20,18 +27,21 @@ defmodule Z19rpwWeb.PostLive.Index do
     socket
     |> assign(:page_title, "Edit Post")
     |> assign(:post, Blog.get_post!(id))
+    |> assign(:current_user, socket.assigns.current_user)
   end
 
   defp apply_action(socket, :new, _params) do
     socket
     |> assign(:page_title, "New Post")
     |> assign(:post, %Post{})
+    |> assign(:current_user, socket.assigns.current_user)
   end
 
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "Listing Posts")
     |> assign(:post, nil)
+    |> assign(:current_user, socket.assigns.current_user)
   end
 
   @impl true

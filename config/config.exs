@@ -26,13 +26,17 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
+config :libcluster,
+  topologies: [
+    z19rpw: [
+      strategy: Elixir.Cluster.Strategy.Gossip
+    ]
   ]
 
+config :z19rpw, :pow,
+  user: Z19rpw.Users.User,
+  repo: Z19rpw.Repo
 
-
-config :libcluster, topologies: [
-    z19rpw: [
-      strategy: Elixir.Cluster.Strategy.Gossip]]
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

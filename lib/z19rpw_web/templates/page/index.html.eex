@@ -10,12 +10,13 @@
           </div>
           <div class="media-content">
             <p class="title is-4"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
-            <p class="subtitle is-6">current</p>
+            <p class="subtitle is-6">june '20 &ndash; current</p>
           </div>
         </div>
 
         <div class="content">
-          staff sortware engineer. leading payments efforts and general arcitecture
+          <p>technical architect</p>
+          <p style="text-decoration: line-through">staff sortware engineer. leading payments efforts and general arcitecture</p>
         </div>
       </div>
     </div>
