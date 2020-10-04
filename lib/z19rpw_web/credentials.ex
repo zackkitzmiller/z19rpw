@@ -21,7 +21,8 @@ defmodule Z19rpwWeb.Credentials do
     salt = Atom.to_string(Pow.Plug.Session)
 
     with {:ok, token} <- Pow.Plug.verify_token(conn, salt, signed_token, config),
-         {user, _metadata} <- CredentialsCache.get([backend: Pow.Store.Backend.EtsCache], token) do
+         {user, _metadata} <-
+           CredentialsCache.get([backend: Pow.Store.Backend.MnesiaCache], token) do
       user
     else
       _any -> nil

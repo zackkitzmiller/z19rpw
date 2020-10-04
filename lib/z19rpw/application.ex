@@ -18,8 +18,7 @@ defmodule Z19rpw.Application do
       {Phoenix.PubSub, name: Z19rpw.PubSub},
       # Start the Endpoint (http/https)
       Z19rpwWeb.Endpoint,
-      {Pow.Store.Backend.MnesiaCache, extra_db_nodes: Node.list()},
-      Pow.Store.Backend.MnesiaCache.Unsplit
+      {Pow.Store.Backend.MnesiaCache, extra_db_nodes: Node.list()}
       # Start a worker by calling: Z19rpw.Worker.start_link(arg)
       # {Z19rpw.Worker, arg}
     ]

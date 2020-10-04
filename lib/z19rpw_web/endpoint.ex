@@ -49,5 +49,6 @@ defmodule Z19rpwWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug Pow.Plug.Session, otp_app: :z19rpw
+  plug PowPersistentSession.Plug.Cookie
   plug Z19rpwWeb.Router
 end
