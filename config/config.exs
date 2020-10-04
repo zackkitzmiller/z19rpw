@@ -36,7 +36,8 @@ config :libcluster,
 config :z19rpw, :pow,
   user: Z19rpw.Users.User,
   repo: Z19rpw.Repo,
-  web_module: Z19rpwWeb
+  web_module: Z19rpwWeb,
+  cache_store_backend: Pow.Store.Backend.MnesiaCache
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -4,8 +4,8 @@ config :z19rpw, Z19rpw.Repo,
   username: "app",
   password: "",
   database: "z19rpw_staging",
-  hostname: "cockroachdb-public.default.svc.cluster.local",
   port: 26257,
+  hostname: "cockroachdb.default.svc.cluster.local",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
