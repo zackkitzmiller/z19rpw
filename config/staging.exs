@@ -16,6 +16,18 @@ config :z19rpw, Z19rpwWeb.Endpoint,
   code_reloader: false,
   check_origin: false
 
+config :libcluster,
+  topologies: [
+    z19rpw: [
+      strategy: Elixir.Cluster.Strategy.Kubernetes.DNS,
+      config: [
+        service: "z19rpw-headless-service",
+        application_name: "z19rpw",
+        polling_interval: 10_000
+      ]
+    ]
+  ]
+
 config :logger, :console, format: "[$level] $message\n"
 config :logger, level: :debug
 config :phoenix, :stacktrace_depth, 20
