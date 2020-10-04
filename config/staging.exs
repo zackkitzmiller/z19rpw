@@ -28,7 +28,10 @@ config :libcluster,
     ]
   ]
 
-config :logger, :console, format: "[$level] $message\n"
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
 config :logger, level: :debug
 config :phoenix, :stacktrace_depth, 20
 config :z19rpw, Z19rpwWeb.Endpoint, server: true
