@@ -35,3 +35,4 @@ z19rpw-*.tar
 /cockroach-data
 /z19rpw_dev.sql
 /deploy/.current_tag
+Mnesia.*

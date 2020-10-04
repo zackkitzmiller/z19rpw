@@ -6,7 +6,6 @@ defmodule Z19rpw.Application do
   use Application
 
   def start(_type, _args) do
-
     topologies = Application.get_env(:libcluster, :topologies) || []
 
     children = [
@@ -18,7 +17,9 @@ defmodule Z19rpw.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Z19rpw.PubSub},
       # Start the Endpoint (http/https)
-      Z19rpwWeb.Endpoint
+      Z19rpwWeb.Endpoint,
+      {Pow.Store.Backend.MnesiaCache, extra_db_nodes: Node.list()},
+      Pow.Store.Backend.MnesiaCache.Unsplit
       # Start a worker by calling: Z19rpw.Worker.start_link(arg)
       # {Z19rpw.Worker, arg}
     ]
