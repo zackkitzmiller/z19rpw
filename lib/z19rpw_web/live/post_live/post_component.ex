@@ -10,7 +10,7 @@ defmodule Z19rpwWeb.PostLive.PostComponent do
             <p class="title article-title"><%= live_patch @post.title, to: Routes.post_show_path(@socket, :show, @post.slug) %></p>
             <div class="tags has-addons level-item">
               <span class="tag is-rounded is-info">@zackkitzmiller</span>
-              <span class="tag is-rounded">May 10, 2018</span>
+              <span class="tag is-rounded"><%= @post.inserted_at |> Timex.format!("%Y-%m-%d %H:%I", :strftime) %></span>
             </div>
           </div>
         </div>
