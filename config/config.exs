@@ -40,7 +40,7 @@ config :z19rpw, :pow,
   cache_store_backend: Pow.Store.Backend.MnesiaCache,
   entensions: PowPersistentSession
 
-config :mnesia, dir: to_charlist(File.cwd!()) ++ '/priv/mnesia'
+# config :mnesia, dir: to_charlist(File.cwd!()) ++ '/priv/mnesia'
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
