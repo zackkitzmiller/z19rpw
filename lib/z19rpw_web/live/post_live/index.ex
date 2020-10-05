@@ -6,14 +6,16 @@ defmodule Z19rpwWeb.PostLive.Index do
   alias Z19rpw.Blog.Post
 
   @impl true
-  def mount(_params, session, socket) do
+  def mount(%{"year" => year} = params, session, socket) do
     if connected?(socket), do: Blog.subscribe()
     current_user = Credentials.get_user(socket, session)
+    IO.inspect(params)
 
     socket =
       socket
-      |> assign(:posts, list_posts())
+      |> assign(:posts, list_posts(year))
       |> assign(:current_user, current_user)
+      |> assign(:years, Blog.publication_years())
 
     {:ok, socket, temporary_assigns: [posts: []]}
   end
@@ -62,7 +64,7 @@ defmodule Z19rpwWeb.PostLive.Index do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
 
-  defp list_posts do
-    Blog.list_posts()
+  defp list_posts(year \\ 2020) do
+    Blog.list_posts(year)
   end
 end

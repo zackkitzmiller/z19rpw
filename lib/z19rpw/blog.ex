@@ -2,7 +2,6 @@ defmodule Z19rpw.Blog do
   @moduledoc """
   The Blog context.
   """
-
   import Ecto.Query, warn: false
   alias Z19rpw.Repo
 
@@ -17,8 +16,16 @@ defmodule Z19rpw.Blog do
       [%Post{}, ...]
 
   """
-  def list_posts do
-    Repo.all(from p in Post, where: p.status != "draft", order_by: [desc: p.id])
+  def list_posts(year \\ 2020) do
+    Repo.all(
+      from p in Post,
+        where:
+          fragment(
+            "status != 'draft' and extract(year from inserted_at)::string = ?",
+            ^year
+          ),
+        order_by: [desc: p.id]
+    )
   end
 
   @doc """
@@ -106,6 +113,15 @@ defmodule Z19rpw.Blog do
   """
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
+  end
+
+  def publication_years do
+    Post
+    |> select([p], fragment("extract(year from inserted_at) as years"))
+    |> distinct(true)
+    |> Repo.all()
+    |> Enum.sort()
+    |> Enum.map(&floor/1)
   end
 
   def subscribe do

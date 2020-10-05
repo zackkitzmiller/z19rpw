@@ -1,11 +1,20 @@
 <section class="articles">
+  <div class="box">
+    <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+      <ul>
+      <%= for year <- @years do %>
+        <li><a href="/blog?year=<%= year %>"><%= year %></a></li>
+      <% end %>
+      </ul>
+    </nav>
+  </div>
+
   <div class="column is-12" id="posts" phx-update="prepend">
     <%= for post <- @posts do %>
       <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: nil %>
     <% end %>
   </div>
 </section>
-
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, Z19rpwWeb.PostLive.FormComponent,
