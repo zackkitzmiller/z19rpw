@@ -3,7 +3,9 @@
     <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
       <%= for year <- @years do %>
-        <li><a href="/blog?year=<%= year %>"><%= year %></a></li>
+        <li <%= if year == @selected_year do %>class="is-active" <% end %>>
+          <a href="/blog?year=<%= year %>"><%= year %></a>
+        </li>
       <% end %>
       </ul>
     </nav>

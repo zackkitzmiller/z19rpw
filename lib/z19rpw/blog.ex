@@ -122,6 +122,7 @@ defmodule Z19rpw.Blog do
     |> Repo.all()
     |> Enum.sort()
     |> Enum.map(&floor/1)
+    |> Enum.map(&to_string/1)
   end
 
   def subscribe do
