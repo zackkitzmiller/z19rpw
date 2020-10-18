@@ -18,7 +18,7 @@ config :libcluster,
         polling_interval: 10_000
       ]
     ]
-  ]
+  ],
   debug: true
 
 import_config "prod.secret.exs"
