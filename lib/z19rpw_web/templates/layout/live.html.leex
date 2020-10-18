@@ -1,1 +1,9 @@
+<div class="container">
+  <%= if live_flash(@flash, :info) do %>
+  <div class="notification is-primary is-light alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></div>
+  <% end %>
+</div>
+
 <%= @inner_content %>

@@ -49,8 +49,8 @@ defmodule Z19rpwWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"id" => id}, socket) do
-    post = Blog.get_post!(id)
+  def handle_event("delete", %{"slug" => slug}, socket) do
+    post = Blog.get_post_by_slug!(slug)
     {:ok, _} = Blog.delete_post(post)
 
     {:noreply, assign(socket, :posts, list_posts())}

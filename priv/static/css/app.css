@@ -7009,3 +7009,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
 .hero-body {
   padding-top: 0; }
 
+.notification {
+  margin-top: -1em;
+  margin-bottom: 2em; }
+

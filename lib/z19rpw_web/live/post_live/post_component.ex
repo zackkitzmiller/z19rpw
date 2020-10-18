@@ -18,10 +18,17 @@ defmodule Z19rpwWeb.PostLive.PostComponent do
           <%=  raw @post.body |> Earmark.as_html!  %>
         </div>
         <%= if @current_user do %>
-          <span><%= live_redirect "<i class=\"fas fa-chevron-circle-left\"></i>" |> raw, to: Routes.post_index_path(@socket, :index) %></span>
-          <span><%= live_patch "<i class=\"fas fa-edit\"></i>" |> raw, to: Routes.post_show_path(@socket, :edit, @post.slug) %></span>
+          <div class="container">
+            <span><%= live_redirect "<i class=\"fas fa-chevron-circle-left\"></i>" |> raw, to: Routes.post_index_path(@socket, :index) %></span>
+            <%= link to: "#", phx_click: "delete", phx_value_slug: @post.slug do %>
+              <span class="icon is-pulled-right">
+                <i class="far fa-trash-alt"></i>
+              </span>
+            <% end %>
+            <span class="is-pulled-right"><%= live_patch "<i class=\"fas fa-edit\"></i>" |> raw, to: Routes.post_show_path(@socket, :edit, @post.slug) %></span>
+          </div>
         <% end %>
-        </div>
+      </div>
     </div>
     """
   end
