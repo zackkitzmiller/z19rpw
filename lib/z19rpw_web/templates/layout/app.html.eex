@@ -21,7 +21,9 @@
         <div class="container">
           <div class="navbar-brand">
             <a class="navbar-item">
-              <h1 class="title"></h1>
+              <h1 class="title">
+                <%= link "zack kitzmiller ♥️'s you", to: Routes.page_path(@conn, :index) %>
+              </h1>
             </a>
           </div>
           <div id="navbarMenuHeroA" class="navbar-menu">
@@ -52,10 +54,7 @@
 
     <div class="hero-body">
       <div class="container">
-        <h1 class="title">
-          <%= link "zack kitzmiller ♥️'s you", to: Routes.page_path(@conn, :index) %>
-        </h1>
-        <h2 class="subtitle">
+        <h2 class="subtitle" id="subtitle">
           software engineer. former new yorker &mdash; current chicagoan
         </h2>
       </div>
