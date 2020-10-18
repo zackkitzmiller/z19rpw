@@ -117,8 +117,10 @@ defmodule Z19rpw.Blog do
 
   def publication_years do
     Post
-    |> select([p], fragment("extract(year from inserted_at) as years"))
-    |> distinct(true)
+    |> select(fragment("extract(year from inserted_at) as year"))
+    |> where([p], p.status == "active")
+    |> group_by(fragment("year"))
+    |> having(count("id") > 0)
     |> Repo.all()
     |> Enum.sort()
     |> Enum.map(&floor/1)
