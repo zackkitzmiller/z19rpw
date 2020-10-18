@@ -17,8 +17,8 @@ config :libcluster,
         application_name: "z19rpw",
         polling_interval: 10_000
       ]
-    ],
-    debug: true
+    ]
   ]
+  debug: true
 
 import_config "prod.secret.exs"
