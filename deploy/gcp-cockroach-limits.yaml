@@ -1,9 +1,0 @@
-statefulset:
-  resources:
-    limits:
-      memory: "500Mi"
-    requests:
-      memory: "500Mi"
-conf:
-  cache: "100Mi"
-  max-sql-memory: "400Mi"

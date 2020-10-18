@@ -8,7 +8,7 @@ WORKDIR /app
 
 # install hex + rebar
 RUN mix local.hex --force && \
-    mix local.rebar --force
+  mix local.rebar --force
 
 # set build ENV
 ENV MIX_ENV=prod
@@ -17,7 +17,7 @@ ENV MIX_ENV=prod
 COPY mix.exs mix.lock ./
 COPY config config
 
-ENV DATABASE_URL=ecto://postgres:L1eGf8qib0rFMEpP@127.0.0.1/z19rpw
+ENV DATABASE_URL=ecto://app@cockroachdb.default.svc.cluster.local:26257/z19rpw
 ENV SECRET_KEY_BASE=34PA0jqGQLok1NXTLqNkXCBjRemHgmt/lc25MRMFBHD7tFy02newjvPLQ1gOAyiV
 
 RUN mix do deps.get, deps.compile
