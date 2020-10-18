@@ -28,17 +28,20 @@ $footer-background-color: $beige-lighter;
 $input-border-color: transparent;
 $input-shadow: none;
 
+@import "../node_modules/bulma/bulma.sass";
 .article {
-    margin-bottom: 3em;
+  margin-bottom: 3em;
 }
 
 #year-select {
-  margin-bottom: 2em;
-  margin-top: 0em;
+margin-bottom: 2em;
+margin-top: 0em;
 }
 
 #subtitle {
-  margin-left: 12px;
+margin-left: 12px;
 }
 
-@import "../node_modules/bulma/bulma.sass";
+.hero-body {
+  padding-top: 0;
+}
