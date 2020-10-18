@@ -34,8 +34,8 @@ spec:
             fieldRef:
               apiVersion: v1
               fieldPath: status.podIP
-        image: gcr.io/z19r-com/z19rpw:1.4.11
-        imagePullPolicy: IfNotPresent
+        image: gcr.io/z19r-com/z19rpw:1.5
+        imagePullPolicy: Always
         name: z19rpw
         resources: {}
         terminationMessagePath: /dev/termination-log

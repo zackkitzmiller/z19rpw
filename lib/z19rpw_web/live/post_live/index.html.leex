@@ -1,4 +1,4 @@
-<section class="articles">
+<div class="container" id="year-select">
   <div class="box">
     <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
       <ul>
@@ -10,13 +10,22 @@
       </ul>
     </nav>
   </div>
+</div>
 
-  <div class="column is-12" id="posts" phx-update="prepend">
+<section class="articles">
+  <div class="container" id="posts" phx-update="prepend">
     <%= for post <- @posts do %>
       <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: nil %>
     <% end %>
   </div>
 </section>
+
+<div class="container">
+  <%= if @current_user do  %>
+    <span><%= live_patch "fucking write", to: Routes.post_index_path(@socket, :new), class: "button is-primary" %></span>
+  <% end %>
+</div>
+
 
 <%= if @live_action in [:new, :edit] do %>
   <%= live_modal @socket, Z19rpwWeb.PostLive.FormComponent,
@@ -25,8 +34,4 @@
     action: @live_action,
     post: @post,
     return_to: Routes.post_index_path(@socket, :index) %>
-<% end %>
-
-<%= if @current_user do  %>
-  <span><%= live_patch "⚽️", to: Routes.post_index_path(@socket, :new) %></span>
 <% end %>

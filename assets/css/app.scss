@@ -29,7 +29,12 @@ $input-border-color: transparent;
 $input-shadow: none;
 
 .article {
-    margin-top: 6em;
+    margin-bottom: 3em;
+}
+
+#year-select {
+  margin-bottom: 2em;
+  margin-top: 0em;
 }
 
 @import "../node_modules/bulma/bulma.sass";

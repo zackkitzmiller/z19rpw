@@ -7,67 +7,104 @@
     <title>z19r</title>
     <%= csrf_meta_tag() %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    <link async defer href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <script async defer data-domain="z19r.pw" src="https://stats.z19r.pw/js/index.js"></script>   </head>
+    <script async defer data-domain="z19r.pw" src="https://stats.z19r.pw/js/index.js"></script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+  </head>
   <body>
-    <section class="hero is-primary">
-      <div class="hero-body">
+  <section class="hero is-primary">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head">
+      <nav class="navbar">
         <div class="container">
-          <h1 class="title">
-              <h1 class="title">zack kitzmiller ♥️'s you</h1>
-          </h1>
-          <h2 class="subtitle">
-              software engineer. former new yorker &mdash; current chicagoan
-          </h2>
+          <div class="navbar-brand">
+            <a class="navbar-item">
+              <h1 class="title"></h1>
+            </a>
+          </div>
+          <div id="navbarMenuHeroA" class="navbar-menu">
+            <div class="navbar-end">
+              <a class="navbar-item" href="https://twitter.com/zackkitzmiller">
+                <span class="icon">
+                  <i class="fab fa-twitter-square"></i>
+                </span>
+                <span>twitter</span>
+              </a>
+              <a class="navbar-item" href="https://linkedin.com/in/zack-kitzmiller-3023777a/">
+                <span class="icon">
+                  <i class="fab fa-linkedin"></i>
+                </span>
+                <span>linkedin</span>
+              </a>
+              <a class="navbar-item" href="https://github.com/zackkitzmiller">
+                <span class="icon">
+                  <i class="fab fa-github-square"></i>
+                </span>
+                <span>github</span>
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="hero-foot">
-        <nav class="tabs">
-          <div class="container">
-            <ul>
-              <li><a href="https://github.com/zackkitzmiller">github</a></li>
-              <li><a href="https://twitter.com/zackkitzmiller">twitter</a></li>
-              <li><a href="https://linkedin.com/in/zack-kitzmiller-3023777a/">linkedin</a></li>
-              <li><a href="https://twitter.com/drunkzackkitz">tiwterr</a></li>
-              <li><%= link "blog", to: Routes.post_index_path(@conn, :index) %></li>
-              <li><a href="https://github.com/zackkitzmiller/z19rpw">src</a></li>
-              <%= if Pow.Plug.current_user(@conn) do %>
-                <%= link "<i class=\"fas fa-lock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :delete), method: :delete %>
-              <% else %>
-                <%= link "<i class=\"fas fa-unlock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :new) %>
-              <% end %>
-              <li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </section>
+      </nav>
+    </div>
 
-    <section role="main" class="section">
+    <div class="hero-body">
       <div class="container">
-        <%= @inner_content %>
+        <h1 class="title">
+          <%= link "zack kitzmiller ♥️'s you", to: Routes.page_path(@conn, :index) %>
+        </h1>
+        <h2 class="subtitle">
+          software engineer. former new yorker &mdash; current chicagoan
+        </h2>
       </div>
-    </section>
+    </div>
 
-    <section class="section">
-      <div class="container">
-        <footer class="fooooter">
-          <div class="content has-text-left">
-            <p>
-              <span class="icon has-text-primary">
-                <i class="fas fa-copyright"></i>
-              </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb,
-              and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
-              venmo name on the receipt printer sitting on my desk and i'll send you $100.
-            </p>
-            <p><small>served by <%= @hostname %> in
-            <%= Timex.Format.Duration.Formatters.Humanized.format(
-                  Timex.Duration.from_microseconds(
-                    System.monotonic_time(:microsecond) - @start_time)) %> &mdash; <%= node() %></small></p>
-          </div>
-        </footer>
-      </div>
-    </section>
+    <div class="hero-foot">
+      <nav class="tabs">
+        <div class="container">
+          <ul>
+            <li><%= link "home", to: Routes.page_path(@conn, :index) %></li>
+            <li><%= link "blog", to: Routes.post_index_path(@conn, :index) %></li>
+            <li><%= link "mentorship", to: Routes.post_index_path(@conn, :index) %></li>
+            <li><a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/zkitzmiller/let-s-get-coffee?hide_gdpr_banner=1'});return false;">let's get coffee</a></li>
+            <%= if Pow.Plug.current_user(@conn) do %>
+              <%= link "<i class=\"fas fa-lock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :delete), method: :delete %>
+            <% else %>
+              <%= link "<i class=\"fas fa-unlock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :new) %>
+            <% end %>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <section role="main" class="section">
+    <div class="container">
+      <%= @inner_content %>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <footer class="footer">
+        <div class="content has-text-left">
+          <p>
+            <span class="icon has-text-primary">
+              <i class="fas fa-copyright"></i>
+            </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb,
+            and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
+            venmo name on the receipt printer sitting on my desk and i'll send you $100.
+          </p>
+          <p><small>served by <%= @hostname %> in
+          <%= Timex.Format.Duration.Formatters.Humanized.format(
+                Timex.Duration.from_microseconds(
+                  System.monotonic_time(:microsecond) - @start_time)) %> &mdash; <%= node() %></small></p>
+        </div>
+      </footer>
+    </div>
+  </section>
   </body>
 </html>

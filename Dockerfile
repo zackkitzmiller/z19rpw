@@ -24,7 +24,8 @@ RUN mix do deps.get, deps.compile
 
 # build assets
 COPY assets/package.json assets/package-lock.json ./assets/
-RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
+RUN npm uninstall node-sass -g && npm cache clean --force && npm install node-sass
+RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
 
 COPY priv priv
 COPY assets assets
