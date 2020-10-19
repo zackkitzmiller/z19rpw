@@ -66,7 +66,7 @@
           <ul>
             <li><%= link "home", to: Routes.page_path(@conn, :index) %></li>
             <li><%= link "blog", to: Routes.post_index_path(@conn, :index) %></li>
-            <li><%= link "mentorship", to: Routes.post_index_path(@conn, :index) %></li>
+            <li><%= link "mentorship", to: Routes.page_path(@conn, :coffee) %></li>
             <li><a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/zkitzmiller/let-s-get-coffee?hide_gdpr_banner=1'});return false;">let's get coffee</a></li>
             <%= if Pow.Plug.current_user(@conn) do %>
               <%= link "<i class=\"fas fa-lock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :delete), method: :delete %>

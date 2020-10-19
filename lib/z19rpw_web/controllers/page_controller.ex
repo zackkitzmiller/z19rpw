@@ -4,4 +4,8 @@ defmodule Z19rpwWeb.PageController do
   def index(conn, _params) do
     render(conn, "index.html")
   end
+
+  def coffee(conn, _params) do
+    render(conn, "coffee.html")
+  end
 end

@@ -40,8 +40,8 @@ defmodule Z19rpwWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/coffee", PageController, :coffee
     get "/_status", StatusController, :status
-    live "/ok-computer", RadioheadLive, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
     live "/blog", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
     live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
