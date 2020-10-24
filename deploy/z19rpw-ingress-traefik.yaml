@@ -9,15 +9,16 @@ metadata:
     traefik.ingress.kubernetes.io/redirect-entry-point: https
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: z19rpw-service
-          servicePort: 80
+    - host: z19r.pw
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: z19rpw-service
+              servicePort: 80
   tls:
     - hosts:
-      - z19r.pw
+        - z19r.pw
       secretName: z19r-pw-tls
 ---
 apiVersion: extensions/v1beta1
@@ -27,25 +28,48 @@ metadata:
   namespace: kube-system
 spec:
   rules:
-  - host: traefik.z19rpw.prod
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: traefik-dashboard
-          servicePort: dashboard-http
+    - host: traefik.z19rpw.prod
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: traefik-dashboard
+              servicePort: dashboard-http
 ---
-  apiVersion: extensions/v1beta1
-  kind: Ingress
-  metadata:
-    name: cockroach-web-ui
-    namespace: default
-  spec:
-    rules:
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cockroach-web-ui
+  namespace: default
+spec:
+  rules:
     - host: cockroach.z19rpw.prod
       http:
         paths:
-        - path: /
-          backend:
-            serviceName: cockroachdb-public
-            servicePort: http
+          - path: /
+            backend:
+              serviceName: cockroachdb-public
+              servicePort: http
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: tthcp-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/frontend-entry-points: http, https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+    - host: thetrumphealthcareplan.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: z19rpw-service
+              servicePort: 80
+  tls:
+    - hosts:
+        - thetrumphealthcareplan.com
+      secretName: thetrumphealthcareplan-com-tls
