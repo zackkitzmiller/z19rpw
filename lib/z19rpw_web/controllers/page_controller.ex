@@ -11,9 +11,23 @@ defmodule Z19rpwWeb.PageController do
   end
 
   def thc(conn, _params) do
+    HTTPoison.post(
+      "https://plausible.io/api/event",
+      "{\"n\": \"pageview\", \"u\": \"http://thetrumphealthcareplan.com:4000/thc\",
+    \"d\": \"thetrumphealthcareplan.com\",
+      \"r\": \"thc\",
+      \"w\": 1764
+  }",
+      [
+        {"Content-Type", "plain/text"}
+      ]
+    )
+
     conn
-    |> put_layout("none.html")
-    |> render("redirect.html")
+    |> redirect(
+      external:
+        "https://www.google.com/search?client=safari&rls=en&ei=1IOTX9PIKcustQavmZygDw&q=funeral+homes&oq=funeral+homes&gs_lcp=a&sclient=psy-ab&ved=&uact=5"
+    )
   end
 
   def coffee(conn, _params) do
