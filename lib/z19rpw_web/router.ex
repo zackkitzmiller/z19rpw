@@ -40,6 +40,7 @@ defmodule Z19rpwWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/thc", PageController, :thc
     get "/coffee", PageController, :coffee
     get "/_status", StatusController, :status
 
