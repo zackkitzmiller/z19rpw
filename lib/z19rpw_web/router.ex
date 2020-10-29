@@ -42,6 +42,7 @@ defmodule Z19rpwWeb.Router do
     get "/", PageController, :index
     get "/thc", PageController, :thc
     get "/coffee", PageController, :coffee
+    get "/mentorship", PageController, :mentoring
     get "/_status", StatusController, :status
 
     live "/blog", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
@@ -63,7 +64,7 @@ defmodule Z19rpwWeb.Router do
 
     scope "/" do
       pipe_through [:fetch_session, :protect_from_forgery]
-      live_dashboard "/dashboard", metrics: Z19rpwWeb.Telemetry
+      live_dashboard "/dashboard", metrics: Z19rpwWeb.Telemetry, ecto_repos: [Z19rpw.Repo]
     end
   end
 
