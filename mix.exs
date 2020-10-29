@@ -51,7 +51,9 @@ defmodule Z19rpw.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:earmark, "~> 1.4.10"},
       {:pow, "~> 1.0"},
-      {:httpoison, "~> 1.6"}
+      {:httpoison, "~> 1.7", override: true},
+      {:huex, "~> 0.8"},
+      {:ecto_psql_extras, "~> 0.2"}
     ]
   end
 
