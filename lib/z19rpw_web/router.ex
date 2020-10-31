@@ -21,6 +21,10 @@ defmodule Z19rpwWeb.Router do
       error_handler: Pow.Phoenix.PlugErrorHandler
   end
 
+  scope "/", Z19rpwWeb do
+    get "/_status", StatusController, :status
+  end
+
   scope "/" do
     pipe_through :browser
     pow_routes()
@@ -43,7 +47,6 @@ defmodule Z19rpwWeb.Router do
     get "/thc", PageController, :thc
     get "/coffee", PageController, :coffee
     get "/mentorship", PageController, :mentoring
-    get "/_status", StatusController, :status
 
     live "/blog", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
     live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
