@@ -6,6 +6,7 @@ defmodule Z19rpw.Blog do
   alias Z19rpw.Repo
 
   alias Z19rpw.Blog.Post
+  require Logger
 
   @doc """
   Returns the list of posts.
@@ -17,15 +18,27 @@ defmodule Z19rpw.Blog do
 
   """
   def list_posts(year \\ 2020) do
-    Repo.all(
-      from p in Post,
-        where:
-          fragment(
-            "status != 'draft' and extract(year from inserted_at)::string = ?",
-            ^year
-          ),
-        order_by: [desc: p.id]
-    )
+    case Memcachir.get("z19rpw:blog:posts_by_year:" <> year) do
+      {:ok, resp} ->
+        resp
+
+      {:error, message} ->
+        Logger.info(message)
+
+        posts =
+          Repo.all(
+            from p in Post,
+              where:
+                fragment(
+                  "status != 'draft' and extract(year from inserted_at)::string = ?",
+                  ^year
+                ),
+              order_by: [desc: p.id]
+          )
+
+        Memcachir.set("z19rpw:blog:posts_by_year:" <> year, posts, ttl: 300)
+        posts
+    end
   end
 
   @doc """
@@ -45,7 +58,18 @@ defmodule Z19rpw.Blog do
   def get_post!(id), do: Repo.get!(Post, id)
 
   def get_post_by_slug!(slug) do
-    Repo.one!(from p in Post, where: p.slug == ^slug)
+    case Memcachir.get("z19rpw:blog:post_by_slug:" <> slug) do
+      {:ok, resp} ->
+        resp
+
+      {:error, message} ->
+        Logger.info(message)
+
+        post = Repo.one!(from p in Post, where: p.slug == ^slug)
+
+        Memcachir.set("z19rpw:blog:post_by_slug:" <> slug, post, ttl: 500)
+        post
+    end
   end
 
   @doc """
@@ -100,6 +124,7 @@ defmodule Z19rpw.Blog do
   """
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+    Memcachir.flush()
   end
 
   @doc """
@@ -116,15 +141,27 @@ defmodule Z19rpw.Blog do
   end
 
   def publication_years do
-    Post
-    |> select(fragment("extract(year from inserted_at) as year"))
-    |> where([p], p.status == "active")
-    |> group_by(fragment("year"))
-    |> having(count("id") > 0)
-    |> Repo.all()
-    |> Enum.sort()
-    |> Enum.map(&floor/1)
-    |> Enum.map(&to_string/1)
+    case Memcachir.get("z19rpw:bl0g:publication_years") do
+      {:ok, resp} ->
+        resp
+
+      {:error, message} ->
+        Logger.info(message)
+
+        years =
+          Post
+          |> select(fragment("extract(year from inserted_at) as year"))
+          |> where([p], p.status == "active")
+          |> group_by(fragment("year"))
+          |> having(count("id") > 0)
+          |> Repo.all()
+          |> Enum.sort()
+          |> Enum.map(&floor/1)
+          |> Enum.map(&to_string/1)
+
+        Memcachir.set("z19rpw:bl0g:publication_years", years, ttl: 24 * 60 * 60)
+        years
+    end
   end
 
   def subscribe do
@@ -135,6 +172,7 @@ defmodule Z19rpw.Blog do
 
   defp broadcast({:ok, post}, event) do
     Phoenix.PubSub.broadcast(Z19rpw.PubSub, "blog", {event, post})
+    Memcachir.flush()
     {:ok, post}
   end
 end

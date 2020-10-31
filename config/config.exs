@@ -41,6 +41,9 @@ config :z19rpw, :pow,
   entensions: PowPersistentSession
 
 # config :mnesia, dir: to_charlist(File.cwd!()) ++ '/priv/mnesia'
+config :memcachir,
+  hosts: "localhost",
+  coder: {Memcache.Coder.Erlang, []}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

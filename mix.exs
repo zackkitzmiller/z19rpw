@@ -20,7 +20,7 @@ defmodule Z19rpw.MixProject do
   def application do
     [
       mod: {Z19rpw.Application, []},
-      extra_applications: [:logger, :runtime_tools, :os_mon, :mnesia]
+      extra_applications: [:logger, :memcachir, :runtime_tools, :os_mon, :mnesia]
     ]
   end
 
@@ -52,8 +52,8 @@ defmodule Z19rpw.MixProject do
       {:earmark, "~> 1.4.10"},
       {:pow, "~> 1.0"},
       {:httpoison, "~> 1.7", override: true},
-      {:huex, "~> 0.8"},
-      {:ecto_psql_extras, "~> 0.2"}
+      {:poison, "~> 3.1"},
+      {:memcachir, "~> 3.3"}
     ]
   end
 
