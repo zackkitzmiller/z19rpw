@@ -40,7 +40,6 @@ config :z19rpw, :pow,
   cache_store_backend: Pow.Store.Backend.MnesiaCache,
   entensions: PowPersistentSession
 
-# config :mnesia, dir: to_charlist(File.cwd!()) ++ '/priv/mnesia'
 config :memcachir,
   hosts: "localhost",
   coder: {Memcache.Coder.Erlang, []}
