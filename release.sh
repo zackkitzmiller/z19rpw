@@ -4,7 +4,7 @@ if [[ -z "${TAG}" ]]; then
 fi
 
 echo "Building Container..."
-docker build -t gcr.io/z19r-com/z19rpw:${TAG} .
+docker build -t gcr.io/z19r-com/z19rpw:${TAG} -t gcr.io/z19r-com/z19rpw:latest .
 if [ $? -eq 0 ]; then
     echo ...Build OK
 else
@@ -13,6 +13,7 @@ else
 fi
 echo "Pushing Container to GCR..."
 docker push gcr.io/z19r-com/z19rpw:${TAG}
+docker push gcr.io/z19r-com/z19rpw:latest
 if [ $? -eq 0 ]; then
     echo ...Push OK
 else
@@ -20,7 +21,7 @@ else
     exit 1
 fi
 echo "Setting new image to ${TAG}"
-kubectl set image deployment/z19rpw z19rpw=gcr.io/z19r-com/z19rpw:${TAG}
+kubectl rollout restart deployment z19rpw
 if [ $? -eq 0 ]; then
     echo ...Deploy OK
 else

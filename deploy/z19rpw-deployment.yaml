@@ -7,7 +7,7 @@ metadata:
   namespace: default
 spec:
   progressDeadlineSeconds: 600
-  replicas: 1
+  replicas: 12
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -19,7 +19,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: z19rpw
     spec:
@@ -34,7 +33,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.podIP
-          image: gcr.io/z19r-com/z19rpw:1.6.2
+          image: gcr.io/z19r-com/z19rpw:latest
           imagePullPolicy: Always
           name: z19rpw
           resources:
@@ -51,7 +50,7 @@ spec:
               path: /_status
               port: 4000
             initialDelaySeconds: 30
-            periodSeconds: 60
+            periodSeconds: 30
         - env:
             - name: NAMESPACE
               valueFrom:
@@ -62,14 +61,16 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.podIP
-          image: memcached:latest
+          image: memcached:alpine
           imagePullPolicy: Always
           name: z19rpw-memcached-sidecar
           resources:
             requests:
               memory: "20Mi"
+              cpu: "100m"
             limits:
               memory: "30Mi"
+              cpu: "150m"
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
