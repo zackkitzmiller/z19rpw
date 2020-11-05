@@ -1,5 +1,5 @@
 steps:
-  - name: example-step
+  - name: example-step-1
     containerRun:
       image: busybox
       script: |
