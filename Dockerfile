@@ -32,9 +32,7 @@ COPY assets assets
 RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
-# compile and build release
 COPY lib lib
-# uncomment COPY if rel/ exists
 COPY rel rel
 RUN mix do compile, release
 
