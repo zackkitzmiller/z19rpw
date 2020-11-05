@@ -1,35 +1,35 @@
 name: '[builder] CI for releases'
 
 on:
-    push:
-        branches:
-            - master
+  push:
+    branches:
+      - master
 
 jobs:
-    release:
-        runs-on: ubuntu-latest
-        steps:
-        -
-            name: Checkout
-            uses: actions/checkout@v1
-        -
-            name: Dockerhub Authentication
-            env:
-                DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-                DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-            run: |
-                echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
-        -
-            name: Build for arm64
-            id: buildx
-            uses: crazy-max/ghaction-docker-buildx@v1
-            with:
-                version: latest
-        -
-            name: Build dockerfile (with push)
-            run: |
-                docker buildx build \
-                --platform=linux/arm64 \
-                --output "type=image,push=true" \
-                --file ./Dockerfile . \
-                --tag $(echo "${DOCKERHUB_USERNAME}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v1
+      -
+        name: Dockerhub Authentication
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+        run: |
+          echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+      -
+        name: Build for arm64
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      -
+        name: Build dockerfile (with push)
+        run: |
+          docker buildx build \
+          --platform=linux/arm64 \
+          --output "type=image,push=true" \
+          --file ./Dockerfile . \
+          --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
