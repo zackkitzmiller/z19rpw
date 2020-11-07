@@ -1,0 +1,22 @@
+name: "Derploy"
+
+on: [push, pull_request]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git the code
+        uses: actions/checkout@v1
+      - name: Mix Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: "1.11.1"
+          otp-version: "23"
+      - name: Elixir Derps
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+          mix do deps.get, deps.compile
+      - name: RUN THE JEWELS
+        run: mix test
