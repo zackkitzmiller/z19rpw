@@ -16,7 +16,8 @@ config :z19rpw, Z19rpwWeb.Endpoint,
   secret_key_base: "QM/B52O3HH0VhIN+6ENj1rh/kkBP3/LQdC/zNhTTicdnsQphALeKyFVIW3/KmCiR",
   render_errors: [view: Z19rpwWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Z19rpw.PubSub,
-  live_view: [signing_salt: "EZFfpWSw"]
+  live_view: [signing_salt: "EZFfpWSw"],
+  instrumenters: [NewRelic.Phoenix.Instrumenter]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -43,6 +44,10 @@ config :z19rpw, :pow,
 config :memcachir,
   hosts: "localhost",
   coder: {Memcache.Coder.Erlang, []}
+
+config :new_relic_agent,
+  app_name: "z19r",
+  license_key: "a88f416e4194549112fdb31f4fd650193f59NRAL"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
