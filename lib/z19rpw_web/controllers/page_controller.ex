@@ -26,7 +26,7 @@ defmodule Z19rpwWeb.PageController do
     conn
     |> redirect(
       external:
-        "https://www.google.com/search?client=safari&rls=en&ei=1IOTX9PIKcustQavmZygDw&q=funeral+homes&oq=funeral+homes&gs_lcp=a&sclient=psy-ab&ved=&uact=5"
+        "https://www.nytimes.com/2020/11/07/us/politics/biden-election.html"
     )
   end
 
