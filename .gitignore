@@ -31,3 +31,4 @@ z19rpw-*.tar
 /deploy/.current_tag
 Mnesia.*
 /z19rpw_stag.sql
+/tmp

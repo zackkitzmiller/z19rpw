@@ -54,6 +54,8 @@ defmodule Z19rpw.MixProject do
       {:httpoison, "~> 1.7", override: true},
       {:poison, "~> 3.1"},
       {:memcachir, "~> 3.3"},
+      {:new_relic_agent, "~> 1.0"},
+      {:new_relic_phoenix, "~> 0.1"},
       {:sentry, "~> 8.0"}
     ]
   end
