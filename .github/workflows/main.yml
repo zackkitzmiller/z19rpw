@@ -1,4 +1,4 @@
-name: "Derploy"
+name: "derploy :allthethings:"
 
 on:
   push:
@@ -6,23 +6,23 @@ on:
       - "master"
 
 jobs:
-  release:
+  build-and-destroy:
     runs-on: ubuntu-latest
     steps:
-      - name: Git the code
+      - name: git the code
         uses: actions/checkout@v1
-      - name: Dockerhub Authentication
+      - name: authmeup
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
-      - name: Mix Elixir
+      - name: mixelixir
         uses: actions/setup-elixir@v1
         with:
           elixir-version: "1.11.1"
           otp-version: "23"
-      - name: Elixir Deps
+      - name: elixirdeps
         run: |
           mix local.hex --force
           mix local.rebar --force
@@ -33,23 +33,23 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: Build Assets
+      - name: bigassets
         run: |
           npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
           npm run --prefix ./assets deploy
-      - name: Build for arm64
+      - name: arm64 for build
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build dockerfile (with push)
+      - name: build and pu5h
         run: |
           docker buildx build \
           --platform=linux/arm64 \
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
-      - name: Trigger deploy
+      - name: derploy
         uses: Consensys/kubernetes-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}

@@ -97,7 +97,7 @@
               <i class="fas fa-copyright"></i>
             </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb,
             and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
-            venmo name on the receipt printer sitting on my desk and i'll send you $100.
+            venmo name on the receipt printer sitting on my desk and i'll venbro you $100.
           </p>
           <p><small>served by <%= @hostname %> in
           <%= Timex.Format.Duration.Formatters.Humanized.format(

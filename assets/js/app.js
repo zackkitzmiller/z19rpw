@@ -14,18 +14,19 @@ import "../css/app.scss"
 //
 import NProgress from 'nprogress'
 import "phoenix_html"
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
+import { Socket } from "phoenix"
+import { LiveSocket } from "phoenix_live_view"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken } })
 
 // connect if there are any LiveViews on the page
 window.addEventListener("phx:page-loading-start", info => NProgress.start());
 window.addEventListener("phx:page-loading-stop", info => NProgress.done());
 liveSocket.connect()
 
-// expose liveSocket on window for web console debug logs and latency simulation:
->> liveSocket.enableDebug()
+  // expose liveSocket on window for web console debug logs and latency simulation:
+  >> liveSocket.enableDebug()
 // >> liveSocket.enableLatencySim(1000)
 window.liveSocket = liveSocket
+console.log('welcome to z91r.com where the grass is green and the girls are pretty');
