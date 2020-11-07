@@ -95,8 +95,8 @@
           <p>
             <span class="icon has-text-primary">
               <i class="fas fa-copyright"></i>
-            </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb,
-            and a bunch of other shit a personal website doesn't need. load tested to 12,000 concurrent users. print your
+            </span>2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb, memcached.
+            hosted on a 10 node RPi kubernetes clusters in my apartment. load tested to 12,000 concurrent users. print your
             venmo name on the receipt printer sitting on my desk and i'll venbro you $100.
           </p>
           <p><small>served by <%= @hostname %> in

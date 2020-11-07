@@ -1,4 +1,5 @@
 defmodule Z19rpwWeb.Endpoint do
+  use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :z19rpw
   use NewRelic.Phoenix.Transaction
 
@@ -48,6 +49,7 @@ defmodule Z19rpwWeb.Endpoint do
     pass: ["*/*"],
     json_decoder: Phoenix.json_library()
 
+  plug Sentry.PlugContext
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
