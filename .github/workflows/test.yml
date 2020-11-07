@@ -1,4 +1,4 @@
-name: "Derploy"
+name: "unit tests"
 
 on: [push, pull_request]
 
