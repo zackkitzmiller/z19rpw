@@ -49,3 +49,9 @@ jobs:
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
+      - name: Trigger deploy
+        uses: Consensys/kubernetes-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout restart deployment z19rpw
