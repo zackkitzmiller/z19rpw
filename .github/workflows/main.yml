@@ -34,7 +34,7 @@ jobs:
       - name: Build Assets
         run: |
           npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
-          npm --prefix ./assets deploy
+          npm run --prefix ./assets deploy
       - name: Build for arm64
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
