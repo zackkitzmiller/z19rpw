@@ -1,9 +1,6 @@
 name: "[builder] CI for releases"
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   release:
