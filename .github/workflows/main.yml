@@ -1,4 +1,4 @@
-name: '[builder] CI for releases'
+name: "[builder] CI for releases"
 
 on:
   push:
@@ -20,8 +20,8 @@ jobs:
       - name: Install Elixir
         uses: actions/setup-elixir@v1
         with:
-          elixir-version: '1.10.3' # Define the elixir version [required]
-          otp-version: '22.3' # Define the OTP version [required]
+          elixir-version: "1.11.1"
+          otp-version: "23"
       - name: Elixir Deps
         run: |
           mix local.hex --force
@@ -33,7 +33,7 @@ jobs:
           node-version: 12
       - name: Build Assets
         run: |
-          npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
+          npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
           npm run --prefix ./assets deploy
       - name: Build for arm64
         id: buildx
