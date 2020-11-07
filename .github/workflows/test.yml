@@ -3,7 +3,7 @@ name: "does it blend?"
 on: [push, pull_request]
 
 jobs:
-  release:
+  compile-on-three:
     runs-on: ubuntu-latest
     steps:
       - name: git the code
