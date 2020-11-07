@@ -53,7 +53,8 @@ defmodule Z19rpw.MixProject do
       {:pow, "~> 1.0"},
       {:httpoison, "~> 1.7", override: true},
       {:poison, "~> 3.1"},
-      {:memcachir, "~> 3.3"}
+      {:memcachir, "~> 3.3"},
+      {:sentry, "~> 8.0"}
     ]
   end
 
