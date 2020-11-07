@@ -1,15 +1,15 @@
-name: '[builder] CI for releases'
+name: "Derploy"
 
 on:
   push:
     branches:
-      - master
+      - "master"
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Git the code
         uses: actions/checkout@v1
       - name: Dockerhub Authentication
         env:
@@ -17,23 +17,25 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
-      - name: Install Elixir
+      - name: Mix Elixir
         uses: actions/setup-elixir@v1
         with:
-          elixir-version: '1.10.3' # Define the elixir version [required]
-          otp-version: '22.3' # Define the OTP version [required]
+          elixir-version: "1.11.1"
+          otp-version: "23"
       - name: Elixir Deps
         run: |
           mix local.hex --force
           mix local.rebar --force
           mix do deps.get, deps.compile
+      # - name: RUN THE JEWELS
+      #   run: mix test
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: 12
       - name: Build Assets
         run: |
-          npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
+          npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
           npm run --prefix ./assets deploy
       - name: Build for arm64
         id: buildx

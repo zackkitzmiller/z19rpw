@@ -23,13 +23,13 @@ ENV SECRET_KEY_BASE=34PA0jqGQLok1NXTLqNkXCBjRemHgmt/lc25MRMFBHD7tFy02newjvPLQ1gO
 RUN mix do deps.get, deps.compile
 
 # build assets
-COPY assets/package.json assets/package-lock.json ./assets/
-RUN npm uninstall node-sass -g && npm cache clean --force && npm install node-sass
-RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
+# COPY assets/package.json assets/package-lock.json ./assets/
+# RUN npm uninstall node-sass -g && npm cache clean --force && npm install node-sass
+# RUN npm --prefix ./assets ci --progress=false --no-audit --loglevel=error --production
 
 COPY priv priv
 COPY assets assets
-RUN npm run --prefix ./assets deploy
+# RUN npm run --prefix ./assets deploy
 RUN mix phx.digest
 
 COPY lib lib
