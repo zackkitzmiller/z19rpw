@@ -45,8 +45,12 @@ export default function () {
   check(res, { 'status was 200': (r) => r.status == 200 });
   var res = http.get("https://z19r.pw/coffee");
   check(res, { 'status was 200': (r) => r.status == 200 });
-  var res = http.get("https://z19r.pw/blog?year=2014");
+  var res = http.get("https://z19r.pw/blog?year=2014&s1kip_cache=true");
   check(res, { 'status was 200': (r) => r.status == 200 });
-  var res = http.get("https://z19r.pw/blog?year=2020");
+  var res = http.get("https://z19r.pw/blog?year=2020&s1kip_cache=true");
+  check(res, { 'status was 200': (r) => r.status == 200 });
+  var res = http.get("https://z19r.pw/blog?year=2020&skip_cache=true");
+  check(res, { 'status was 200': (r) => r.status == 200 });
+  var res = http.get("https://z19r.pw/");
   check(res, { 'status was 200': (r) => r.status == 200 });
 }
