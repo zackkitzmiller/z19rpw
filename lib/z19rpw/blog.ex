@@ -5,25 +5,19 @@ defmodule Z19rpw.Blog do
   alias Z19rpw.Blog.Post
   require Logger
 
-  def list_posts(year \\ 2020) do
+  def list_posts(year \\ 2020, skip_cache) do
+    if skip_cache do
+      Logger.info("skipping cache and returning posts")
+      scoped_posts(year)
+    end
+
     case Memcachir.get("z19rpw:blog:posts_by_year:" <> year) do
       {:ok, resp} ->
         resp
 
       {:error, message} ->
         Logger.info(message)
-
-        posts =
-          Repo.all(
-            from p in Post,
-              where:
-                fragment(
-                  "status != 'draft' and extract(year from inserted_at)::string = ?",
-                  ^year
-                ),
-              order_by: [desc: p.id]
-          )
-
+        posts = scoped_posts(year)
         Memcachir.set("z19rpw:blog:posts_by_year:" <> year, posts, ttl: 300)
         posts
     end
@@ -103,5 +97,17 @@ defmodule Z19rpw.Blog do
     Phoenix.PubSub.broadcast(Z19rpw.PubSub, "blog", {event, post})
     Memcachir.flush()
     {:ok, post}
+  end
+
+  defp scoped_posts(year) do
+    Repo.all(
+      from p in Post,
+        where:
+          fragment(
+            "status != 'draft' and extract(year from inserted_at)::string = ?",
+            ^year
+          ),
+        order_by: [desc: p.id]
+    )
   end
 end
