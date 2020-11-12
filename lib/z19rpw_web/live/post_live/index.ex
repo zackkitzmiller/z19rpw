@@ -54,7 +54,7 @@ defmodule Z19rpwWeb.PostLive.Index do
     post = Blog.get_post_by_slug!(slug)
     {:ok, _} = Blog.delete_post(post)
 
-    {:noreply, assign(socket, :posts, Blog.list_posts(false))}
+    {:noreply, assign(socket, :posts, Blog.list_posts())}
   end
 
   @impl true

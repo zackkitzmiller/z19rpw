@@ -5,6 +5,10 @@ defmodule Z19rpw.Blog do
   alias Z19rpw.Blog.Post
   require Logger
 
+  def list_posts do
+    scoped_posts("2020")
+  end
+
   def list_posts(year \\ 2020, skip_cache) do
     if skip_cache do
       Logger.info("skipping cache and returning posts")
