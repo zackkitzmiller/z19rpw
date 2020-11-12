@@ -14,7 +14,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: z19rpw-service
+              serviceName: varnish-svc
               servicePort: 80
   tls:
     - hosts:
