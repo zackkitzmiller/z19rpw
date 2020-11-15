@@ -12,6 +12,15 @@
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script async defer data-domain="z19r.pw" src="https://stats.z19r.pw/js/index.js"></script>
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3PC6C2250C');
+</script>
   </head>
   <body>
   <section class="hero is-primary">
