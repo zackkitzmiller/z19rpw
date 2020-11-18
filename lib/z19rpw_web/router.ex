@@ -53,6 +53,7 @@ defmodule Z19rpwWeb.Router do
   end
 
   scope "/api", Z19rpwWeb do
+    resources "/posts", PostController, except: [:new, :edit]
   end
 
   import Phoenix.LiveDashboard.Router
