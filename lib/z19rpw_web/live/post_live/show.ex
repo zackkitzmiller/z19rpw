@@ -19,14 +19,13 @@ defmodule Z19rpwWeb.PostLive.Show do
 
   @impl true
   def handle_params(%{"slug" => slug}, _, socket) do
+    post = Blog.get_post_by_slug!(slug)
+
     {:noreply,
      socket
-     |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:post, Blog.get_post_by_slug!(slug))}
+     |> assign(:post, post)
+     |> assign(:page_title, post.title)}
   end
-
-  defp page_title(:show), do: "Show Post"
-  defp page_title(:edit), do: "Edit Post"
 
   @impl true
   def handle_info({:post_updated, post}, socket) do
