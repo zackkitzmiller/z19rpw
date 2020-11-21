@@ -61,6 +61,7 @@ defmodule Z19rpw.Blog do
   def delete_post(%Post{} = post) do
     Repo.delete(post)
     Memcachir.flush()
+    {:ok, post}
   end
 
   def change_post(%Post{} = post, attrs \\ %{}) do
@@ -108,7 +109,7 @@ defmodule Z19rpw.Blog do
       from p in Post,
         where:
           fragment(
-            "status != 'draft' and extract(year from inserted_at)::string = ?",
+            "status != 'draft' and extract(year from inserted_at)::text = ?",
             ^year
           ),
         order_by: [desc: p.id]
