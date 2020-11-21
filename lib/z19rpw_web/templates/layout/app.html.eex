@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= if assigns[:page_title] do %>
       <title>z19r - <%= @page_title |> raw %></title>
-    <%= else %>
+    <% else %>
       <title>z19r</title>
     <% end %>
     <%= csrf_meta_tag() %>

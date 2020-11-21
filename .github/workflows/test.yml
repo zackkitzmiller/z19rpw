@@ -5,19 +5,32 @@ on: [push, pull_request]
 jobs:
   compile-on-three:
     runs-on: ubuntu-latest
+    container: elixir:1.11.2-alpine
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      memcached:
+        image: memcached
+
     steps:
       - name: git the code
         uses: actions/checkout@v1
-      - name: mixelixir
-        uses: actions/setup-elixir@v1
-        with:
-          elixir-version: "1.11.1"
-          otp-version: "23"
       - name: burnbabyburn
         run: |
           mix local.hex --force
           mix local.rebar --force
           mix do deps.get, deps.compile
-          mix compile
-      # - name: RUN THE JEWELS
-      #   run: mix test
+          mix test
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
+          MEMCACHED_HOST: memcached
