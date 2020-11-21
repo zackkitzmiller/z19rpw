@@ -1,6 +1,11 @@
 name: "does it blend?"
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+      - "master"
+  pull_request:
+    branches: "*"
 
 jobs:
   compile-on-three:
