@@ -61,6 +61,7 @@ defmodule Z19rpw.Blog do
   def delete_post(%Post{} = post) do
     Repo.delete(post)
     Memcachir.flush()
+    {:ok, post}
   end
 
   def change_post(%Post{} = post, attrs \\ %{}) do
