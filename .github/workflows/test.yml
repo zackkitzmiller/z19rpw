@@ -5,7 +5,6 @@ on: [push, pull_request]
 jobs:
   compile-on-three:
     runs-on: ubuntu-latest
-    container: ubuntu-latest
     services:
       postgres:
         image: postgres
