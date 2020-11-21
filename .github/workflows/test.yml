@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   compile-on-three:
     runs-on: ubuntu-latest
+    container: elixir:1.11.2-alpine
     services:
       postgres:
         image: postgres
@@ -19,11 +20,6 @@ jobs:
     steps:
       - name: git the code
         uses: actions/checkout@v1
-      - name: mixelixir
-        uses: actions/setup-elixir@v1
-        with:
-          elixir-version: "1.11.1"
-          otp-version: "23"
       - name: burnbabyburn
         run: |
           mix local.hex --force
@@ -31,7 +27,7 @@ jobs:
           mix do deps.get, deps.compile
           mix test
         env:
-          POSTGRES_USER: "postgres"
-          POSTGRES_PASSWORD: "postgres"
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
           POSTGRES_HOST: localhost
           POSTGRES_PORT: 5432
