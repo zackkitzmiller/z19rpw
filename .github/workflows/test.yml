@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   compile-on-three:
     runs-on: ubuntu-latest
-    container: elixir:1.9.0
+    container: elixir:1.11-alpine
     services:
       postgres:
         image: postgres
