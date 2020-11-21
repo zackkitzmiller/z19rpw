@@ -8,6 +8,10 @@ config :z19rpw, Z19rpw.Repo,
   port: System.get_env("POSTGRES_PORT", "5432"),
   pool: Ecto.Adapters.SQL.Sandbox
 
+config :memcachir,
+  hosts: System.get_env("MEMCACHED_HOST", "localhost"),
+  coder: {Memcache.Coder.Erlang, []}
+
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
 config :z19rpw, Z19rpwWeb.Endpoint,
