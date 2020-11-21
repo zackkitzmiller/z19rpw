@@ -108,7 +108,7 @@ defmodule Z19rpw.Blog do
       from p in Post,
         where:
           fragment(
-            "status != 'draft' and extract(year from inserted_at)::string = ?",
+            "status != 'draft' and extract(year from inserted_at)::text = ?",
             ^year
           ),
         order_by: [desc: p.id]
