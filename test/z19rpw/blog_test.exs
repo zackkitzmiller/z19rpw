@@ -54,7 +54,7 @@ defmodule Z19rpw.BlogTest do
 
     test "delete_post/1 deletes the post" do
       post = post_fixture()
-      assert {:ok} = Blog.delete_post(post)
+      assert {:ok, _} = Blog.delete_post(post)
       assert_raise Ecto.NoResultsError, fn -> Blog.get_post!(post.id) end
     end
 
