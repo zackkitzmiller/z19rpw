@@ -40,10 +40,8 @@ defmodule Z19rpwWeb.Router do
     pipe_through [:browser, :protected]
 
     live "/posts/new", PostLive.Index, :new, layout: {Z19rpwWeb.LayoutView, "app.html"}
-    live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
-    live "/posts/:slug/show/edit", PostLive.Show, :edit,
-      layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
   scope "/", Z19rpwWeb do
