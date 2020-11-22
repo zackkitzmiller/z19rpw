@@ -1,9 +1,15 @@
 defmodule Z19rpwWeb.Router do
   use Z19rpwWeb, :router
   use Pow.Phoenix.Router
+  import Phoenix.LiveDashboard.Router
+
+  pipeline :api_protected do
+    plug Pow.Plug.RequireAuthenticated, error_handler: Z19rpwWeb.APIAuthErrorHandler
+  end
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug Z19rpwWeb.APIAuthPlug, otp_app: :z19rpw
   end
 
   pipeline :browser do
@@ -34,10 +40,8 @@ defmodule Z19rpwWeb.Router do
     pipe_through [:browser, :protected]
 
     live "/posts/new", PostLive.Index, :new, layout: {Z19rpwWeb.LayoutView, "app.html"}
-    live "/posts/:id/edit", PostLive.Index, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
 
-    live "/posts/:slug/show/edit", PostLive.Show, :edit,
-      layout: {Z19rpwWeb.LayoutView, "app.html"}
+    live "/posts/:slug/edit", PostLive.Show, :edit, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
   scope "/", Z19rpwWeb do
@@ -52,10 +56,22 @@ defmodule Z19rpwWeb.Router do
     live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 
-  scope "/api", Z19rpwWeb do
+  scope "/api/", Z19rpwWeb, as: :api do
+    pipe_through :api
+
+    resources "/session", SessionController, singleton: true, only: [:create, :delete]
+    post "/session/renew", SessionController, :renew
   end
 
-  import Phoenix.LiveDashboard.Router
+  scope "/api", Z19rpwWeb, as: :api do
+    pipe_through [:api]
+    resources "/posts", PostController, only: [:index, :show]
+  end
+
+  scope "/api", Z19rpwWeb, as: :api do
+    pipe_through [:api, :api_protected]
+    resources "/posts", PostController, except: [:index, :show]
+  end
 
   scope "/" do
     pipe_through [:fetch_session, :protect_from_forgery]
