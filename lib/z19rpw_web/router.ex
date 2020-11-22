@@ -63,9 +63,14 @@ defmodule Z19rpwWeb.Router do
     post "/session/renew", SessionController, :renew
   end
 
-  scope "/api", Z19rpwWeb do
+  scope "/api", Z19rpwWeb, as: :api do
     pipe_through [:api]
-    resources "/posts", PostController, except: [:new, :edit]
+    resources "/posts", PostController, only: [:index, :show]
+  end
+
+  scope "/api", Z19rpwWeb, as: :api do
+    pipe_through [:api, :api_protected]
+    resources "/posts", PostController, except: [:index, :show]
   end
 
   scope "/" do
