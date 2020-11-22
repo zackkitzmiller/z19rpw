@@ -34,10 +34,15 @@ defmodule Z19rpwWeb.PostControllerTest do
 
   describe "show post" do
     test "renders error when post dne", %{conn: conn} do
-      conn = get(conn, Routes.post_path(conn, :show, 1))
+      assert_raise Ecto.NoResultsError, fn -> get(conn, Routes.post_path(conn, :show, 1)) end
+    end
+
+    test "renders post json with a good post", %{conn: conn} do
+      {_, post} = Blog.create_post(@create_attrs)
+      conn = get(conn, Routes.post_path(conn, :show, post.id))
 
       assert %{
-               "id" => id,
+               "id" => _,
                "author" => 1,
                "body" => "some body",
                "slug" => "this-is-a-great-computer-machine",
@@ -55,7 +60,7 @@ defmodule Z19rpwWeb.PostControllerTest do
       conn = get(conn, Routes.post_path(conn, :show, id))
 
       assert %{
-               "id" => id,
+               "id" => _,
                "author" => 1,
                "body" => "some body",
                "slug" => "this-is-a-great-computer-machine",
@@ -80,7 +85,7 @@ defmodule Z19rpwWeb.PostControllerTest do
       conn = get(conn, Routes.post_path(conn, :show, id))
 
       assert %{
-               "id" => id,
+               "id" => _,
                "author" => 1,
                "body" => "some updated body",
                "slug" => "fuck-this-computer-i-cant-make-it-work",
