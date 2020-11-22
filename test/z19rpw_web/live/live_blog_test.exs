@@ -5,7 +5,7 @@ defmodule Z19rpwWeb.BlogViewTest do
   import Phoenix.ConnTest
   import Phoenix.LiveViewTest
 
-  alias Z19rpw.Blog
+  alias Z19rpw.{Blog, Blog.Post}
 
   describe "posts" do
     @valid_attrs %{author: 42, body: "some body", title: "Creating New Things"}
@@ -26,31 +26,61 @@ defmodule Z19rpwWeb.BlogViewTest do
       {:ok, conn: conn, authed_conn: authed_conn}
     end
 
+    test "redirected if not authenticated", %{conn: conn} do
+      conn = get(conn, "/posts/new")
+
+      assert redirected_to(conn) ==
+               Routes.pow_session_path(conn, :new, %{
+                 "request_path" => Routes.post_index_path(conn, :new)
+               })
+
+      assert {:error, _} = live(conn)
+    end
+
+    test "new post modal shows if authenticated", %{authed_conn: authed_conn} do
+      authed_conn = get(authed_conn, "/posts/new")
+
+      assert {:ok, view, _} = live(authed_conn)
+
+      view
+        |> element("form")
+        |> render_submit(%{post: %{"title" => "title", "body" => "test body"}})
+
+      assert_redirect(view, Routes.post_index_path(authed_conn, :index))
+      assert %Post{
+        :title => "title",
+        :body => "test body",
+        :id => _,
+        :status => "active",
+        :author => 1
+      } = Blog.get_post_by_slug!("title")
+    end
+
     test "blog home renders", %{conn: conn} do
       conn = get(conn, "/blog")
       assert html_response(conn, 200) =~ "<title>z19r - blog</title>"
 
-      {:ok, _, _} = live(conn)
+      assert {:ok, _, _} = live(conn)
     end
 
-    test "psot view title is correct", %{conn: conn} do
+    test "post view title is correct", %{conn: conn} do
       post_fixture()
       conn = get(conn, "/posts/creating-new-things")
       assert html_response(conn, 200) =~ "<title>z19r - Creating New Things</title>"
 
-      {:ok, _, _} = live(conn)
+      assert {:ok, _, _} = live(conn)
     end
 
     test "shows loging screen if not authed", %{conn: conn} do
       post = post_fixture()
       conn = get(conn, "/posts/creating-new-things/edit")
-      # assert redirected_to(conn) == Routes.post_show_path(conn, :edit, post.slug)
+
       assert redirected_to(conn) ==
                Routes.pow_session_path(conn, :new, %{
                  "request_path" => Routes.post_show_path(conn, :edit, post.slug)
                })
 
-      {:error, _} = live(conn)
+      assert {:error, _} = live(conn)
     end
 
     test "edit form shown if authed", %{authed_conn: authed_conn} do
@@ -61,7 +91,7 @@ defmodule Z19rpwWeb.BlogViewTest do
       assert html_response(authed_conn, 200) =~ "<form action"
       assert html_response(authed_conn, 200) =~ "Creating New Things"
 
-      {:ok, _, _} = live(authed_conn)
+      assert {:ok, _, _} = live(authed_conn)
     end
   end
 end

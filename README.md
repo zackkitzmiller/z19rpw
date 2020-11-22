@@ -1,5 +1,7 @@
 # Z19rpw
 
+[![Coverage Status](https://coveralls.io/repos/github/zackkitzmiller/z19rpw/badge.svg?branch=blog-api)](https://coveralls.io/github/zackkitzmiller/z19rpw?branch=blog-api)
+
 zack kitzmiller's personal website
 
 ## Pull Requests
