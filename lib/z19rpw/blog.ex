@@ -1,47 +1,28 @@
 defmodule Z19rpw.Blog do
   import Ecto.Query, warn: false
-  alias Z19rpw.Repo
 
+  use Z19rpw.Cachier
+
+  alias Z19rpw.Repo
   alias Z19rpw.Blog.Post
+
   require Logger
 
+  @decorate write_through()
   def list_posts do
     scoped_posts("2020")
   end
 
-  def list_posts(year \\ 2020, skip_cache) do
-    if skip_cache do
-      Logger.info("skipping cache and returning posts")
-      scoped_posts(year)
-    end
-
-    case Memcachir.get("z19rpw:blog:posts_by_year:" <> year) do
-      {:ok, resp} ->
-        resp
-
-      {:error, message} ->
-        Logger.info(message)
-        posts = scoped_posts(year)
-        Memcachir.set("z19rpw:blog:posts_by_year:" <> year, posts, ttl: 300)
-        posts
-    end
+  @decorate write_through()
+  def list_posts(%{"year" => year}) do
+    scoped_posts(year)
   end
 
   def get_post!(id), do: Repo.get!(Post, id)
 
+  @decorate write_through()
   def get_post_by_slug!(slug) do
-    case Memcachir.get("z19rpw:blog:post_by_slug:" <> slug) do
-      {:ok, resp} ->
-        resp
-
-      {:error, message} ->
-        Logger.info(message)
-
-        post = Repo.one!(from p in Post, where: p.slug == ^slug)
-
-        Memcachir.set("z19rpw:blog:post_by_slug:" <> slug, post, ttl: 500)
-        post
-    end
+    Repo.one!(from p in Post, where: p.slug == ^slug)
   end
 
   def create_post(attrs \\ %{}) do
@@ -68,28 +49,17 @@ defmodule Z19rpw.Blog do
     Post.changeset(post, attrs)
   end
 
+  @decorate write_through()
   def publication_years do
-    case Memcachir.get("z19rpw:bl0g:publication_years") do
-      {:ok, resp} ->
-        resp
-
-      {:error, message} ->
-        Logger.info(message)
-
-        years =
-          Post
-          |> select(fragment("extract(year from inserted_at) as year"))
-          |> where([p], p.status == "active")
-          |> group_by(fragment("year"))
-          |> having(count("id") > 0)
-          |> Repo.all()
-          |> Enum.sort()
-          |> Enum.map(&floor/1)
-          |> Enum.map(&to_string/1)
-
-        Memcachir.set("z19rpw:bl0g:publication_years", years, ttl: 24 * 60 * 60)
-        years
-    end
+    Post
+    |> select(fragment("extract(year from inserted_at) as year"))
+    |> where([p], p.status == "active")
+    |> group_by(fragment("year"))
+    |> having(count("id") > 0)
+    |> Repo.all()
+    |> Enum.sort()
+    |> Enum.map(&floor/1)
+    |> Enum.map(&to_string/1)
   end
 
   def subscribe do

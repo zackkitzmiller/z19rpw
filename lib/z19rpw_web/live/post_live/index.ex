@@ -11,11 +11,10 @@ defmodule Z19rpwWeb.PostLive.Index do
     current_user = Credentials.get_user(socket, session)
 
     year = Map.get(params, "year", "2020")
-    skip_cache = Map.get(params, "skip_cache", false)
 
     socket =
       socket
-      |> assign(:posts, Blog.list_posts(year, skip_cache))
+      |> assign(:posts, Blog.list_posts(%{"year" => year}))
       |> assign(:current_user, current_user)
       |> assign(:years, Blog.publication_years())
       |> assign(:selected_year, year)

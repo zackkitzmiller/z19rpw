@@ -64,7 +64,8 @@ defmodule Z19rpw.MixProject do
       {:new_relic_agent, "~> 1.0"},
       {:new_relic_phoenix, "~> 0.1"},
       {:sentry, "~> 8.0"},
-      {:excoveralls, "~> 0.10", only: :test}
+      {:excoveralls, "~> 0.10", only: :test},
+      {:decorator, "~> 1.2"}
     ]
   end
 
