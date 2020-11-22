@@ -10,7 +10,14 @@ defmodule Z19rpw.MixProject do
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -56,7 +63,8 @@ defmodule Z19rpw.MixProject do
       {:memcachir, "~> 3.3"},
       {:new_relic_agent, "~> 1.0"},
       {:new_relic_phoenix, "~> 0.1"},
-      {:sentry, "~> 8.0"}
+      {:sentry, "~> 8.0"},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
