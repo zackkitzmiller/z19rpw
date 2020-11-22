@@ -99,6 +99,8 @@ defmodule Z19rpwWeb.PostControllerTest do
       authed_conn =
         put(authed_conn, Routes.api_post_path(authed_conn, :update, post), post: @update_attrs)
 
+      id = Integer.to_string(id)
+
       assert %{"id" => ^id} = json_response(authed_conn, 200)["data"]
 
       authed_conn = get(authed_conn, Routes.api_post_path(authed_conn, :show, id))
