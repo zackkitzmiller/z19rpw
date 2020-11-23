@@ -11,6 +11,10 @@
     <%= label f, :title, "what this shit about", class: "label"  %>
     <div class="control">
       <%= text_input f, :title, class: "input" %>
+      <%= error_tag f, :title %>
+      <%= if input_value f, :slug do %>
+        <span><%= Z19rpwWeb.Endpoint.url() <> "/" <> input_value f, :slug %></span>
+      <% end %>
     </div>
   </div>
 
@@ -18,6 +22,7 @@
     <%= label f, :body, "go on then...", class: "label" %>
     <div class="control">
       <%= textarea f, :body, class: "textarea", rows: 30 %>
+      <%= error_tag f, :body %>
     </div>
   </div>
 
