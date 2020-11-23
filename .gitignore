@@ -32,3 +32,5 @@ z19rpw-*.tar
 Mnesia.*
 /z19rpw_stag.sql
 /tmp
+priv/static/css/
+priv/static/js/
