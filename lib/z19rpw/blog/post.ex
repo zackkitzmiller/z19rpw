@@ -23,12 +23,6 @@ defmodule Z19rpw.Blog.Post do
   def generate_slug(changeset) do
     title = get_field(changeset, :title)
 
-    slug =
-      title
-      |> String.downcase()
-      |> String.replace(~r/[^a-z0-9\s-]/, "")
-      |> String.replace(~r/(\s|-)+/, "-")
-
-    put_change(changeset, :slug, slug)
+    put_change(changeset, :slug, title |> Slug.slugify())
   end
 end

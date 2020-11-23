@@ -4,8 +4,10 @@ defmodule Z19rpw.Cachier do
 
   def write_through(body, context) do
     key = cache_key(context)
+
     quote do
       key = unquote(key)
+
       case Memcachir.get(key) do
         {:ok, resp} ->
           Logger.info("found key: " <> key <> " in cache.")
@@ -22,12 +24,12 @@ defmodule Z19rpw.Cachier do
 
   defp cache_key(context) do
     quote do
-      Atom.to_string(unquote(context.module))
-        <> Atom.to_string(unquote(context.name))
-        <> Macro.to_string(unquote(context.args))
-          |> String.downcase()
-          |> String.replace(~r/[^a-z0-9\s-]/, "-")
-          |> String.replace(~r/(\s|-)+/, ":")
+      (Atom.to_string(unquote(context.module)) <>
+         " " <>
+         Atom.to_string(unquote(context.name)) <>
+         " " <>
+         Macro.to_string(unquote(context.args)))
+      |> Slug.slugify(separator: ":", ignore: "_")
     end
   end
 end
