@@ -17,7 +17,7 @@ defmodule Z19rpw.Blog.Post do
     post
     |> cast(attrs, [:title, :body])
     |> validate_required([:title, :body])
-    |> generate_slug()
+    |> generate_slug
   end
 
   def generate_slug(changeset) do
