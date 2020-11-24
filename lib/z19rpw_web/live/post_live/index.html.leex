@@ -15,7 +15,7 @@
 <section class="articles">
   <div class="container" id="posts" phx-update="prepend">
     <%= for post <- @posts do %>
-      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: nil %>
+      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: @current_user %>
     <% end %>
   </div>
 </section>

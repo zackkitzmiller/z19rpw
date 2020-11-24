@@ -37,7 +37,7 @@ defmodule Z19rpwWeb.PostLive.Index do
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Post")
+    |> assign(:page_title, "write your thoughts bitch")
     |> assign(:post, %Post{})
     |> assign(:current_user, socket.assigns.current_user)
   end

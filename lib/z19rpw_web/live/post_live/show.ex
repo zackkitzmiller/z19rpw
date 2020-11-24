@@ -10,11 +10,7 @@ defmodule Z19rpwWeb.PostLive.Show do
 
     current_user = Credentials.get_user(socket, session)
 
-    socket =
-      socket
-      |> assign(:current_user, current_user)
-
-    {:ok, socket}
+    {:ok, socket |> assign(:current_user, current_user)}
   end
 
   @impl true
