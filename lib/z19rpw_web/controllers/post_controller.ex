@@ -1,8 +1,7 @@
 defmodule Z19rpwWeb.PostController do
   use Z19rpwWeb, :controller
 
-  alias Z19rpw.Blog
-  alias Z19rpw.Blog.Post
+  alias Z19rpw.{Blog, Blog.Post}
 
   action_fallback Z19rpwWeb.FallbackController
 
@@ -12,7 +11,7 @@ defmodule Z19rpwWeb.PostController do
   end
 
   def index(conn, _params) do
-    posts = Blog.list_posts
+    posts = Blog.list_posts()
     render(conn, "index.json", posts: posts)
   end
 

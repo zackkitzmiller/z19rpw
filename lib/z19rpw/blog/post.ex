@@ -1,6 +1,10 @@
 defmodule Z19rpw.Blog.Post do
   use Ecto.Schema
+
+  import Ecto.Query, warn: false
   import Ecto.Changeset
+
+  alias Z19rpw.{Repo, Blog.Post}
 
   schema "posts" do
     field :author, :integer, default: 1
@@ -12,17 +16,31 @@ defmodule Z19rpw.Blog.Post do
     timestamps()
   end
 
+  @spec changeset(
+          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
+          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
+        ) :: Ecto.Changeset.t()
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:title, :body])
-    |> validate_required([:title, :body])
+    |> cast(attrs, [:body, :title])
     |> generate_slug
+    |> validate_required([:body, :slug, :title])
   end
 
   def generate_slug(changeset) do
-    title = get_field(changeset, :title)
+    slug = get_field(changeset, :title)
 
-    put_change(changeset, :slug, title |> Slug.slugify())
+    case Repo.one(from p in Post, where: p.slug == ^slug) do
+      %Post{} ->
+        slug =
+          slug <>
+            "-" <> (:crypto.strong_rand_bytes(6) |> Base.url_encode64() |> binary_part(0, 6))
+
+        put_change(changeset, :slug, slug |> Slug.slugify())
+
+      nil ->
+        put_change(changeset, :slug, slug |> Slug.slugify())
+    end
   end
 end

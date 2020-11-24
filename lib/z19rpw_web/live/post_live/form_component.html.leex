@@ -21,7 +21,7 @@
   <div class="field">
     <%= label f, :body, "go on then...", class: "label" %>
     <div class="control">
-      <%= textarea f, :body, class: "textarea", rows: 30 %>
+      <%= textarea f, :body, class: "textarea", rows: 30, phx_debounce: "blur" %>
       <%= error_tag f, :body %>
     </div>
   </div>
