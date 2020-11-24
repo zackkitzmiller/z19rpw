@@ -8,7 +8,7 @@ defmodule Z19rpw.BlogTest do
 
     @valid_attrs %{author: 42, body: "some body", title: "some title"}
     @update_attrs %{author: 43, body: "some updated body", title: "some updated title"}
-    @invalid_attrs %{author: nil, body: nil, title: nil}
+    @invalid_attrs %{author: nil, body: "", title: ""}
 
     def post_fixture(attrs \\ %{}) do
       {:ok, post} =

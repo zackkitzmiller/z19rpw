@@ -14,7 +14,7 @@ defmodule Z19rpwWeb.PostControllerTest do
     body: "some updated body",
     title: "fuck this computer i cant make it work"
   }
-  @invalid_attrs %{author: nil, body: nil, slug: nil, status: nil, title: nil}
+  @invalid_attrs %{author: "", body: "", slug: "", status: "", title: ""}
 
   def fixture(:post) do
     {:ok, post} = Blog.create_post(@create_attrs)
