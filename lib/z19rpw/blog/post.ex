@@ -29,11 +29,19 @@ defmodule Z19rpw.Blog.Post do
   end
 
   def generate_slug(changeset) do
-    slug = get_field(changeset, :title)
-
-    case slug |> Slug.slugify() do
-      nil ->
+    case get_field(changeset, :title) |> slug_title do
+      :error ->
         changeset
+
+      {:ok, slug} ->
+        put_change(changeset, :slug, slug)
+    end
+  end
+
+  def slug_title(title) do
+    case Slug.slugify(title) do
+      nil ->
+        :error
 
       slug ->
         case Repo.one(from p in Post, where: p.slug == ^slug) do
@@ -42,10 +50,10 @@ defmodule Z19rpw.Blog.Post do
               slug <>
                 "-" <> (:crypto.strong_rand_bytes(6) |> Base.url_encode64() |> binary_part(0, 6))
 
-            put_change(changeset, :slug, slug |> Slug.slugify())
+            {:ok, slug |> Slug.slugify()}
 
           nil ->
-            put_change(changeset, :slug, slug |> Slug.slugify())
+            {:ok, slug}
         end
     end
   end
