@@ -29,7 +29,7 @@ defmodule Z19rpw.Cachier do
          Atom.to_string(unquote(context.name)) <>
          " " <>
          Macro.to_string(unquote(context.args)))
-      |> Slug.slugify(separator: ":", ignore: "_")
+      |> Slug.slugify(separator: ":", ignore: ["_", "-"])
     end
   end
 end
