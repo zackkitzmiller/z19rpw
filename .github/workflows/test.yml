@@ -32,8 +32,6 @@ jobs:
     steps:
       - name: git the code
         uses: actions/checkout@v2
-      - name: Install xmllint
-        run: sudo apt-get install libncurses5
       - name: Setup elixir
         uses: actions/setup-elixir@v1
         with:
