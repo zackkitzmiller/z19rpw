@@ -16,6 +16,7 @@ jobs:
         elixir: ["1.11.2"]
         otp: ["23.1.2"]
 
+    container: elixir:${{ matrix.elixir }}
     services:
       postgres:
         image: postgres
@@ -32,11 +33,6 @@ jobs:
     steps:
       - name: git the code
         uses: actions/checkout@v2
-      - name: Setup elixir
-        uses: actions/setup-elixir@v1
-        with:
-          elixir-version: ${{ matrix.elixir }} # Define the elixir version [required]
-          otp-version: ${{ matrix.otp }}
 
       - name: Retrieve Mix Dependencies Cache
         uses: actions/cache@v1
