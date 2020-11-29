@@ -11,11 +11,13 @@ defmodule Z19rpwWeb.PostView do
   end
 
   def render("post.json", %{post: post}) do
-    %{id: Integer.to_string(post.id),
+    %{
+      id: Integer.to_string(post.id),
       title: post.title,
       author: post.author,
       body: post.body,
       status: post.status,
-      slug: post.slug}
+      slug: post.slug
+    }
   end
 end

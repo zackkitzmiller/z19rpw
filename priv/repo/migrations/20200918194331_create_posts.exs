@@ -9,6 +9,5 @@ defmodule Z19rpw.Repo.Migrations.CreatePosts do
 
       timestamps()
     end
-
   end
 end

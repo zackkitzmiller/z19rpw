@@ -43,17 +43,18 @@ defmodule Z19rpwWeb.BlogViewTest do
       assert {:ok, view, _} = live(authed_conn)
 
       view
-        |> element("form")
-        |> render_submit(%{post: %{"title" => "title", "body" => "test body"}})
+      |> element("form")
+      |> render_submit(%{post: %{"title" => "title", "body" => "test body"}})
 
       assert_redirect(view, Routes.post_index_path(authed_conn, :index))
+
       assert %Post{
-        :title => "title",
-        :body => "test body",
-        :id => _,
-        :status => "active",
-        :author => 1
-      } = Blog.get_post_by_slug!("title")
+               :title => "title",
+               :body => "test body",
+               :id => _,
+               :status => "active",
+               :author => 1
+             } = Blog.get_post_by_slug!("title")
     end
 
     test "blog home renders", %{conn: conn} do
