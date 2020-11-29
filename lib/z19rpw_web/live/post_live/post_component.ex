@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.PostLive.PostComponent do
+  @moduledoc false
+
   use Z19rpwWeb, :live_component
 
   def render(assigns) do

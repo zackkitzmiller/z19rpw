@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.APIAuthErrorHandler do
+  @moduledoc false
+
   use Z19rpwWeb, :controller
   alias Plug.Conn
 

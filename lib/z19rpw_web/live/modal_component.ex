@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.ModalComponent do
+  @moduledoc false
+
   use Z19rpwWeb, :live_component
 
   @impl true

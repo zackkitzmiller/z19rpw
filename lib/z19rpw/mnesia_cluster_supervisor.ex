@@ -1,4 +1,6 @@
 defmodule Z19rpw.MnesiaClusterSupervisor do
+  @moduledoc false
+
   use Supervisor
 
   def start_link(init_arg) do

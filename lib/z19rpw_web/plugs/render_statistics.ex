@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.RenderStatistics do
+  @moduledoc false
+
   import Plug.Conn
 
   def init(options) do

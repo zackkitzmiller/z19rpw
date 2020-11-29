@@ -1,4 +1,5 @@
 defmodule Z19rpw.Blog do
+  @moduledoc false
   import Ecto.Query, warn: false
 
   use Z19rpw.Cachier

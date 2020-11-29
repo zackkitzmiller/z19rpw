@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.PostLive.FormComponent do
+  @moduledoc false
+
   use Z19rpwWeb, :live_component
 
   alias Z19rpw.Blog
