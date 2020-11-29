@@ -16,7 +16,6 @@ jobs:
         elixir: ["1.11.2"]
         otp: ["23.1.2"]
 
-    container: ubuntu-latest
     services:
       postgres:
         image: postgres
