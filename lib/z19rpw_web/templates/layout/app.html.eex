@@ -14,92 +14,69 @@
     <link async defer href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
-    <script async defer data-domain="z19r.pw" src="https://stats.z19r.pw/js/index.js"></script>
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-3PC6C2250C');
-</script>
+      gtag('config', 'G-3PC6C2250C');
+    </script>
   </head>
   <body>
-  <section class="hero is-primary">
-    <!-- Hero head: will stick at the top -->
-    <div class="hero-head">
-      <nav class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item">
-              <h1 class="title">
-                <%= link "zack kitzmiller ♥️'s you", to: Routes.page_path(@conn, :index) %>
-              </h1>
-            </a>
-          </div>
-          <div id="navbarMenuHeroA" class="navbar-menu">
-            <div class="navbar-end">
-              <a class="navbar-item" href="https://twitter.com/zackkitzmiller">
-                <span class="icon">
-                  <i class="fab fa-twitter-square"></i>
-                </span>
-                <span>twitter</span>
-              </a>
-              <a class="navbar-item" href="https://linkedin.com/in/zack-kitzmiller-3023777a/">
-                <span class="icon">
-                  <i class="fab fa-linkedin"></i>
-                </span>
-                <span>linkedin</span>
-              </a>
-              <a class="navbar-item" href="https://github.com/zackkitzmiller">
-                <span class="icon">
-                  <i class="fab fa-github-square"></i>
-                </span>
-                <span>github</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
 
-    <div class="hero-body">
-      <div class="container">
-        <h2 class="subtitle" id="subtitle">
-          software engineer. former new yorker &mdash; current chicagoan
-        </h2>
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="<%= Routes.page_path(@conn, :index) %>">
+          ♥️ zack kitzmiller
+        </a>
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="z4xw3tb4r">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div id="z4xw3tb4r" class="navbar-menu">
+        <div class="navbar-start">
+          <%= link "blog", to: Routes.post_index_path(@conn, :index), class: "navbar-item" %>
+          <%= link "mentorship", to: Routes.page_path(@conn, :coffee), class: "navbar-item" %>
+          <a href="#" class="navbar-item" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/zkitzmiller/let-s-get-coffee?hide_gdpr_banner=1'});return false;">let's get coffee</a>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+          <%= if Pow.Plug.current_user(@conn) do %>
+            <a class="navbar-item"><i class='fas fa-lock'></i></a>
+          <% else %>
+            <%= link "<i class='fas fa-unlock'></i>" |> raw, to: Routes.pow_session_path(@conn, :new), class: "navbar-item" %>
+          <% end %>
+          <a class="navbar-item" href="https://twitter.com/zackkitzmiller">
+            <span class="icon">
+              <i class="fab fa-twitter-square"></i>
+            </span>
+          </a>
+          <a class="navbar-item" href="https://linkedin.com/in/zack-kitzmiller-3023777a/">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          <a class="navbar-item" href="https://github.com/zackkitzmiller">
+            <span class="icon">
+              <i class="fab fa-github-square"></i>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
+  </nav>
 
-    <div class="hero-foot">
-      <nav class="tabs">
-        <div class="container">
-          <ul>
-            <li><%= link "home", to: Routes.page_path(@conn, :index) %></li>
-            <li><%= link "blog", to: Routes.post_index_path(@conn, :index) %></li>
-            <li><%= link "mentorship", to: Routes.page_path(@conn, :coffee) %></li>
-            <li><a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/zkitzmiller/let-s-get-coffee?hide_gdpr_banner=1'});return false;">let's get coffee</a></li>
-            <%= if Pow.Plug.current_user(@conn) do %>
-              <%= link "<i class=\"fas fa-lock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :delete), method: :delete %>
-            <% else %>
-              <%= link "<i class=\"fas fa-unlock\"></i>" |> raw, to: Routes.pow_session_path(@conn, :new) %>
-            <% end %>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+  <section class="hero is-primary">
+    &nbsp;
   </section>
 
-  <section role="main" class="section">
-    <div class="container">
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-      <%= @inner_content %>
-    </div>
-  </section>
+  <%= @inner_content %>
 
   <section class="section">
     <div class="container">
