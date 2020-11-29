@@ -9,20 +9,23 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
-{:ok, _user} = Z19rpw.Accounts.create_user(%{
-  username: "writer",
-  password: "qweqweqwe",
-  permissions: %{default: [:read_users, :write_users]}
-})
+{:ok, _user} =
+  Z19rpw.Accounts.create_user(%{
+    username: "writer",
+    password: "qweqweqwe",
+    permissions: %{default: [:read_users, :write_users]}
+  })
 
-{:ok, _user} = Z19rpw.Accounts.create_user(%{
-  username: "reader",
-  password: "qweqweqwe",
-  permissions: %{default: [:read_users]}
-})
+{:ok, _user} =
+  Z19rpw.Accounts.create_user(%{
+    username: "reader",
+    password: "qweqweqwe",
+    permissions: %{default: [:read_users]}
+  })
 
-{:ok, _user} = Z19rpw.Accounts.create_user(%{
-  username: "rubbish",
-  password: "qweqweqwe",
-  permissions: %{default: []}
-})
+{:ok, _user} =
+  Z19rpw.Accounts.create_user(%{
+    username: "rubbish",
+    password: "qweqweqwe",
+    permissions: %{default: []}
+  })

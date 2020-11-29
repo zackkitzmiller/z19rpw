@@ -1,4 +1,6 @@
 defmodule Z19rpw.Cachier do
+  @moduledoc false
+
   use Decorator.Define, write_through: 0
   require Logger
 

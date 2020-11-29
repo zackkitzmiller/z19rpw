@@ -1,4 +1,5 @@
 defmodule Z19rpwWeb.LiveHelpers do
+  @moduledoc false
   import Phoenix.LiveView.Helpers
 
   def live_modal(socket, component, opts) do

@@ -1,4 +1,6 @@
 defmodule Z19rpwWeb.PostLive.Index do
+  @moduledoc false
+
   use Z19rpwWeb, :live_view
 
   alias Z19rpwWeb.Credentials

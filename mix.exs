@@ -66,7 +66,9 @@ defmodule Z19rpw.MixProject do
       {:sentry, "~> 8.0"},
       {:excoveralls, "~> 0.10", only: :test},
       {:decorator, "~> 1.2"},
-      {:slugify, "~> 1.3"}
+      {:slugify, "~> 1.3"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev], runtime: false}
     ]
   end
 

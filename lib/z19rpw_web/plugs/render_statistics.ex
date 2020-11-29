@@ -1,11 +1,13 @@
 defmodule Z19rpwWeb.RenderStatistics do
-    import Plug.Conn
+  @moduledoc false
 
-    def init(options) do
-      options
-    end
+  import Plug.Conn
 
-    def call(conn, _opts) do
-      assign(conn, :hostname, System.get_env("HOSTNAME"))
-    end
+  def init(options) do
+    options
+  end
+
+  def call(conn, _opts) do
+    assign(conn, :hostname, System.get_env("HOSTNAME"))
+  end
 end

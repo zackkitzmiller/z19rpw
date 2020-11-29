@@ -1,4 +1,5 @@
 defmodule Z19rpwWeb.PostLive.Show do
+  @moduledoc false
   use Z19rpwWeb, :live_view
 
   alias Z19rpw.Blog
