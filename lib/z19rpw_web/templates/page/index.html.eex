@@ -1,87 +1,99 @@
-<div class="columns is-multiline">
-  <div class="column is-full">
-    <div class="card">
-      <div class="card-content">
-        <div class="media">
-          <div class="media-left">
-            <figure class="image is-48x48">
-              <img src="https://grabango.com/wp-content/uploads/2020/08/Grabango_Round_Red-1.png" alt="grabango">
-            </figure>
-          </div>
-          <div class="media-content">
-            <p class="title is-4"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
-            <p class="subtitle is-6">june '20 &ndash; current</p>
-          </div>
-        </div>
+<section id="about-z4ck" class="section idx">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half has-text-centered">
+        <figure class="image is-128x128" style="margin: 0 auto 48px auto;">
+          <img class="is-rounded" src="https://pbs.twimg.com/profile_images/907621222921506816/o58LZkZZ_400x400.jpg">
+        </figure>
+        <p class="title">Zack Kitzmiller</p>
+        <p class="subtitle">Technical Architect/Software Engineer</p>
 
-        <div class="content">
-          <p>technical architect</p>
-          <p style="text-decoration: line-through">staff sortware engineer. leading payments efforts and general arcitecture</p>
+        <div class="social-linkaroos">
+          <a href="https://twitter.com/zackkitzmiller">
+            <span class="icon">
+              <i class="fab fa-twitter-square"></i>
+            </span>
+          </a>
+          <a href="https://linkedin.com/in/zack-kitzmiller-3023777a/">
+            <span class="icon">
+              <i class="fab fa-linkedin"></i>
+            </span>
+          </a>
+          <a href="https://github.com/zackkitzmiller">
+            <span class="icon">
+              <i class="fab fa-github-square"></i>
+            </span>
+          </a>
         </div>
+      </div>
+      <div class="column is-half">
+        <p class="title">About Me</p>
+        <p class="is-size-5">I build and design quality, fault tolerant, high traffic, distributed software systems, especially in the payments space.</p>
+        <br/>
+        <p class="is-size-5">I'm also interested in hardware hacking, iOS, kubernetes, building unnecessary things, and data stores.</p>
+        <br/>
+        <p class="is-size-5">I like building things in Elixir, Python, Go, and Swift, but I'm comfortable in a bunch of other languages. <%= link "Let me know", to: Routes.page_path(@conn, :coffee) %> if I can help you build or prototype something.</p>
       </div>
     </div>
   </div>
-  <div class="column is-half">
-    <div class="card">
-      <div class="card-content">
+</section>
+
+<section id="exp" class="section idx">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half">
+        <p class="title">Experience</p>
+      </div>
+      <div class="column is-half">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <figure class="image is-128x128">
+              <img src="<%= Routes.static_path(@conn, "/images/gbo.png") %>" alt="grabango">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="is-size-3"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
+            <p class="is-size-5">technical architect</p>
+            <p class="is-size-5">june '20 &ndash; current</p>
+          </div>
+        </div>
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-96x96">
               <img src="<%= Routes.static_path(@conn, "/images/venmo.png") %>" alt="venmo">
             </figure>
+            </div>
+            <div class="media-content">
+              <p class="is-size-4"><%= link("venmo", to: "https://venmo.com", target: "_blank") %></p>
+              <p class="is-size-6">member of the technical staff ii</p>
+              <p class="is-size-6">sept '19 &ndash; jun '20</p>
+            </div>
           </div>
-          <div class="media-content">
-            <p class="title is-4"><%= link("venmo", to: "https://venmo.com", target: "_blank") %></p>
-            <p class="subtitle is-6">sept '19 &ndash; jun '20</p>
-          </div>
-        </div>
-
-        <div class="content">
-          member of the technical staff ii
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="column is-half">
-    <div class="card">
-      <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <figure class="image is-96x96">
               <img src="<%= Routes.static_path(@conn, "/images/seatgeek.png") %>" alt="seatgeek">
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4"><%= link("seatgeek", to: "https://seatgeek.com", target: "_blank") %></p>
-            <p class="subtitle is-6">jan '12 &ndash; sept '19</p>
+            <p class="is-size-4"><%= link("seatgeek", to: "https://seatgeek.com", target: "_blank") %></p>
+            <p class="is-size-6">sr software engineer ii. <br/> EM resilience engineering</p>
+            <p class="is-size-6">jan '12 &ndash; sept '19</p>
           </div>
         </div>
-
-        <div class="content">
-          sr software engineer ii. fraud, payments, marketplace, lots more. manager &ndash; resilience engineering
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="column is-half">
-    <div class="card">
-      <div class="card-content">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-48x48">
+            <figure class="image is-96x96">
               <img src="<%= Routes.static_path(@conn, "/images/forrst.png") %>" alt="forrst">
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4"><%= link("forrst", to: "https://techcrunch.com/2012/03/26/design-community-colourlovers-acquires-forrst/", target: "_blank") %></p>
-            <p class="subtitle is-6">jan '11 &ndash; sept '11</p>
+            <p class="is-size-4"><%= link("forrst", to: "https://techcrunch.com/2012/03/26/design-community-colourlovers-acquires-forrst/", target: "_blank") %></p>
+            <p class="is-size-6">the software engineer. worked with kyle</p>
+            <p class="is-size-6">jan '11 &ndash; sept '11</p>
           </div>
-        </div>
-
-        <div class="content">
-          the software engineer. worked with kyle
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>
