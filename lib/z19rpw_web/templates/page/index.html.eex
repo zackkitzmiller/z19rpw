@@ -28,7 +28,7 @@
       </div>
       <div class="column is-half">
         <p class="title">About Me</p>
-        <p class="is-size-5">I build and design quality, fault tolerant, high traffic, distributed software systems, especially in the payments space.</p>
+        <p class="is-size-5">I build and design high quality, high traffic, fault tolerant, distributed software systems, especially in the payments space.</p>
         <br/>
         <p class="is-size-5">I'm also interested in hardware hacking, iOS, kubernetes/cloud infrastructure, datastores, and building unnecessary things.</p>
         <br/>
