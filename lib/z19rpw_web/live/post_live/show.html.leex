@@ -7,8 +7,8 @@
     return_to: Routes.post_show_path(@socket, :show, @post.slug) %>
 <% end %>
 
-<section class="articles">
-  <div class="column is-12" id="post">
+<div class="container">
+  <div id="post">
     <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: @post.id, post: @post, current_user: @current_user %>
   </div>
-</section>
+</div>

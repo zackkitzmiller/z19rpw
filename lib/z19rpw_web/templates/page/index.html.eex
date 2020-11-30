@@ -30,7 +30,7 @@
         <p class="title">About Me</p>
         <p class="is-size-5">I build and design quality, fault tolerant, high traffic, distributed software systems, especially in the payments space.</p>
         <br/>
-        <p class="is-size-5">I'm also interested in hardware hacking, iOS, kubernetes, building unnecessary things, and data stores.</p>
+        <p class="is-size-5">I'm also interested in hardware hacking, iOS, kubernetes/cloud infrastructure, datastores, and building unnecessary things.</p>
         <br/>
         <p class="is-size-5">I like building things in Elixir, Python, Go, and Swift, but I'm comfortable in a bunch of other languages. <%= link "Let me know", to: Routes.page_path(@conn, :coffee) %> if I can help you build or prototype something.</p>
       </div>
@@ -90,7 +90,7 @@
           <div class="media-content">
             <p class="is-size-4"><%= link("forrst", to: "https://techcrunch.com/2012/03/26/design-community-colourlovers-acquires-forrst/", target: "_blank") %></p>
             <p class="is-size-6">the software engineer. worked with kyle</p>
-            <p class="is-size-6">jan '11 &ndash; sept '11</p>
+            <p class="is-size-6">jan '11 &ndash; sept '11 (acquired)</p>
           </div>
         </div>
       </div>
