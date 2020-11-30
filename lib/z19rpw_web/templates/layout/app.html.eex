@@ -50,19 +50,19 @@
             <%= if Pow.Plug.current_user(@conn) do %>
               <a class="navbar-item"><i class='fas fa-lock'></i></a>
             <% else %>
-              <%= link "<i class='fas fa-unlock'></i>" |> raw, to: Routes.pow_session_path(@conn, :new), class: "navbar-item" %>
+              <%= link "<i class='fas fa-unlock'></i>" |> raw, to: Routes.pow_session_path(@conn, :new), class: "navbar-item", title: "login" %>
             <% end %>
-            <a class="navbar-item" href="https://twitter.com/zackkitzmiller">
+            <a class="navbar-item" href="https://twitter.com/zackkitzmiller" title="twitter">
               <span class="icon">
                 <i class="fab fa-twitter-square"></i>
               </span>
             </a>
-            <a class="navbar-item" href="https://linkedin.com/in/zack-kitzmiller-3023777a/">
+            <a class="navbar-item" href="https://linkedin.com/in/zack-kitzmiller-3023777a/", title="linkedin">
               <span class="icon">
                 <i class="fab fa-linkedin"></i>
               </span>
             </a>
-            <a class="navbar-item" href="https://github.com/zackkitzmiller">
+            <a class="navbar-item" href="https://github.com/zackkitzmiller" title="github">
               <span class="icon">
                 <i class="fab fa-github-square"></i>
               </span>

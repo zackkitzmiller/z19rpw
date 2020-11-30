@@ -1,0 +1,4 @@
+USER-SUPPLIED VALUES:
+resources:
+  requests:
+    memory: 1Gi
