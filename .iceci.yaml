@@ -1,9 +1,0 @@
-steps:
-  - name: example-step-1
-    containerRun:
-      image: busybox
-      script: |
-        echo "### Environment variables from IceCI"
-        env | grep ICE
-        echo "### PWD"
-        pwd
