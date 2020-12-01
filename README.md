@@ -1,7 +1,7 @@
 # Z19rpw
 
 [![Coverage Status](https://coveralls.io/repos/github/zackkitzmiller/z19rpw/badge.svg?branch=main)](https://coveralls.io/github/zackkitzmiller/z19rpw?branch=blog-api)
-[![Tests](https://github.com/zackkitzmiller/z19rpw/workflows/does%20it%20blend%3F/badge.svg)
+![Tests](https://github.com/zackkitzmiller/z19rpw/workflows/does%20it%20blend%3F/badge.svg)
 
 zack kitzmiller's personal website
 
