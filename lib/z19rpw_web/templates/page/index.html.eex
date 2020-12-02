@@ -48,7 +48,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-128x128">
-              <img src="<%= Routes.static_path(@conn, "/images/gbo.png") %>" alt="grabango">
+              <img src="https://blob.z19r.pw/public/gbo.png" alt="grabango">
             </figure>
           </div>
           <div class="media-content">
@@ -60,7 +60,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="<%= Routes.static_path(@conn, "/images/venmo.png") %>" alt="venmo">
+              <img src="https://blob.z19r.pw/public/venmo.png" alt="venmo">
             </figure>
             </div>
             <div class="media-content">
@@ -72,7 +72,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="<%= Routes.static_path(@conn, "/images/seatgeek.png") %>" alt="seatgeek">
+              <img src="https://blob.z19r.pw/public/seatgeek.png" alt="seatgeek">
             </figure>
           </div>
           <div class="media-content">
@@ -84,7 +84,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="<%= Routes.static_path(@conn, "/images/forrst.png") %>" alt="forrst">
+              <img src="https://blob.z19r.pw/public/forrst.png" alt="forrst">
             </figure>
           </div>
           <div class="media-content">
