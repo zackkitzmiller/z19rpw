@@ -3,7 +3,7 @@
     <div class="columns">
       <div class="column is-half has-text-centered">
         <figure class="image is-128x128" style="margin: 0 auto 48px auto;">
-          <img class="is-rounded" src="https://blob.z19r.pw/public/kitz.jpg">
+          <img class="is-rounded" src="https://contentdeliverynetwork.z19r.pw/assets/kitz.jpg">
         </figure>
         <p class="title">Zack Kitzmiller</p>
         <p class="subtitle">Technical Architect/Software Engineer</p>
@@ -48,7 +48,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-128x128">
-              <img src="https://blob.z19r.pw/public/gbo.png" alt="grabango">
+              <img src="https://contentdeliverynetwork.z19r.pw/assets/gbo.png" alt="grabango">
             </figure>
           </div>
           <div class="media-content">
@@ -60,7 +60,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://blob.z19r.pw/public/venmo.png" alt="venmo">
+              <img src="https://contentdeliverynetwork.z19r.pw/assets/venmo.png" alt="venmo">
             </figure>
             </div>
             <div class="media-content">
@@ -72,7 +72,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://blob.z19r.pw/public/seatgeek.png" alt="seatgeek">
+              <img src="https://contentdeliverynetwork.z19r.pw/assets/seatgeek.png" alt="seatgeek">
             </figure>
           </div>
           <div class="media-content">
@@ -84,7 +84,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://blob.z19r.pw/public/forrst.png" alt="forrst">
+              <img src="https://contentdeliverynetwork.z19r.pw/assets/forrst.png" alt="forrst">
             </figure>
           </div>
           <div class="media-content">

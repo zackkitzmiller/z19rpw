@@ -97,3 +97,26 @@ spec:
     - hosts:
       - blob.z19r.pw
       secretName: blobz-z19r-pw-tls
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cdn
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/frontend-entry-points: http, https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+    - host: contentdeliverynetwork.z19r.pw
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: varnish-svc
+              servicePort: 80
+  tls:
+    - hosts:
+      - contentdeliverynetwork.z19r.pw
+      secretName: contentdeliverynetwork-z19r-pw-tls
