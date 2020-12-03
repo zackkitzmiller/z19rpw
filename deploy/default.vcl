@@ -9,6 +9,11 @@ backend z19rpw {
   .port = "80";
 }
 
+backend cdn {
+  .host = "minio-1606771947.minio";
+  .port = "9000";
+}
+
 sub vcl_recv {
   if (req.http.upgrade ~ "(?i)websocket") {
     return (pipe);
@@ -30,6 +35,12 @@ sub vcl_recv {
   if (req.http.Host ~ "z19r.pw") {
     std.log("setting backend to z19rpw");
     set req.backend_hint = z19rpw;
+  }
+
+  if (req.http.Host ~ "contentdeliverynetwork.z19r.pw" && req.url ~ "^/assets/") {
+    set req.url = regsuball(req.url, "/assets/", "/public/");
+    std.log("setting backend to CDNNN");
+    set req.backend_hint = cdn;
   }
 
   if (req.method != "GET" && req.method != "HEAD") {

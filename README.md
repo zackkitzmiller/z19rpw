@@ -53,3 +53,10 @@ Releases are handled by GitHub actions. You can see the build configuration at `
 ## Architecture
 
 z19rpw is currently hosted on a Raspberry Pi cluster that sits on my desk. It's a 10 node configuration running Kubernetes with routing handled by Traefik. DNS is served by Google Cloud DNS.
+
+## Varnish
+
+- `cd deploy && kubectl create configmap varnish-vcl --from-file=default.vcl` to create the configmap
+- `kubectl delete configmap varnish-vcl` to delete the configmap
+- On a varnish pod `varnishlog -i VCL_Log` to tail custom logs
+- `kubectl rollout restart deployment varnish-proxy` to purchase the cache. This is also done on deploy
