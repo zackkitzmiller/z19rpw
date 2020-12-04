@@ -41,14 +41,14 @@ If this doesn't work, please open an issue and I'll take a look at it.
 Yup! To run the test suite make sure that `config/test.exs` is correctly pointing to CockroachDB (or Postgres) and run:
 
 ```
-mix test
+MIX_ENV=test mix coveralls
 ```
 
 You might get an warning about reporting to Sentry because of a missing DSN. It can safely be ignored as I don't want tests reporting errors to Sentry.
 
 ## Release
 
-Releases are handled by GitHub actions. You can see the build configuration at `.github/workflows/main.yml`.
+Releases are handled by GitHub actions. You can see the build configuration at `.github/workflows/main.yml`. 
 
 ## Architecture
 
