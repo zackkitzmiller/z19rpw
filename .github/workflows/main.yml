@@ -1,6 +1,10 @@
 name: "derploy :allthethings:"
 
 on:
+  workflow_run:
+    workflows: automerge
+    types: 
+      - completed
   push:
     branches:
       - "main"
