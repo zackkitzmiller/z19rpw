@@ -1,9 +1,6 @@
 name: "does it blend?"
 
-on:
-  push:
-    branches-ignore:
-      - "master"
+on: [push]
 
 jobs:
   compile-on-three:
