@@ -1,4 +1,5 @@
 defmodule Z19rpw.Blog.Post.Like do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
