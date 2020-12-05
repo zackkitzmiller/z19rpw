@@ -51,7 +51,7 @@ config :new_relic_agent,
 
 config :ex_aws, :s3,
   scheme: "https://",
-  host: "blob.z19r.pw",
+  host: "contentdeliverynetwork.z19r.pw",
   port: 443
 
 # Import environment specific config. This must remain at the bottom
