@@ -15,6 +15,12 @@ jobs:
     services:
       cockroachdb:
         image: cockroachdb/cockroach:v20.2.2
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+          --entrypoint "start --insecure"
       memcached:
         image: memcached
 
@@ -44,7 +50,7 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_PASSWORD: ""
           POSTGRES_HOST: cockroachdb
-          POSTGRES_PORT: 26257
+          POSTGRES_PORT: "26257"
           MEMCACHED_HOST: memcached
           MIX_ENV: test
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
