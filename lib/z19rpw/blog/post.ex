@@ -8,6 +8,8 @@ defmodule Z19rpw.Blog.Post do
 
   alias Z19rpw.{Repo, Blog.Post}
 
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
   schema "posts" do
     field :author, :integer, default: 1
     field :body, :string

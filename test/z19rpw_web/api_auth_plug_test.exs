@@ -9,7 +9,7 @@ defmodule Z19rpwWeb.APIAuthPlugTest do
 
   setup %{conn: conn} do
     conn = %{conn | secret_key_base: Endpoint.config(:secret_key_base)}
-    user = Repo.insert!(%User{id: 1, email: "test@example.com"})
+    user = Repo.insert!(%User{id: Ecto.UUID.generate(), email: "test@example.com"})
 
     {:ok, conn: conn, user: user}
   end

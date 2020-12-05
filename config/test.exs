@@ -1,11 +1,11 @@
 use Mix.Config
 
 config :z19rpw, Z19rpw.Repo,
-  username: System.get_env("POSTGRES_USER", "zackkitzmiller"),
+  username: System.get_env("POSTGRES_USER", "root"),
   password: System.get_env("POSTGRES_PASSWORD", ""),
   database: "z19rpw_test#{System.get_env("MIX_TEST_PARTITION")}",
   hostname: System.get_env("POSTGRES_HOST", "localhost"),
-  port: System.get_env("POSTGRES_PORT", "5432"),
+  port: System.get_env("POSTGRES_PORT", "26257"),
   pool: Ecto.Adapters.SQL.Sandbox
 
 config :memcachir,
