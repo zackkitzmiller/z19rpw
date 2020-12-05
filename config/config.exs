@@ -8,7 +8,12 @@
 use Mix.Config
 
 config :z19rpw,
-  ecto_repos: [Z19rpw.Repo]
+  ecto_repos: [Z19rpw.Repo],
+  generators: [binary_id: true]
+
+config :z19rpw, Z19rpw.Repo,
+  migration_primary_key: [name: :id, type: :binary_id],
+  migration_foreign_key: [column: :id, type: :binary_id]
 
 # Configures the endpoint
 config :z19rpw, Z19rpwWeb.Endpoint,
