@@ -11,18 +11,6 @@ defmodule Z19rpwWeb.PageController do
   end
 
   def thc(conn, _params) do
-    HTTPoison.post(
-      "https://plausible.io/api/event",
-      "{\"n\": \"pageview\", \"u\": \"http://thetrumphealthcareplan.com:4000/thc\",
-    \"d\": \"thetrumphealthcareplan.com\",
-      \"r\": \"thc\",
-      \"w\": 1764
-  }",
-      [
-        {"Content-Type", "plain/text"}
-      ]
-    )
-
     conn
     |> redirect(external: "https://www.nytimes.com/2020/11/07/us/politics/biden-election.html")
   end
