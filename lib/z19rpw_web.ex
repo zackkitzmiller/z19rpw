@@ -88,6 +88,7 @@ defmodule Z19rpwWeb do
       import Phoenix.View
 
       import Z19rpwWeb.ErrorHelpers
+      import Z19rpwWeb.CDNHelpers
       import Z19rpwWeb.LiveHelpers
       import Z19rpwWeb.Gettext
       alias Z19rpwWeb.Router.Helpers, as: Routes
