@@ -1,4 +1,4 @@
-name: "derploy :allthethings:"
+name: "deploy"
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - "main"
 
 jobs:
-  build-and-destroy:
+  deploy:
     if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
@@ -29,7 +29,6 @@ jobs:
         with:
           path: deps
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-
       - name: Install Dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
         run: |
