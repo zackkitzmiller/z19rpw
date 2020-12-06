@@ -27,7 +27,6 @@ $ brew install cockroachdb/tap/cockroach memcached
 ```
 
 You need update the configuration of CockroachDB in `config/dev.exs` and `config/test.exs`. That should be enough to get you up and running.
-
 ```
 $ hub clone zackkitzmiller/z19rpw
 $ mix deps.get
