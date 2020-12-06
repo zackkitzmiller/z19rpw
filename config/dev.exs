@@ -18,7 +18,7 @@ config :z19rpw, Z19rpw.Repo,
 # with webpack to recompile .js and .css sources.
 config :z19rpw, Z19rpwWeb.Endpoint,
   http: [port: String.to_integer(System.get_env("PORT") || "4000")],
-  debug_errors: true,
+  debug_errors: false,
   code_reloader: true,
   check_origin: false,
   watchers: [

@@ -53,7 +53,7 @@ sub vcl_recv {
     return (hash);
   }
 
-  if (req.url ~ "\.(png|jpg|jpeg|css|js)") {
+  if (req.url ~ "\.(png|jpg|gif|jpeg|css|js)") {
     std.log("processing for z19r assets");
     unset req.http.Cookie;
     return (hash);

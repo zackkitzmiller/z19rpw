@@ -22,4 +22,8 @@ defmodule Z19rpwWeb.PageController do
 
     render(conn, "coffee.html")
   end
+
+  def err(_conn, _params) do
+    raise "Error"
+  end
 end
