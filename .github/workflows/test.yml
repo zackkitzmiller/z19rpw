@@ -14,7 +14,7 @@ jobs:
     container: elixir:${{ matrix.elixir }}
     services:
       cockroachdb:
-        image: cockroachdb/cockroach:v20.2.2
+        image: zackkitzmiller/crdb-single-node-server:latest
       memcached:
         image: memcached
 

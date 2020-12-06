@@ -1,16 +1,13 @@
 name: "derploy :allthethings:"
 
 on:
-  workflow_run:
-    workflows: [automerge]
-    types:
-      - completed
   push:
     branches:
       - "main"
 
 jobs:
   build-and-destroy:
+    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: git the code
