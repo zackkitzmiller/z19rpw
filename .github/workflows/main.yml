@@ -2,8 +2,8 @@ name: "derploy :allthethings:"
 
 on:
   workflow_run:
-    workflows: automerge
-    types: 
+    workflows: [automerge]
+    types:
       - completed
   push:
     branches:
