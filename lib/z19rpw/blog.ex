@@ -42,6 +42,8 @@ defmodule Z19rpw.Blog do
 
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+    |> broadcast(:post_deleted)
+
     Memcachir.flush()
     {:ok, post}
   end
