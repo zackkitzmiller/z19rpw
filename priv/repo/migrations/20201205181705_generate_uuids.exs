@@ -7,15 +7,22 @@ defmodule Z19rpw.Repo.Migrations.GenerateUuidsAndMigrate do
 
   def change do
     Ecto.Adapters.SQL.query!(
-      Z19rpw.Repo, "UPDATE posts SET uuid = gen_random_uuid();"
+      Z19rpw.Repo,
+      "UPDATE posts SET uuid = gen_random_uuid();"
     )
+
     flush()
+
     Ecto.Adapters.SQL.query!(
-      Z19rpw.Repo, "ALTER TABLE posts ALTER COLUMN uuid SET NOT NULL;"
+      Z19rpw.Repo,
+      "ALTER TABLE posts ALTER COLUMN uuid SET NOT NULL;"
     )
+
     flush()
+
     Ecto.Adapters.SQL.query!(
-      Z19rpw.Repo, "ALTER TABLE posts ALTER COLUMN uuid SET DEFAULT gen_random_uuid();"
+      Z19rpw.Repo,
+      "ALTER TABLE posts ALTER COLUMN uuid SET DEFAULT gen_random_uuid();"
     )
   end
 end
