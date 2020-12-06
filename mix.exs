@@ -58,7 +58,6 @@ defmodule Z19rpw.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:earmark, "~> 1.4.10"},
       {:pow, "~> 1.0"},
-      {:httpoison, "~> 1.7", override: true},
       {:memcachir, "~> 3.3"},
       {:new_relic_agent, "~> 1.0"},
       {:new_relic_phoenix, "~> 0.1"},

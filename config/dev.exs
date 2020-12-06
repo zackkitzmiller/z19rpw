@@ -6,7 +6,7 @@ config :z19rpw, Z19rpw.Repo,
   password: "",
   database: "defaultdb",
   hostname: "localhost",
-  port: 26257,
+  port: "26257",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

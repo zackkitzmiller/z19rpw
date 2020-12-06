@@ -22,7 +22,7 @@ defmodule Z19rpwWeb.PostControllerTest do
   end
 
   setup %{conn: conn} do
-    user = %Z19rpw.Users.User{email: "test@example.com", id: 1}
+    user = %Z19rpw.Users.User{email: "test@example.com", id: Ecto.UUID.generate()}
     authed_conn = Pow.Plug.assign_current_user(conn, user, [])
 
     {:ok, conn: put_req_header(conn, "accept", "application/json"), authed_conn: authed_conn}
@@ -37,7 +37,9 @@ defmodule Z19rpwWeb.PostControllerTest do
 
   describe "show post" do
     test "renders error when post dne", %{conn: conn} do
-      assert_raise Ecto.NoResultsError, fn -> get(conn, Routes.api_post_path(conn, :show, 1)) end
+      assert_raise Ecto.NoResultsError, fn ->
+        get(conn, Routes.api_post_path(conn, :show, Ecto.UUID.generate()))
+      end
     end
 
     test "renders post json with a good post", %{conn: conn} do
@@ -99,8 +101,6 @@ defmodule Z19rpwWeb.PostControllerTest do
       authed_conn =
         put(authed_conn, Routes.api_post_path(authed_conn, :update, post), post: @update_attrs)
 
-      id = Integer.to_string(id)
-
       assert %{"id" => ^id} = json_response(authed_conn, 200)["data"]
 
       authed_conn = get(authed_conn, Routes.api_post_path(authed_conn, :show, id))
@@ -119,7 +119,9 @@ defmodule Z19rpwWeb.PostControllerTest do
       authed_conn: authed_conn
     } do
       assert_error_sent :not_found, fn ->
-        put(authed_conn, Routes.api_post_path(authed_conn, :update, %Post{id: 188_827_177}),
+        put(
+          authed_conn,
+          Routes.api_post_path(authed_conn, :update, %Post{id: Ecto.UUID.generate()}),
           post: @update_attrs
         )
       end
@@ -162,7 +164,9 @@ defmodule Z19rpwWeb.PostControllerTest do
       authed_conn: authed_conn
     } do
       assert_error_sent :not_found, fn ->
-        delete(authed_conn, Routes.api_post_path(authed_conn, :delete, %Post{id: 188_827_177}),
+        delete(
+          authed_conn,
+          Routes.api_post_path(authed_conn, :delete, %Post{id: Ecto.UUID.generate()}),
           post: @update_attrs
         )
       end

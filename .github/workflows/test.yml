@@ -1,11 +1,6 @@
 name: "does it blend?"
 
-on:
-  push:
-    branches-ignore:
-      - "master"
-  pull_request:
-    branches: "*"
+on: [push]
 
 jobs:
   compile-on-three:
@@ -18,15 +13,8 @@ jobs:
 
     container: elixir:${{ matrix.elixir }}
     services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+      cockroachdb:
+        image: zackkitzmiller/crdb-single-node-server:latest
       memcached:
         image: memcached
 
@@ -53,10 +41,10 @@ jobs:
           mix local.hex --force
           mix coveralls.github
         env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_HOST: postgres
-          POSTGRES_PORT: 5432
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: ""
+          POSTGRES_HOST: cockroachdb
+          POSTGRES_PORT: "26257"
           MEMCACHED_HOST: memcached
           MIX_ENV: test
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

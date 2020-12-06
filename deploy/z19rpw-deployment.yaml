@@ -7,7 +7,7 @@ metadata:
   namespace: default
 spec:
   progressDeadlineSeconds: 600
-  replicas: 12
+  replicas: 2
   revisionHistoryLimit: 10
   selector:
     matchLabels:
@@ -33,7 +33,7 @@ spec:
                 fieldRef:
                   apiVersion: v1
                   fieldPath: status.podIP
-          image: gcr.io/z19r-com/z19rpw:latest
+          image: docker.io/zackkitzmiller/z19rpw:latest
           imagePullPolicy: Always
           name: z19rpw
           resources:
