@@ -85,7 +85,7 @@ defmodule Z19rpw.Blog do
             "status != 'draft' and extract(year from inserted_at)::text = ?",
             ^year
           ),
-        order_by: [desc: p.id]
+        order_by: [desc: p.inserted_at]
     )
   end
 end
