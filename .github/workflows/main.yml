@@ -67,15 +67,6 @@ jobs:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: rollout restart deployment varnish-proxy
-      - name: Mark Deploy (New Relic)
-        uses: newrelic/deployment-marker-action@master
-        with:
-          apiKey: ${{ secrets.NEW_RELIC_API_KEY }}
-          applicationId: ${{ secrets.NEW_RELIC_APPLICATION_ID }}
-          revision: ${{ github.ref }}-${{ github.sha }}
-          region: US
-          accountId: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
-          user: ${{ github.actor }}
       - name: Mark Deploy (Sentry)
         uses: getsentry/action-release@v1.0.0
         env:
