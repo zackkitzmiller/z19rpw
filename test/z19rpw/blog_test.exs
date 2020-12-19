@@ -25,7 +25,7 @@ defmodule Z19rpw.BlogTest do
     end
 
     test "get_post!/1 returns the post with given id" do
-      post = post_fixture()
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
       assert Blog.get_post!(post.id) == post
     end
 
@@ -47,7 +47,7 @@ defmodule Z19rpw.BlogTest do
     end
 
     test "update_post/2 with invalid data returns error changeset" do
-      post = post_fixture()
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
       assert {:error, %Ecto.Changeset{}} = Blog.update_post(post, @invalid_attrs)
       assert post == Blog.get_post!(post.id)
     end
