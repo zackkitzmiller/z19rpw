@@ -1,4 +1,7 @@
 defmodule Z19rpwWeb.PostControllerTest do
+  @moduledoc """
+  Test module for the Post Controller
+  """
   use Z19rpwWeb.ConnCase
 
   alias Z19rpw.Blog
