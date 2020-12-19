@@ -41,9 +41,14 @@ defmodule Z19rpwWeb.PostLive.Show do
      |> push_redirect(to: Routes.post_index_path(socket, :index))}
   end
 
+  @impl true
   def handle_event("like", %{"slug" => slug}, socket) do
-    post = Blog.get_post_by_slug!(slug)
-    Z19rpw.Repo.insert!(%Blog.Post.Like{post: post, user: socket.assigns.current_user})
-    {:noreply, socket |> assign(:post, Blog.get_post!(post.id))}
+    {:ok, post} =
+      Blog.like_post(
+        Blog.get_post_by_slug!(slug),
+        socket.assigns.current_user
+      )
+
+    {:noreply, socket |> assign(:post, post)}
   end
 end

@@ -16,7 +16,7 @@ defmodule Z19rpw.Blog.Post do
     field :title, :string, default: ""
     field :status, :string, default: "active"
     field :slug, :string, default: ""
-    has_many :likes, Z19rpw.Blog.Post.Like
+    has_many :likes, Z19rpw.Blog.Post.Like, on_delete: :delete_all
 
     timestamps()
   end

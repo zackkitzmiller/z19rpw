@@ -5,7 +5,8 @@ defmodule Z19rpw.Blog do
   use Z19rpw.Cachier
 
   alias Z19rpw.Repo
-  alias Z19rpw.Blog.Post
+  alias Z19rpw.Blog.{Post, Post.Like}
+  alias Z19rpw.Users.User
 
   require Logger
 
@@ -48,6 +49,12 @@ defmodule Z19rpw.Blog do
     {:ok, post}
   end
 
+  def like_post(%Post{} = post, %User{} = user) do
+    Repo.insert!(%Like{post: post, user: user})
+
+    broadcast({:ok, post |> Repo.preload(:likes, force: true)}, :post_updated)
+  end
+
   def change_post(%Post{} = post, attrs \\ %{}) do
     Post.changeset(post, attrs)
   end
@@ -72,7 +79,7 @@ defmodule Z19rpw.Blog do
   defp broadcast({:error, _reason} = error, _event), do: error
 
   defp broadcast({:ok, post}, event) do
-    Phoenix.PubSub.broadcast(Z19rpw.PubSub, "blog", {event, post})
+    Phoenix.PubSub.broadcast(Z19rpw.PubSub, "blog", {event, post |> Repo.preload(:likes)})
     Memcachir.flush()
     {:ok, post}
   end

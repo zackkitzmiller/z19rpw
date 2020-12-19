@@ -1,4 +1,7 @@
 defmodule Z19rpwWeb.BlogViewTest do
+  @moduledoc """
+  Test module for the Blog LiveView controllers and interactions
+  """
   use Z19rpwWeb.ConnCase, async: true
 
   # import Plug.Conn

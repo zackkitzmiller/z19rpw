@@ -1,4 +1,7 @@
 defmodule Z19rpw.BlogTest do
+  @moduledoc """
+  Test module for the Pure blog functionality
+  """
   use Z19rpw.DataCase
 
   alias Z19rpw.Blog
