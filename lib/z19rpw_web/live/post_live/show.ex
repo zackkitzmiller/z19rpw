@@ -4,6 +4,7 @@ defmodule Z19rpwWeb.PostLive.Show do
 
   alias Z19rpw.Blog
   alias Z19rpwWeb.Credentials
+  require Logger
 
   @impl true
   def mount(_params, session, socket) do
@@ -38,5 +39,11 @@ defmodule Z19rpwWeb.PostLive.Show do
      socket
      |> put_flash(:info, "post deleted. sure as fuck hope you meant that.")
      |> push_redirect(to: Routes.post_index_path(socket, :index))}
+  end
+
+  def handle_event("like", %{"slug" => slug}, socket) do
+    post = Blog.get_post_by_slug!(slug)
+    Z19rpw.Repo.insert!(%Blog.Post.Like{post: post, user: socket.assigns.current_user})
+    {:noreply, socket |> assign(:post, Blog.get_post!(post.id))}
   end
 end

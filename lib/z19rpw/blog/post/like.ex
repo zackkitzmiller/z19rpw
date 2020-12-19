@@ -4,7 +4,7 @@ defmodule Z19rpw.Blog.Post.Like do
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  @foreign_key_type :integer
+  @foreign_key_type :binary_id
   schema "likes" do
     # field :post_id, :integer
     # field :user_id, :integer

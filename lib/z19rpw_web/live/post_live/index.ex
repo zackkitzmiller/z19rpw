@@ -7,6 +7,8 @@ defmodule Z19rpwWeb.PostLive.Index do
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
 
+  require Logger
+
   @impl true
   def mount(params, session, socket) do
     if connected?(socket), do: Blog.subscribe()
@@ -22,19 +24,12 @@ defmodule Z19rpwWeb.PostLive.Index do
       |> assign(:selected_year, year)
       |> assign(:page_title, "blog")
 
-    {:ok, socket, temporary_assigns: [posts: []]}
+    {:ok, socket}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
-  end
-
-  defp apply_action(socket, :edit, %{"id" => id}) do
-    socket
-    |> assign(:page_title, "Edit Post")
-    |> assign(:post, Blog.get_post!(id))
-    |> assign(:current_user, socket.assigns.current_user)
   end
 
   defp apply_action(socket, :new, _params) do
@@ -52,11 +47,19 @@ defmodule Z19rpwWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("delete", %{"slug" => slug}, socket) do
-    post = Blog.get_post_by_slug!(slug)
-    Blog.delete_post(post)
+  def handle_event("like", %{"slug" => slug}, socket) do
+    liked_post = Blog.get_post_by_slug!(slug)
+    Z19rpw.Repo.insert!(%Blog.Post.Like{post: liked_post, user: socket.assigns.current_user})
 
-    {:noreply, update(socket, :posts, fn _ -> Blog.list_posts() end)}
+    {:noreply,
+     update(socket, :posts, fn posts ->
+       for post <- posts do
+         case post.id == liked_post.id do
+           true -> liked_post
+           _ -> post
+         end
+       end
+     end)}
   end
 
   @impl true
@@ -64,13 +67,25 @@ defmodule Z19rpwWeb.PostLive.Index do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end
 
-  @impl true
-  def handle_info({:post_updated, post}, socket) do
-    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  def handle_info({:post_updated, updated_post}, socket) do
+    {:noreply,
+     update(socket, :posts, fn posts ->
+       for post <- posts do
+         case post.id == updated_post.id do
+           true -> updated_post
+           _ -> post
+         end
+       end
+     end)}
   end
 
-  @impl true
-  def handle_info({:post_deleted, post}, socket) do
-    {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
+  def handle_info({:post_deleted, deleted_post}, socket) do
+    {:noreply,
+     update(socket, :posts, fn posts ->
+       posts
+       |> Enum.reject(fn post ->
+         post.id == deleted_post.id
+       end)
+     end)}
   end
 end

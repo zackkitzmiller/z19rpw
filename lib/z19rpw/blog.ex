@@ -19,11 +19,11 @@ defmodule Z19rpw.Blog do
     scoped_posts(year)
   end
 
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:likes)
 
   @decorate write_through()
   def get_post_by_slug!(slug) do
-    Repo.one!(from p in Post, where: p.slug == ^slug)
+    Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload(:likes)
   end
 
   def create_post(attrs \\ %{}) do
@@ -42,6 +42,8 @@ defmodule Z19rpw.Blog do
 
   def delete_post(%Post{} = post) do
     Repo.delete(post)
+    |> broadcast(:post_deleted)
+
     Memcachir.flush()
     {:ok, post}
   end
@@ -83,7 +85,8 @@ defmodule Z19rpw.Blog do
             "status != 'draft' and extract(year from inserted_at)::text = ?",
             ^year
           ),
-        order_by: [desc: p.id]
+        order_by: [desc: p.inserted_at]
     )
+    |> Repo.preload(:likes)
   end
 end
