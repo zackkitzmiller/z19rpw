@@ -1,4 +1,4 @@
-defmodule Z19rpw.BlogTest do
+defmodule Z19rpw.LikeTest do
   use Z19rpw.DataCase
 
   alias Z19rpw.{Blog, Blog.Post, Blog.Post.Like}
@@ -17,48 +17,19 @@ defmodule Z19rpw.BlogTest do
       post
     end
 
-    test "list_posts/0 returns all posts" do
-      post = post_fixture()
-      assert Blog.list_posts() == [post]
+    test "default posts have no likes" do
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
+      assert post.likes == []
     end
 
-    test "get_post!/1 returns the post with given id" do
-      post = post_fixture()
-      assert Blog.get_post!(post.id) == post
-    end
+    test "liking a post creates a like" do
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
+      user = Z19rpw.Repo.insert!(%Z19rpw.Users.User{email: "test@example.com"})
+      like = Z19rpw.Repo.insert!(%Like{post: post, user: user})
 
-    test "create_post/1 with valid data creates a post" do
-      assert {:ok, %Post{} = post} = Blog.create_post(@valid_attrs)
-      assert post.body == "some body"
-      assert post.title == "some title"
-    end
-
-    test "create_post/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs)
-    end
-
-    test "update_post/2 with valid data updates the post" do
-      post = post_fixture()
-      assert {:ok, %Post{} = post} = Blog.update_post(post, @update_attrs)
-      assert post.body == "some updated body"
-      assert post.title == "some updated title"
-    end
-
-    test "update_post/2 with invalid data returns error changeset" do
-      post = post_fixture()
-      assert {:error, %Ecto.Changeset{}} = Blog.update_post(post, @invalid_attrs)
-      assert post == Blog.get_post!(post.id)
-    end
-
-    test "delete_post/1 deletes the post" do
-      post = post_fixture()
-      assert {:ok, _} = Blog.delete_post(post)
-      assert_raise Ecto.NoResultsError, fn -> Blog.get_post!(post.id) end
-    end
-
-    test "change_post/1 returns a post changeset" do
-      post = post_fixture()
-      assert %Ecto.Changeset{} = Blog.change_post(post)
+      liked_post = Blog.get_post!(post.id) |> Z19rpw.Repo.preload(:likes)
+      post_like = Repo.get!(Like, like.id)
+      assert liked_post.likes == [post_like]
     end
   end
 end

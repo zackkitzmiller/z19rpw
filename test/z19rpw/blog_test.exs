@@ -20,7 +20,7 @@ defmodule Z19rpw.BlogTest do
     end
 
     test "list_posts/0 returns all posts" do
-      post = post_fixture()
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
       assert Blog.list_posts() == [post]
     end
 

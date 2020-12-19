@@ -19,11 +19,11 @@ defmodule Z19rpw.Blog do
     scoped_posts(year)
   end
 
-  def get_post!(id), do: Repo.get!(Post, id)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:likes)
 
   @decorate write_through()
   def get_post_by_slug!(slug) do
-    Repo.one!(from p in Post, where: p.slug == ^slug)
+    Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload(:likes)
   end
 
   def create_post(attrs \\ %{}) do
@@ -87,5 +87,6 @@ defmodule Z19rpw.Blog do
           ),
         order_by: [desc: p.inserted_at]
     )
+    |> Repo.preload(:likes)
   end
 end
