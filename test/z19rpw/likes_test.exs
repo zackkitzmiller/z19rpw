@@ -23,7 +23,7 @@ defmodule Z19rpw.LikeTest do
       assert post.likes == []
     end
 
-    test "liking a post creates a like" do
+    test "like_post/2 creates a like when no like exists" do
       post = post_fixture() |> Z19rpw.Repo.preload(:likes)
       user = Z19rpw.Repo.insert!(%Z19rpw.Users.User{email: "test@example.com"})
       {:ok, post} = Blog.like_post(post, user)
@@ -38,6 +38,15 @@ defmodule Z19rpw.LikeTest do
                  :post_id => ^post_id
                }
              ] = post.likes
+    end
+
+    test "like_post/2 deletes a like when a like exists" do
+      post = post_fixture() |> Z19rpw.Repo.preload(:likes)
+      user = Z19rpw.Repo.insert!(%Z19rpw.Users.User{email: "test@example.com"})
+      {:ok, post} = Blog.like_post(post, user)
+      {:ok, post} = Blog.like_post(post, user)
+
+      assert [] = post.likes
     end
   end
 end
