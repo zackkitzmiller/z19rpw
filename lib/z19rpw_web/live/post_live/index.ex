@@ -47,21 +47,6 @@ defmodule Z19rpwWeb.PostLive.Index do
   end
 
   @impl true
-  def handle_event("like", %{"slug" => slug}, socket) do
-    {:ok, liked_post} = Blog.like_post(Blog.get_post_by_slug!(slug), socket.assigns.current_user)
-
-    {:noreply,
-     update(socket, :posts, fn posts ->
-       for post <- posts do
-         case post.id == liked_post.id do
-           true -> liked_post
-           _ -> post
-         end
-       end
-     end)}
-  end
-
-  @impl true
   def handle_info({:post_created, post}, socket) do
     {:noreply, update(socket, :posts, fn posts -> [post | posts] end)}
   end

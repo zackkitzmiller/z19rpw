@@ -15,16 +15,16 @@
 <section class="articles">
   <div class="container" id="posts" phx-update="replace">
     <%= for post <- @posts do %>
-      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: nil %>
+      <%= live_component @socket, Z19rpwWeb.PostLive.PostComponent, id: post.id, post: post, current_user: @current_user %>
     <% end %>
   </div>
 </section>
 
-<div class="container">
-  <%= if @current_user do  %>
-    <span><%= live_patch "fucking write", to: Routes.post_index_path(@socket, :new), class: "button is-primary" %></span>
-  <% end %>
-</div>
+<%= if @current_user do  %>
+  <div class="container">
+      <span><%= live_patch "fucking write", to: Routes.post_index_path(@socket, :new), class: "button is-primary" %></span>
+  </div>
+<% end %>
 
 
 <%= if @live_action in [:new, :edit] do %>

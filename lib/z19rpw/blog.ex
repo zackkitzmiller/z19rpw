@@ -50,7 +50,16 @@ defmodule Z19rpw.Blog do
   end
 
   def like_post(%Post{} = post, %User{} = user) do
-    Repo.insert!(%Like{post: post, user: user})
+    case Repo.one(
+           from l in Like,
+             where: l.user_id == ^user.id and l.post_id == ^post.id
+         ) do
+      nil ->
+        Repo.insert!(%Like{post: post, user: user})
+
+      %Like{} = like ->
+        Repo.delete!(like)
+    end
 
     broadcast({:ok, post |> Repo.preload(:likes, force: true)}, :post_updated)
   end
