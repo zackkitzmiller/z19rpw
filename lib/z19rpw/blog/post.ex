@@ -11,11 +11,12 @@ defmodule Z19rpw.Blog.Post do
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "posts" do
-    field :author, :integer, default: 1
     field :body, :string
     field :title, :string, default: ""
     field :status, :string, default: "active"
     field :slug, :string, default: ""
+
+    belongs_to :user, Z19rpw.Users.User
     has_many :likes, Z19rpw.Blog.Post.Like, on_delete: :delete_all
 
     timestamps()

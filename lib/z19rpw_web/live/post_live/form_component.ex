@@ -4,6 +4,13 @@ defmodule Z19rpwWeb.PostLive.FormComponent do
   use Z19rpwWeb, :live_component
 
   alias Z19rpw.Blog
+  alias Z19rpwWeb.Credentials
+
+  def mount(_params, session, socket) do
+    current_user = Credentials.get_user(socket, session)
+
+    {:ok, socket |> assign(:current_user, current_user)}
+  end
 
   @impl true
   def update(%{post: post} = assigns, socket) do
@@ -43,7 +50,7 @@ defmodule Z19rpwWeb.PostLive.FormComponent do
   end
 
   defp save_post(socket, :new, post_params) do
-    case Blog.create_post(post_params) do
+    case Blog.create_post(post_params, socket.assigns.current_user) do
       {:ok, _post} ->
         {:noreply,
          socket

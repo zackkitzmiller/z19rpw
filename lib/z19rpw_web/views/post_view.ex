@@ -14,7 +14,7 @@ defmodule Z19rpwWeb.PostView do
     %{
       id: post.id,
       title: post.title,
-      author: post.author,
+      user: %{id: post.user.id},
       body: post.body,
       status: post.status,
       slug: post.slug
