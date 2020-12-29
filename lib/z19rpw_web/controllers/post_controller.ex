@@ -16,7 +16,7 @@ defmodule Z19rpwWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    with {:ok, %Post{} = post} <- Blog.create_post(post_params) do
+    with {:ok, %Post{} = post} <- Blog.create_post(post_params, Pow.Plug.current_user(conn)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.api_post_path(conn, :show, post))

@@ -6,26 +6,42 @@ defmodule Z19rpwWeb.PostControllerTest do
 
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
+  alias Z19rpw.Users.User
+  alias Z19rpw.Repo
 
   @create_attrs %{
-    author: 1,
     body: "some body",
     title: "this is a great computer machine"
   }
   @update_attrs %{
-    author: 1,
     body: "some updated body",
     title: "fuck this computer i cant make it work"
   }
-  @invalid_attrs %{author: "", body: "", slug: "", status: "", title: ""}
+  @invalid_attrs %{body: "", slug: "", status: "", title: ""}
+
+  @password "secret1234"
+
+  def user_fixture do
+    user =
+      %User{}
+      |> User.changeset(%{
+        email: "test@example.com",
+        password: @password,
+        password_confirmation: @password
+      })
+      |> Repo.insert!()
+
+    user |> struct(%{password: nil})
+  end
 
   def fixture(:post) do
-    {:ok, post} = Blog.create_post(@create_attrs)
-    post
+    {:ok, post} = Blog.create_post(@create_attrs, user_fixture())
+
+    post |> Repo.preload([:likes, :user])
   end
 
   setup %{conn: conn} do
-    user = %Z19rpw.Users.User{email: "test@example.com", id: Ecto.UUID.generate()}
+    user = %User{email: "test@example.com", id: Ecto.UUID.generate()}
     authed_conn = Pow.Plug.assign_current_user(conn, user, [])
 
     {:ok, conn: put_req_header(conn, "accept", "application/json"), authed_conn: authed_conn}
@@ -46,15 +62,15 @@ defmodule Z19rpwWeb.PostControllerTest do
     end
 
     test "renders post json with a good post", %{conn: conn} do
-      {_, post} = Blog.create_post(@create_attrs)
+      {_, post} = Blog.create_post(@create_attrs, user_fixture())
       conn = get(conn, Routes.api_post_path(conn, :show, post.id))
 
       assert %{
                "id" => _,
-               "author" => 1,
                "body" => "some body",
                "slug" => "this-is-a-great-computer-machine",
                "status" => "active",
+               "user" => _,
                "title" => "this is a great computer machine"
              } = json_response(conn, 200)["data"]
     end
@@ -71,7 +87,6 @@ defmodule Z19rpwWeb.PostControllerTest do
 
       assert %{
                "id" => _,
-               "author" => 1,
                "body" => "some body",
                "slug" => "this-is-a-great-computer-machine",
                "status" => "active",
@@ -79,7 +94,9 @@ defmodule Z19rpwWeb.PostControllerTest do
              } = json_response(authed_conn, 200)["data"]
     end
 
-    test "renders errors when data is invalid when authed", %{authed_conn: authed_conn} do
+    test "renders errors when data is invalid when authed with correct user", %{
+      authed_conn: authed_conn
+    } do
       authed_conn =
         post(authed_conn, Routes.api_post_path(authed_conn, :create), post: @invalid_attrs)
 
@@ -110,7 +127,6 @@ defmodule Z19rpwWeb.PostControllerTest do
 
       assert %{
                "id" => _,
-               "author" => 1,
                "body" => "some updated body",
                "slug" => "fuck-this-computer-i-cant-make-it-work",
                "status" => "active",

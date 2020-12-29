@@ -20,15 +20,15 @@ defmodule Z19rpw.Blog do
     scoped_posts(year)
   end
 
-  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload(:likes)
+  def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload([:likes, :user])
 
   @decorate write_through()
   def get_post_by_slug!(slug) do
-    Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload(:likes)
+    Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload([:likes, :user])
   end
 
-  def create_post(attrs \\ %{}) do
-    %Post{}
+  def create_post(attrs \\ %{}, %User{} = user) do
+    %Post{:user => user}
     |> Post.changeset(attrs)
     |> Repo.insert()
     |> broadcast(:post_created)
@@ -103,6 +103,6 @@ defmodule Z19rpw.Blog do
           ),
         order_by: [desc: p.inserted_at]
     )
-    |> Repo.preload(:likes)
+    |> Repo.preload([:likes, :user])
   end
 end
