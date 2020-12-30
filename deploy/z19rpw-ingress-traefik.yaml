@@ -120,3 +120,26 @@ spec:
     - hosts:
       - contentdeliverynetwork.z19r.pw
       secretName: contentdeliverynetwork-z19r-pw-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: vaccine-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/frontend-entry-points: http, https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+    - host: shouldigetthecovidvaccine.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: varnish-svc
+              servicePort: 80
+  tls:
+    - hosts:
+        - shouldigetthecovidvaccine.com
+      secretName: shouldigetthecovidvaccine-com-tls
