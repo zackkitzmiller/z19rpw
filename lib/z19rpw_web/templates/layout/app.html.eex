@@ -50,7 +50,7 @@
             <%= if Pow.Plug.current_user(@conn) do %>
               <a class="navbar-item"><i class='fas fa-lock'></i></a>
             <% else %>
-              <%= link "<i class='fas fa-unlock'></i>" |> raw, to: Routes.pow_session_path(@conn, :new), class: "navbar-item", title: "login" %>
+              <%= link "<i class='fas fa-unlock'></i>" |> raw, to: AuthRouteHelpers.login_to_current_path(@conn), class: "navbar-item", title: "login" %>
             <% end %>
             <a class="navbar-item" href="https://twitter.com/zackkitzmiller" title="twitter">
               <span class="icon">

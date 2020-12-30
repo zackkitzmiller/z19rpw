@@ -18,7 +18,7 @@ defmodule Z19rpw.Cachier do
         {:error, message} ->
           Logger.info(message)
           resp = unquote(body)
-          Memcachir.set(key, resp, ttl: 300)
+          Memcachir.set(key, resp, ttl: 10)
           resp
       end
     end
