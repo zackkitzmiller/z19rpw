@@ -34,6 +34,8 @@ defmodule Z19rpw.Blog do
     |> broadcast(:post_created)
   end
 
+  def update_post(%Post{}, nil), do: {:error, :unauthorized}
+
   def update_post(%Post{} = post, attrs, %User{} = current_user) do
     case post.user_id == current_user.id do
       false ->
@@ -46,6 +48,8 @@ defmodule Z19rpw.Blog do
         |> broadcast(:post_updated)
     end
   end
+
+  def delete_post(%Post{}, nil), do: {:error, :unauthorized}
 
   def delete_post(%Post{} = post, %User{} = current_user) do
     case post.user_id == current_user.id do
