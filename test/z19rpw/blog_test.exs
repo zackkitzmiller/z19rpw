@@ -58,22 +58,35 @@ defmodule Z19rpw.BlogTest do
       assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs, user)
     end
 
+    test "update_post/2 with invalid user fails", %{:user => user} do
+      post = post_fixture(user)
+
+      assert {:error, _} =
+               Blog.update_post(post, @update_attrs, %User{:id => Ecto.UUID.generate()})
+    end
+
     test "update_post/2 with valid data updates the post", %{:user => user} do
       post = post_fixture(user)
-      assert {:ok, %Post{} = post} = Blog.update_post(post, @update_attrs)
+      assert {:ok, %Post{} = post} = Blog.update_post(post, @update_attrs, user)
       assert post.body == "some updated body"
       assert post.title == "some updated title"
     end
 
     test "update_post/2 with invalid data returns error changeset", %{:user => user} do
       post = post_fixture(user) |> Z19rpw.Repo.preload([:likes, :user])
-      assert {:error, %Ecto.Changeset{}} = Blog.update_post(post, @invalid_attrs)
+      assert {:error, %Ecto.Changeset{}} = Blog.update_post(post, @invalid_attrs, user)
       assert post == Blog.get_post!(post.id)
+    end
+
+    test "delete_post/1 with invalid user does not delete the post", %{:user => user} do
+      post = post_fixture(user)
+      assert {:error, _} = Blog.delete_post(post, %User{:id => Ecto.UUID.generate()})
+      assert %Post{} = Blog.get_post!(post.id)
     end
 
     test "delete_post/1 deletes the post", %{:user => user} do
       post = post_fixture(user)
-      assert {:ok, _} = Blog.delete_post(post)
+      assert {:ok, _} = Blog.delete_post(post, user)
       assert_raise Ecto.NoResultsError, fn -> Blog.get_post!(post.id) end
     end
 
