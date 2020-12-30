@@ -45,7 +45,7 @@ defmodule Z19rpwWeb.PostLive.PostComponent do
   @impl true
   def handle_event("delete", %{"slug" => slug}, socket) do
     post = Z19rpw.Blog.get_post_by_slug!(slug)
-    {:ok, _} = Z19rpw.Blog.delete_post(post)
+    {:ok, _} = Z19rpw.Blog.delete_post(post, socket.assigns.current_user)
 
     {:noreply,
      socket

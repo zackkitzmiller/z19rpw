@@ -21,6 +21,7 @@ defmodule Z19rpwWeb.PostLive.Show do
 
     {:noreply,
      socket
+     |> assign(:current_user, socket.assigns.current_user)
      |> assign(:post, post)
      |> assign(:page_title, post.title)}
   end
