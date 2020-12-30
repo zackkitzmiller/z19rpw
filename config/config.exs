@@ -15,6 +15,8 @@ config :z19rpw, Z19rpw.Repo,
   migration_primary_key: [name: :id, type: :binary_id],
   migration_foreign_key: [column: :id, type: :binary_id]
 
+config :z19rpw, env: Mix.env()
+
 # Configures the endpoint
 config :z19rpw, Z19rpwWeb.Endpoint,
   url: [host: "127.0.0.1"],

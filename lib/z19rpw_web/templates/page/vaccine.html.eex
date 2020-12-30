@@ -7,14 +7,17 @@
     <title>should i get the covid vaccine</title>
     <link rel="stylesheet" href="/css/app.css"/>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
 
-      gtag('config', 'G-SRER3CZZXX');
-    </script>
+    <%= if "prod" == Application.get_env(:z19rpw, :env) do   %>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-SRER3CZZXX');
+      </script>
+    <% end %>
   </head>
   <body>
     <section class="hero is-primary is-fullheight">
