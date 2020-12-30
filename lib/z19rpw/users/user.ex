@@ -9,6 +9,9 @@ defmodule Z19rpw.Users.User do
   schema "users" do
     pow_user_fields()
 
+    has_many :posts, Z19rpw.Blog.Post, on_delete: :delete_all
+    has_many :likes, Z19rpw.Blog.Post.Like, on_delete: :delete_all
+
     timestamps()
   end
 end

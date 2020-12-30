@@ -17,7 +17,7 @@ ENV MIX_ENV=prod
 COPY mix.exs mix.lock ./
 COPY config config
 
-ENV DATABASE_URL=ecto://app@cockroachdb.default.svc.cluster.local:26257/z19rpw
+ENV DATABASE_URL=ecto://app@cockroachdb.default.svc.cluster.local:26257/z19r
 ENV SECRET_KEY_BASE=34PA0jqGQLok1NXTLqNkXCBjRemHgmt/lc25MRMFBHD7tFy02newjvPLQ1gOAyiV
 
 RUN mix do deps.get, deps.compile

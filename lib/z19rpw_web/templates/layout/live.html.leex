@@ -4,6 +4,11 @@
     phx-click="lv:clear-flash"
     phx-value-key="info"><%= live_flash(@flash, :info) %></div>
   <% end %>
+  <%= if live_flash(@flash, :error) do %>
+  <div class="notification is-primary is-light alert alert-error" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="error"><%= live_flash(@flash, :error) %></div>
+  <% end %>
 </div>
 
 <%= @inner_content %>

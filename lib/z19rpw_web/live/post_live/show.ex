@@ -4,6 +4,7 @@ defmodule Z19rpwWeb.PostLive.Show do
 
   alias Z19rpw.Blog
   alias Z19rpwWeb.Credentials
+  require Logger
 
   @impl true
   def mount(_params, session, socket) do
@@ -20,6 +21,7 @@ defmodule Z19rpwWeb.PostLive.Show do
 
     {:noreply,
      socket
+     |> assign(:current_user, socket.assigns.current_user)
      |> assign(:post, post)
      |> assign(:page_title, post.title)}
   end
@@ -27,16 +29,5 @@ defmodule Z19rpwWeb.PostLive.Show do
   @impl true
   def handle_info({:post_updated, post}, socket) do
     {:noreply, update(socket, :post, fn _ -> post end)}
-  end
-
-  @impl true
-  def handle_event("delete", %{"slug" => slug}, socket) do
-    post = Blog.get_post_by_slug!(slug)
-    {:ok, _} = Blog.delete_post(post)
-
-    {:noreply,
-     socket
-     |> put_flash(:info, "post deleted. sure as fuck hope you meant that.")
-     |> push_redirect(to: Routes.post_index_path(socket, :index))}
   end
 end

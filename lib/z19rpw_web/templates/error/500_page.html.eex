@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>z19r - OOPS</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3PC6C2250C');
+    </script>
+  </head>
+  <body>
+
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            ♥️ zack kitzmiller
+          </a>
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="z4xw3tb4r">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero is-primary" style="margin-bottom: 40px;">
+      &nbsp;
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="title">i need envelope</h2>
+        <h2 class="subtitle">something's broke. tweet <a href="https://twitter.com/zackkitzmiller">@zackkitzmiller</a></h2>
+        <figure class="image" style="margin: 0 auto;">
+          <img src="https://contentdeliverynetwork.z19r.pw/assets/fuckme.gif">
+        </figure>
+      </div>
+    </section>
+  </body>
+</html>

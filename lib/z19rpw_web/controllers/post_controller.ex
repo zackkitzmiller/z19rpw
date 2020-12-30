@@ -16,7 +16,7 @@ defmodule Z19rpwWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    with {:ok, %Post{} = post} <- Blog.create_post(post_params) do
+    with {:ok, %Post{} = post} <- Blog.create_post(post_params, Pow.Plug.current_user(conn)) do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.api_post_path(conn, :show, post))
@@ -32,7 +32,7 @@ defmodule Z19rpwWeb.PostController do
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Blog.get_post!(id)
 
-    with {:ok, %Post{} = post} <- Blog.update_post(post, post_params) do
+    with {:ok, %Post{} = post} <- Blog.update_post(post, post_params, Pow.Plug.current_user(conn)) do
       render(conn, "show.json", post: post)
     end
   end
@@ -40,7 +40,7 @@ defmodule Z19rpwWeb.PostController do
   def delete(conn, %{"id" => id}) do
     post = Blog.get_post!(id)
 
-    with {:ok, %Post{}} <- Blog.delete_post(post) do
+    with {:ok, %Post{}} <- Blog.delete_post(post, Pow.Plug.current_user(conn)) do
       send_resp(conn, :no_content, "")
     end
   end
