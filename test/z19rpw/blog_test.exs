@@ -90,6 +90,18 @@ defmodule Z19rpw.BlogTest do
       assert_raise Ecto.NoResultsError, fn -> Blog.get_post!(post.id) end
     end
 
+    # these next two tests simulate the behavior of a user that is not
+    # authenticated attempted to force a connection without being logged in
+    test "unauthenticate users don't crash on delete", %{:user => user} do
+      post = post_fixture(user)
+      assert {:error, :unauthorized} = Blog.delete_post(post, nil)
+    end
+
+    test "unauthenticate users don't crash on updated", %{:user => user} do
+      post = post_fixture(user)
+      assert {:error, :unauthorized} = Blog.update_post(post, nil)
+    end
+
     test "change_post/1 returns a post changeset", %{:user => user} do
       post = post_fixture(user)
       assert %Ecto.Changeset{} = Blog.change_post(post)
