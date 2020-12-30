@@ -45,12 +45,20 @@ defmodule Z19rpwWeb.PostLive.PostComponent do
   @impl true
   def handle_event("delete", %{"slug" => slug}, socket) do
     post = Z19rpw.Blog.get_post_by_slug!(slug)
-    {:ok, _} = Z19rpw.Blog.delete_post(post, socket.assigns.current_user)
 
-    {:noreply,
-     socket
-     |> put_flash(:info, "post deleted. sure as fuck hope you meant that.")
-     |> push_redirect(to: Routes.post_index_path(socket, :index))}
+    case Z19rpw.Blog.delete_post(post, socket.assigns.current_user) do
+      {:ok, _} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "post deleted. sure as fuck hope you meant that.")
+         |> push_redirect(to: Routes.post_index_path(socket, :index))}
+
+      {:error, _} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "broooo.. not your post. Not cool.")
+         |> push_redirect(to: Routes.post_show_path(socket, :show, slug))}
+    end
   end
 
   def handle_event("like", %{"slug" => slug}, socket) do
