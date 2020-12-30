@@ -27,26 +27,35 @@ defmodule Z19rpw.Blog do
     Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload([:likes, :user])
   end
 
-  def create_post(attrs \\ %{}, %User{} = user) do
-    %Post{:user => user}
+  def create_post(attrs \\ %{}, %User{} = current_user) do
+    %Post{:user => current_user}
     |> Post.changeset(attrs)
     |> Repo.insert()
     |> broadcast(:post_created)
   end
 
-  def update_post(%Post{} = post, attrs) do
-    post
-    |> Post.changeset(attrs)
-    |> Repo.update()
-    |> broadcast(:post_updated)
+  def update_post(%Post{} = post, attrs, %User{} = current_user) do
+    case post.user_id == current_user.id do
+      false ->
+        {:error, :unauthorized}
+
+      _ ->
+        post
+        |> Post.changeset(attrs)
+        |> Repo.update()
+        |> broadcast(:post_updated)
+    end
   end
 
-  def delete_post(%Post{} = post) do
-    Repo.delete(post)
-    |> broadcast(:post_deleted)
+  def delete_post(%Post{} = post, %User{} = current_user) do
+    case post.user_id == current_user.id do
+      false ->
+        {:error, :unauthorized}
 
-    Memcachir.flush()
-    {:ok, post}
+      _ ->
+        Repo.delete(post)
+        |> broadcast(:post_deleted)
+    end
   end
 
   def like_post(%Post{} = post, %User{} = user) do

@@ -114,12 +114,36 @@ defmodule Z19rpwWeb.PostControllerTest do
   describe "update post" do
     setup [:create_post]
 
-    test "renders updated post when data is valid and user authenticated", %{
+    test "failure on incorrect or invalid user", %{
       authed_conn: authed_conn,
       post: %Post{id: id} = post
     } do
       authed_conn =
         put(authed_conn, Routes.api_post_path(authed_conn, :update, post), post: @update_attrs)
+
+      assert %{"errors" => %{"detail" => "Forbidden"}} = json_response(authed_conn, 401)
+
+      authed_conn = get(authed_conn, Routes.api_post_path(authed_conn, :show, id))
+
+      assert %{
+               "id" => _,
+               "body" => "some body",
+               "slug" => "this-is-a-great-computer-machine",
+               "status" => "active",
+               "title" => "this is a great computer machine"
+             } = json_response(authed_conn, 200)["data"]
+    end
+
+    test "renders updated post when data is valid and user authenticated", %{
+      authed_conn: authed_conn,
+      post: %Post{id: id} = post
+    } do
+      authed_conn =
+        put(
+          Pow.Plug.assign_current_user(authed_conn, post.user, []),
+          Routes.api_post_path(authed_conn, :update, post),
+          post: @update_attrs
+        )
 
       assert %{"id" => ^id} = json_response(authed_conn, 200)["data"]
 
@@ -151,7 +175,11 @@ defmodule Z19rpwWeb.PostControllerTest do
       post: post
     } do
       authed_conn =
-        put(authed_conn, Routes.api_post_path(authed_conn, :update, post), post: @invalid_attrs)
+        put(
+          Pow.Plug.assign_current_user(authed_conn, post.user, []),
+          Routes.api_post_path(authed_conn, :update, post),
+          post: @invalid_attrs
+        )
 
       assert json_response(authed_conn, 422)["errors"] != %{}
     end
@@ -170,8 +198,21 @@ defmodule Z19rpwWeb.PostControllerTest do
   describe "delete existing post" do
     setup [:create_post]
 
-    test "deletes post when user authenticated", %{authed_conn: authed_conn, post: post} do
+    test "failed when user incorrect", %{authed_conn: authed_conn, post: post} do
       authed_conn = delete(authed_conn, Routes.api_post_path(authed_conn, :delete, post))
+      assert response(authed_conn, 401)
+
+      authed_conn = get(authed_conn, Routes.api_post_path(authed_conn, :show, post))
+      assert response(authed_conn, 200)
+    end
+
+    test "deletes post when user authenticated", %{authed_conn: authed_conn, post: post} do
+      authed_conn =
+        delete(
+          Pow.Plug.assign_current_user(authed_conn, post.user, []),
+          Routes.api_post_path(authed_conn, :delete, post)
+        )
+
       assert response(authed_conn, 204)
 
       assert_error_sent 404, fn ->
