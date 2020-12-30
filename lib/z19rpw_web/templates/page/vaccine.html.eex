@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>should i get the covid vaccine</title>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3PC6C2250C');
+    </script>
+  </head>
+  <body>
+    <section class="hero is-primary is-fullheight">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            <i class="fas fa-syringe"></i> Probably, yeah.
+          </h1>
+
+          <h2 class="subtitle">
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/safety.html" style="text-decoration: underline;">Click here</a> for some safety information.
+          </h2>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

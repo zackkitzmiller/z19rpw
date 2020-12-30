@@ -2,11 +2,16 @@ defmodule Z19rpwWeb.PageController do
   use Z19rpwWeb, :controller
 
   def index(conn, _params) do
-    if conn.host == "thetrumphealthcareplan.com" do
-      conn
-      |> redirect(to: "/thc")
-    else
-      render(conn, "index.html")
+    case conn.host do
+      "thetrumphealthcareplan.com" ->
+        conn
+        |> redirect(to: "/thc")
+
+      "shouldigetthecovidvaccine.com" ->
+        render(conn |> put_layout(false), "vaccine.html")
+
+      _ ->
+        render(conn, "index.html")
     end
   end
 
