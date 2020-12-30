@@ -24,7 +24,7 @@
 
         gtag('config', 'G-3PC6C2250C');
       </script>
-    <%= end %>
+    <% end %>
   </head>
   <body>
 
