@@ -37,6 +37,12 @@ defmodule Z19rpwWeb.PostLive.FormComponent do
          |> put_flash(:info, "Post updated successfully")
          |> push_redirect(to: Routes.post_show_path(socket, :show, post.slug))}
 
+      {:error, :unauthorized} ->
+        {:noreply,
+         socket
+         |> put_flash(:info, "broooo.. not your post. Not cool.")
+         |> push_patch(to: socket.assigns.return_to)}
+
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
     end
