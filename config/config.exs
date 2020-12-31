@@ -60,6 +60,8 @@ config :ex_aws, :s3,
   scheme: "https://",
   host: "contentdeliverynetwork.z19r.pw",
   port: 443
+  access_key_id: System.get_env("AWS_ACCESS_KEY_ID"),
+  secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
