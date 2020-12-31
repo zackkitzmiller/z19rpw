@@ -37,7 +37,7 @@ If this doesn't work, please open an issue and I'll take a look at it.
 
 ## tests
 
-Yup! To run the test suite make sure that `config/test.exs` is correctly pointing to CockroachDB (or Postgres) and run:
+Yup! To run the test suite make sure that `config/test.exs` is correctly pointing to CockroachDB and run:
 
 ```
 MIX_ENV=test mix coveralls

@@ -4,6 +4,7 @@
     title: @post.title,
     action: @live_action,
     post: @post,
+    current_user: @current_user,
     return_to: Routes.post_show_path(@socket, :show, @post.slug) %>
 <% end %>
 
