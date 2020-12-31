@@ -52,6 +52,8 @@ jobs:
         run: |
           docker buildx build \
           --platform=linux/arm64 \
+          --build-arg aws_secret=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          --build-arg aws_key=${{ secrets.AWS_ACCESS_KEY_ID }} \
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
