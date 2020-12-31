@@ -48,7 +48,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-128x128">
-              <img src="https://contentdeliverynetwork.z19r.pw/assets/gbo.png" alt="grabango">
+              <img src="<%= Z19rpwWeb.CDNHelpers.signed_cdn_path("gbo.png") %>" alt="grabango">
             </figure>
           </div>
           <div class="media-content">
@@ -60,7 +60,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://contentdeliverynetwork.z19r.pw/assets/venmo.png" alt="venmo">
+              <img src="<%= Z19rpwWeb.CDNHelpers.signed_cdn_path("venmo.png") %>"" alt="venmo">
             </figure>
             </div>
             <div class="media-content">
@@ -72,7 +72,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://contentdeliverynetwork.z19r.pw/assets/seatgeek.png" alt="seatgeek">
+              <img src="<%= Z19rpwWeb.CDNHelpers.signed_cdn_path("seatgeek.png") %>"" alt="seatgeek">
             </figure>
           </div>
           <div class="media-content">
@@ -84,7 +84,7 @@
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="https://contentdeliverynetwork.z19r.pw/assets/forrst.png" alt="forrst">
+              <img src="<%= Z19rpwWeb.CDNHelpers.signed_cdn_path("forrst.png") %>"" alt="forrst">
             </figure>
           </div>
           <div class="media-content">
