@@ -77,11 +77,8 @@ sub vcl_backend_response {
     unset beresp.http.set-cookie;
   }
 
-  if (bereq.url ~ "^/$") {
-    # Software pages are purged explicitly, so cache them for 48h
-    set beresp.http.Cache-Control = "max-age=3600";
-    set beresp.ttl = 1h;
-  }
+  set beresp.http.Cache-Control = "max-age=3600";
+  set beresp.ttl = 1h;
 
   return (deliver);
 }
