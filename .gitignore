@@ -34,3 +34,4 @@ Mnesia.*
 /tmp
 priv/static/css/
 priv/static/js/
+.env
