@@ -14,7 +14,7 @@ defmodule Z19rpwWeb.PostLive.Index do
     if connected?(socket), do: Blog.subscribe()
     current_user = Credentials.get_user(socket, session)
 
-    year = Map.get(params, "year", "2020")
+    year = Map.get(params, "year", Integer.to_string(DateTime.utc_now().year))
 
     socket =
       socket
