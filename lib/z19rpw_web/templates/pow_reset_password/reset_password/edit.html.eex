@@ -3,12 +3,6 @@
     <h2 class="title is-3">create new password</h2>
 
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
-      <%= if @changeset.action do %>
-        <div class="alert alert-danger">
-          <p>Oops, something went wrong! Please check the errors below.</p>
-        </div>
-      <% end %>
-
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
@@ -17,7 +11,7 @@
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
-              <%= error_tag f, :password %>
+              <p class="help is-danger"><%= error_tag f, :password %></p>
             </p>
           </div>
           <div class="field">
@@ -26,7 +20,7 @@
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
-              <%= error_tag f, :password_confirmation %>
+              <p class="help is-danger"><%= error_tag f, :password_confirmation %></p>
             </p>
           </div>
         </div>
