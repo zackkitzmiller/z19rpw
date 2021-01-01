@@ -78,6 +78,21 @@
       &nbsp;
     </section>
 
+    <%= if get_flash(@conn, :error) do %>
+      <div class="container">
+        <div class="notification is-primary is-light alert alert-info" role="alert">
+          <%= get_flash(@conn, :error) %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= if get_flash(@conn, :info) do %>
+      <div class="container">
+        <div class="notification is-info is-light alert alert-info" role="alert">
+          <%= get_flash(@conn, :info) %>
+        </div>
+      </div>
+    <% end %>
     <%= @inner_content %>
 
     <section class="section">
