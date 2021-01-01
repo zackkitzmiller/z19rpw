@@ -45,8 +45,11 @@ config :z19rpw, :pow,
   user: Z19rpw.Users.User,
   repo: Z19rpw.Repo,
   web_module: Z19rpwWeb,
+  web_mailer_module: Z19rpwWeb,
+  mailer_backend: Z19rpw.Mailer,
   cache_store_backend: Pow.Store.Backend.MnesiaCache,
-  entensions: PowPersistentSession
+  extensions: [PowEmailConfirmation, PowResetPassword, PowPersistentSession],
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks
 
 config :memcachir,
   hosts: "localhost",
@@ -62,6 +65,10 @@ config :ex_aws, :s3,
   port: 443,
   access_key_id: System.get_env("AWS_ACCESS_KEY_ID", "testkey"),
   secret_access_key: System.get_env("AWS_SECRET_ACCESS_KEY", "testsecret")
+
+config :z19rpw, Z19rpw.Mailer,
+  adapter: Bamboo.SendGridAdapter,
+  api_key: System.get_env("SENDGRID_API_KEY", "testkey")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

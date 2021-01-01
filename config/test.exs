@@ -18,5 +18,9 @@ config :z19rpw, Z19rpwWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :z19rpw, Z19rpw.Mailer,
+  adapter: Bamboo.TestAdapter,
+  api_key: ""
+
 # Print only warnings and errors during test
 config :logger, level: :warn

@@ -1,6 +1,10 @@
 defmodule Z19rpwWeb.Router do
   use Z19rpwWeb, :router
   use Pow.Phoenix.Router
+
+  use Pow.Extension.Phoenix.Router,
+    extensions: [PowEmailConfirmation, PowResetPassword]
+
   import Phoenix.LiveDashboard.Router
 
   pipeline :api_protected do
@@ -34,6 +38,7 @@ defmodule Z19rpwWeb.Router do
   scope "/" do
     pipe_through :browser
     pow_routes()
+    pow_extension_routes()
   end
 
   scope "/", Z19rpwWeb do
