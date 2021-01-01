@@ -78,13 +78,28 @@
       &nbsp;
     </section>
 
+    <%= if get_flash(@conn, :error) do %>
+      <div class="container">
+        <div class="notification is-primary is-light alert alert-info" role="alert">
+          <%= get_flash(@conn, :error) %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= if get_flash(@conn, :info) do %>
+      <div class="container">
+        <div class="notification is-info is-light alert alert-info" role="alert">
+          <%= get_flash(@conn, :info) %>
+        </div>
+      </div>
+    <% end %>
     <%= @inner_content %>
 
     <section class="section">
       <div class="container">
         <div class="content has-text-left">
           <p><span class="icon has-text-primary"> <i class="fas fa-copyright"></i></span>
-          2020 zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb, memcached.
+          <%= DateTime.utc_now.year %> zack kitzmiller. this website is built using elixir w/ pheonix, cockroachdb, memcached.
           hosted on a 10 node RPi kubernetes clusters in my apartment. load tested to 12,000 concurrent users. print your
           venmo name on the receipt printer sitting on my desk and i'll venbro you $100.
           </p>

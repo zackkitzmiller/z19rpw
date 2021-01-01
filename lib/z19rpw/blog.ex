@@ -12,7 +12,7 @@ defmodule Z19rpw.Blog do
 
   @decorate write_through()
   def list_posts do
-    scoped_posts("2020")
+    scoped_posts(Integer.to_string(DateTime.utc_now().year))
   end
 
   @decorate write_through()

@@ -19,9 +19,11 @@ COPY config config
 
 ARG aws_key
 ARG aws_secret
+ARG sendgrid_api_key
 
 ENV AWS_ACCESS_KEY_ID=${aws_key}
 ENV AWS_SECRET_ACCESS_KEY=${aws_secret}
+ENV SENDGRID_API_KEY=${sendgrid_api_key}}
 
 ENV DATABASE_URL=ecto://app@cockroachdb.default.svc.cluster.local:26257/z19r
 ENV SECRET_KEY_BASE=34PA0jqGQLok1NXTLqNkXCBjRemHgmt/lc25MRMFBHD7tFy02newjvPLQ1gOAyiV

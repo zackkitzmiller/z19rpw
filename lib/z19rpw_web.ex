@@ -53,6 +53,16 @@ defmodule Z19rpwWeb do
     end
   end
 
+  def mailer_view do
+    quote do
+      use Phoenix.View,
+        root: "lib/z19rpw_web/templates",
+        namespace: Z19rpwWeb
+
+      use Phoenix.HTML
+    end
+  end
+
   def live_component do
     quote do
       use Phoenix.LiveComponent

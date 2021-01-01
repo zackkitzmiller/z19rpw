@@ -1,6 +1,6 @@
 <section class="section">
   <div class="container">
-    <h2 class="title is-3">edit profile</h2>
+    <h2 class="title is-3">create new password</h2>
 
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
       <%= if @changeset.action do %>
@@ -9,21 +9,11 @@
         </div>
       <% end %>
 
-      <div class="field">
-        <p class="control has-icons-left">
-          <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input", placeholder: "email" %>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-        </p>
-      </div>
-
       <div class="field is-horizontal">
         <div class="field-body">
           <div class="field">
             <p class="control is-expanded has-icons-left">
-              <%= password_input f, :password, class: "input", type: "password", placeholder: "change pw" %>
+              <%= password_input f, :password, class: "input", type: "password", placeholder: "pw" %>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
@@ -42,18 +32,9 @@
         </div>
       </div>
 
-      <div class="field">
-        <p class="control has-icons-left">
-          <%= password_input f, :current_password, class: "input", type: "password", placeholder: "current password" %>
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-          <%= error_tag f, :current_password %>
-        </p>
-      </div>
-
       <div>
-        <%= submit "update", class: "button is-primary", style: "margin-right: 20px" %>
+        <%= submit "reset", class: "button is-primary", style: "margin-right: 20px" %>
+        <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "button is-primary is-inverted" %>
       </div>
     <% end %>
 

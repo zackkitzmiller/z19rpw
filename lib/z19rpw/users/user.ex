@@ -4,6 +4,9 @@ defmodule Z19rpw.Users.User do
   use Ecto.Schema
   use Pow.Ecto.Schema
 
+  use Pow.Extension.Ecto.Schema,
+    extensions: [PowEmailConfirmation, PowResetPassword]
+
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
   schema "users" do
@@ -13,5 +16,11 @@ defmodule Z19rpw.Users.User do
     has_many :likes, Z19rpw.Blog.Post.Like, on_delete: :delete_all
 
     timestamps()
+  end
+
+  def changeset(user_or_changeset, attrs) do
+    user_or_changeset
+    |> pow_changeset(attrs)
+    |> pow_extension_changeset(attrs)
   end
 end
