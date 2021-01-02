@@ -29,13 +29,13 @@ defmodule Z19rpw.Blog.Post do
   @doc false
   def changeset(post, attrs) do
     post
-    |> cast(attrs, [:body, :title])
+    |> cast(attrs, [:body, :title, :slug])
     |> generate_slug
     |> validate_required([:body, :slug, :title])
   end
 
   def generate_slug(changeset) do
-    case get_field(changeset, :title) |> slug_title do
+    case get_change(changeset, :title) |> slug_title do
       :error ->
         changeset
 
@@ -43,6 +43,8 @@ defmodule Z19rpw.Blog.Post do
         put_change(changeset, :slug, slug)
     end
   end
+
+  def slug_title(nil), do: :error
 
   def slug_title(title) do
     case Slug.slugify(title) do
