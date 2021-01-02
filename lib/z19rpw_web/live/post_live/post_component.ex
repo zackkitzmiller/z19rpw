@@ -12,7 +12,7 @@ defmodule Z19rpwWeb.PostLive.PostComponent do
           <div class="media-content has-text-centered">
             <p class="title article-title"><%= live_patch @post.title, to: Routes.post_show_path(@socket, :show, @post.slug) %></p>
             <div class="tags has-addons level-item">
-              <span class="tag is-rounded is-info">@zackkitzmiller</span>
+              <span class="tag is-rounded is-info">@<%= @post.user.username %></span>
                 <a href="#" phx-click="like" phx-value-slug="<%= @post.slug %>" phx-target="<%= @myself %>">
                   <span class="tag">
                     <i class="far fa-heart"></i>
