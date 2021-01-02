@@ -5,5 +5,5 @@ defmodule Z19rpwWeb.Pow.Routes do
   use Pow.Phoenix.Routes
   alias Z19rpwWeb.Router.Helpers, as: Routes
 
-  def after_sign_in_path(conn), do: Routes.pow_session_path(conn, :new)
+  def after_registration_path(conn), do: Routes.pow_session_path(conn, :new)
 end
