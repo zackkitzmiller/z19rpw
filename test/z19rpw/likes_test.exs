@@ -15,6 +15,7 @@ defmodule Z19rpw.LikeTest do
       |> User.changeset(%{
         email: "test@example.com",
         password: @password,
+        username: "zebracakez",
         password_confirmation: @password
       })
       |> Repo.insert!()

@@ -15,6 +15,7 @@ defmodule Z19rpw.BlogTest do
       |> User.changeset(%{
         email: "test@example.com",
         password: @password,
+        username: "z3bracak3z",
         password_confirmation: @password
       })
       |> Repo.insert!()

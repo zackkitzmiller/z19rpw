@@ -27,6 +27,7 @@ defmodule Z19rpwWeb.PostControllerTest do
       |> User.changeset(%{
         email: "test@example.com",
         password: @password,
+        username: "zack",
         password_confirmation: @password
       })
       |> Repo.insert!()

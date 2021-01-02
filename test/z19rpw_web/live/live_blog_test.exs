@@ -20,6 +20,7 @@ defmodule Z19rpwWeb.BlogViewTest do
       |> User.changeset(%{
         email: "test@example.com",
         password: @password,
+        username: "this-is-a-fun-name",
         password_confirmation: @password
       })
       |> Repo.insert!()
@@ -61,21 +62,6 @@ defmodule Z19rpwWeb.BlogViewTest do
       authed_conn = get(authed_conn, "/posts/new")
 
       assert {:ok, _, _} = live(authed_conn)
-
-      # view =
-      #   view
-      #   |> element("form")
-      #   |> render_submit(%{post: %{"title" => "title", "body" => "test body"}})
-
-      # assert_redirect(view, Routes.post_index_path(authed_conn, :index))
-
-      # assert %Post{
-      #          :title => "title",
-      #          :body => "test body",
-      #          :id => _,
-      #          :status => "active",
-      #          :user => _
-      #        } = Blog.get_post_by_slug!("title")
     end
 
     test "blog home renders", %{conn: conn} do
