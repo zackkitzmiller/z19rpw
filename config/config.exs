@@ -49,7 +49,8 @@ config :z19rpw, :pow,
   mailer_backend: Z19rpw.Mailer,
   cache_store_backend: Pow.Store.Backend.MnesiaCache,
   extensions: [PowEmailConfirmation, PowResetPassword, PowPersistentSession],
-  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks
+  controller_callbacks: Pow.Extension.Phoenix.ControllerCallbacks,
+  routes_backend: Z19rpwWeb.Pow.Routes
 
 config :memcachir,
   hosts: "localhost",

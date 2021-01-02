@@ -21,7 +21,7 @@
 
       <div>
         <%= submit "reset", class: "button is-primary", style: "margin-right: 20px" %>
-        <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "button is-primary is-inverted" %>
+        <%= link "login", to: Routes.pow_session_path(@conn, :new), class: "button is-primary is-inverted" %>
       </div>
     <% end %>
 

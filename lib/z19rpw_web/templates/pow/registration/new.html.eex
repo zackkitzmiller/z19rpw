@@ -3,11 +3,6 @@
     <h2 class="title is-3">sign up baby</h2>
 
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
-      <%= if @changeset.action do %>
-        <div class="alert alert-danger">
-          <p>Oops, something went wrong! Please check the errors below.</p>
-        </div>
-      <% end %>
 
       <div class="field">
         <p class="control has-icons-left">
@@ -15,7 +10,9 @@
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
-          <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+          <p class="help is-danger">
+            <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+          </p>
         </p>
       </div>
 
@@ -23,28 +20,28 @@
         <div class="field-body">
           <div class="field">
             <p class="control is-expanded has-icons-left">
-              <%= password_input f, :password, class: "input", type: "password", placeholder: "pw" %>
+              <%= password_input f, :password, class: "input", type: "password", placeholder: "password" %>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
-              <%= error_tag f, :password %>
+              <p class="help is-danger"><%= error_tag f, :password %></p>
             </p>
           </div>
           <div class="field">
             <p class="control is-expanded has-icons-left">
-              <%= password_input f, :password_confirmation, class: "input", type: "password", placeholder: "confirm" %>
+              <%= password_input f, :password_confirmation, class: "input", type: "password", placeholder: "password confirmation" %>
               <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
               </span>
-              <%= error_tag f, :password_confirmation %>
+              <p class="help is-danger"><%= error_tag f, :password_confirmation %></p>
             </p>
           </div>
         </div>
       </div>
 
       <div>
-        <%= submit "signup", class: "button is-primary", style: "margin-right: 20px" %>
-        <%= link "Sign in", to: Routes.pow_session_path(@conn, :new), class: "button is-primary is-inverted" %>
+        <%= submit "sign up", class: "button is-primary", style: "margin-right: 20px" %>
+        <%= link "login", to: Routes.pow_session_path(@conn, :new), class: "button is-primary is-inverted" %>
       </div>
     <% end %>
 
