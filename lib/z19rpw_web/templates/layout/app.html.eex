@@ -50,7 +50,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
             <%= if Pow.Plug.current_user(@conn) do %>
-              <a class="navbar-item"><i class='fas fa-lock'></i></a>
+              <a class="navbar-item" href="<%= Routes.pow_registration_path(@conn, :edit) %>"><i class='fas fa-lock'></i></a>
             <% else %>
               <%= link "<i class='fas fa-unlock'></i>" |> raw, to: AuthRouteHelpers.login_to_current_path(@conn), class: "navbar-item", title: "login" %>
             <% end %>
