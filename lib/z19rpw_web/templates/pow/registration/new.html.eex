@@ -4,16 +4,31 @@
 
     <%= form_for @changeset, @action, [as: :user], fn f -> %>
 
-      <div class="field">
-        <p class="control has-icons-left">
-          <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input", placeholder: "email" %>
-          <span class="icon is-small is-left">
-            <i class="fas fa-envelope"></i>
-          </span>
-          <p class="help is-danger">
-            <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
-          </p>
-        </p>
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <p class="control has-icons-left">
+              <%= text_input f, Pow.Ecto.Schema.user_id_field(@changeset), class: "input", placeholder: "email" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <p class="help is-danger">
+                <%= error_tag f, Pow.Ecto.Schema.user_id_field(@changeset) %>
+              </p>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <%= text_input f, :username, class: "input", placeholder: "username" %>
+              <span class="icon is-small is-left">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <p class="help is-danger">
+                <%= error_tag f, :username %>
+              </p>
+            </p>
+          </div>
+        </div>
       </div>
 
       <div class="field is-horizontal">

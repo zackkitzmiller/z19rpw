@@ -1,6 +1,8 @@
 defmodule Z19rpw.Users.User do
   @moduledoc false
 
+  import Ecto.Changeset
+
   use Ecto.Schema
   use Pow.Ecto.Schema
 
@@ -12,6 +14,8 @@ defmodule Z19rpw.Users.User do
   schema "users" do
     pow_user_fields()
 
+    field :username, :string
+
     has_many :posts, Z19rpw.Blog.Post, on_delete: :delete_all
     has_many :likes, Z19rpw.Blog.Post.Like, on_delete: :delete_all
 
@@ -22,5 +26,7 @@ defmodule Z19rpw.Users.User do
     user_or_changeset
     |> pow_changeset(attrs)
     |> pow_extension_changeset(attrs)
+    |> cast(attrs, [:username])
+    |> validate_required([:username])
   end
 end
