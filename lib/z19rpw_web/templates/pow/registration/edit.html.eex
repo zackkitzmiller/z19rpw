@@ -72,6 +72,7 @@
 
       <div>
         <%= submit "update", class: "button is-primary", style: "margin-right: 20px" %>
+        <span><%= link "Sign out", to: Routes.pow_session_path(@conn, :delete), method: :delete, class: "button is-danger" %></span>
       </div>
     <% end %>
 
