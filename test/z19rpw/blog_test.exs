@@ -55,6 +55,14 @@ defmodule Z19rpw.BlogTest do
       assert post.title == "some title"
     end
 
+    test "create_post/1 with same title creates a new slug", %{:user => user} do
+      assert {:ok, %Post{} = post} = Blog.create_post(@valid_attrs, user)
+      assert post.body == "some body"
+      assert post.title == "some title"
+      assert {:ok, %Post{} = post_two} = Blog.create_post(@valid_attrs, user)
+      assert post.slug != post_two.slug
+    end
+
     test "create_post/1 with invalid data returns error changeset", %{:user => user} do
       assert {:error, %Ecto.Changeset{}} = Blog.create_post(@invalid_attrs, user)
     end
