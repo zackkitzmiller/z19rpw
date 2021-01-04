@@ -1,6 +1,6 @@
 # Z19rpw
 
-[![Coverage Status](https://coveralls.io/repos/github/zackkitzmiller/z19rpw/badge.svg?branch=main)](https://coveralls.io/github/zackkitzmiller/z19rpw?branch=blog-api)
+[![Coverage Status](https://coveralls.io/repos/github/zackkitzmiller/z19rpw/badge.svg?branch=main)](https://coveralls.io/github/zackkitzmiller/z19rpw?branch=main)
 ![Tests](https://github.com/zackkitzmiller/z19rpw/workflows/does%20it%20blend%3F/badge.svg)
 
 zack kitzmiller's personal website
@@ -27,6 +27,7 @@ $ brew install cockroachdb/tap/cockroach memcached
 ```
 
 You need update the configuration of CockroachDB in `config/dev.exs` and `config/test.exs`. That should be enough to get you up and running.
+
 ```
 $ hub clone zackkitzmiller/z19rpw
 $ mix deps.get
@@ -47,7 +48,7 @@ You might get an warning about reporting to Sentry because of a missing DSN. It 
 
 ## Release
 
-Releases are handled by GitHub actions. You can see the build configuration at `.github/workflows/main.yml`. 
+Releases are handled by GitHub actions. You can see the build configuration at `.github/workflows/main.yml`.
 
 ## Architecture
 
