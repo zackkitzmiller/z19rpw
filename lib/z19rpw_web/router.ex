@@ -59,6 +59,10 @@ defmodule Z19rpwWeb.Router do
     get "/mentorship", PageController, :mentoring
 
     live "/blog", PostLive.Index, :index, layout: {Z19rpwWeb.LayoutView, "app.html"}
+
+    live "/posts/author/:username", PostLive.Index, :user,
+      layout: {Z19rpwWeb.LayoutView, "app.html"}
+
     live "/posts/:slug", PostLive.Show, :show, layout: {Z19rpwWeb.LayoutView, "app.html"}
   end
 

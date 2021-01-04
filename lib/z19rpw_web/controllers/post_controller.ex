@@ -5,11 +5,6 @@ defmodule Z19rpwWeb.PostController do
 
   action_fallback Z19rpwWeb.FallbackController
 
-  def index(conn, %{"year" => year} = _params) do
-    posts = Blog.list_posts(%{"year" => year})
-    render(conn, "index.json", posts: posts)
-  end
-
   def index(conn, _params) do
     posts = Blog.list_posts()
     render(conn, "index.json", posts: posts)

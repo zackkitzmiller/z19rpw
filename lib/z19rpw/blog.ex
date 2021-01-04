@@ -11,13 +11,13 @@ defmodule Z19rpw.Blog do
   require Logger
 
   @decorate write_through()
-  def list_posts do
-    scoped_posts(Integer.to_string(DateTime.utc_now().year))
+  def list_posts() do
+    filter(%{})
   end
 
   @decorate write_through()
-  def list_posts(%{"year" => year}) do
-    scoped_posts(year)
+  def list_posts(params) do
+    filter(params)
   end
 
   def get_post!(id), do: Repo.get!(Post, id) |> Repo.preload([:likes, :user])
@@ -81,19 +81,6 @@ defmodule Z19rpw.Blog do
     Post.changeset(post, attrs)
   end
 
-  @decorate write_through()
-  def publication_years do
-    Post
-    |> select(fragment("extract(year from inserted_at) as year"))
-    |> where([p], p.status == "active")
-    |> group_by(fragment("year"))
-    |> having(count("id") > 0)
-    |> Repo.all()
-    |> Enum.sort()
-    |> Enum.map(&floor/1)
-    |> Enum.map(&to_string/1)
-  end
-
   def subscribe do
     Phoenix.PubSub.subscribe(Z19rpw.PubSub, "blog")
   end
@@ -106,16 +93,27 @@ defmodule Z19rpw.Blog do
     {:ok, post}
   end
 
-  defp scoped_posts(year) do
-    Repo.all(
-      from p in Post,
-        where:
-          fragment(
-            "status != 'draft' and extract(year from inserted_at)::text = ?",
-            ^year
-          ),
-        order_by: [desc: p.inserted_at]
-    )
-    |> Repo.preload([:likes, :user])
+  defp filter(params) do
+    Post
+    |> join(:inner, [p], assoc(p, :user), as: :user)
+    |> where([p], p.status != "draft")
+    |> where(^filter_where(params))
+    |> order_by(^filter_order_by("inserted_at"))
+    |> preload([:likes, :user])
+    |> Repo.all()
+  end
+
+  defp filter_order_by("inserted_at"),
+    do: [desc: dynamic([p], p.inserted_at)]
+
+  defp filter_where(params) do
+    Enum.reduce(params, dynamic(true), fn
+      {"username", value}, dynamic ->
+        dynamic([user: u], ^dynamic and u.username == ^value)
+
+      {_, _}, dynamic ->
+        # Not a where parameter
+        dynamic
+    end)
   end
 end
