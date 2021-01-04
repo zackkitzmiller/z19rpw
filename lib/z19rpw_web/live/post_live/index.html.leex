@@ -1,17 +1,3 @@
-<div class="container" id="year-select">
-  <div class="box" style="margin-top: 10px">
-    <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-      <ul>
-      <%= for year <- @years do %>
-        <li <%= if year == @selected_year do %>class="is-active" <% end %>>
-          <a href="/blog?year=<%= year %>"><%= year %></a>
-        </li>
-      <% end %>
-      </ul>
-    </nav>
-  </div>
-</div>
-
 <section class="articles">
   <div class="container" id="posts" phx-update="replace">
     <%= for post <- @posts do %>

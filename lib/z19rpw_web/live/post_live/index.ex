@@ -7,21 +7,15 @@ defmodule Z19rpwWeb.PostLive.Index do
   alias Z19rpw.Blog
   alias Z19rpw.Blog.Post
 
-  require Logger
-
   @impl true
-  def mount(params, session, socket) do
+  def mount(_params, session, socket) do
     if connected?(socket), do: Blog.subscribe()
     current_user = Credentials.get_user(socket, session)
 
-    year = Map.get(params, "year", Integer.to_string(DateTime.utc_now().year))
-
     socket =
       socket
-      |> assign(:posts, Blog.list_posts(%{"year" => year}))
+      |> assign(:posts, Blog.list_posts())
       |> assign(:current_user, current_user)
-      |> assign(:years, Blog.publication_years())
-      |> assign(:selected_year, year)
       |> assign(:page_title, "blog")
 
     {:ok, socket}
@@ -42,6 +36,13 @@ defmodule Z19rpwWeb.PostLive.Index do
   defp apply_action(socket, :index, _params) do
     socket
     |> assign(:page_title, "blog")
+    |> assign(:current_user, socket.assigns.current_user)
+  end
+
+  defp apply_action(socket, :user, %{"username" => username}) do
+    socket
+    |> assign(:page_title, "user")
+    |> assign(:posts, Blog.list_posts(%{"username" => username}))
     |> assign(:current_user, socket.assigns.current_user)
   end
 

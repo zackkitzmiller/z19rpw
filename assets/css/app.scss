@@ -1,17 +1,17 @@
 @charset "utf-8";
 
 // Import a Google Font
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
 @import "../node_modules/nprogress/nprogress.css";
 // @import "../node_modules/highlight.js/scss/co";
 @import "../node_modules/highlight.js/scss/stackoverflow-light.scss";
 
 // Set your brand colors
-$purple: #8A4D76;
-$pink: #FA7C91;
+$purple: #8a4d76;
+$pink: #fa7c91;
 $brown: #757763;
-$beige-light: #D0D1CD;
-$beige-lighter: #EFF0EB;
+$beige-light: #d0d1cd;
+$beige-lighter: #eff0eb;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -21,7 +21,7 @@ $primary: $purple;
 $link: $pink;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
-$modal-background-background-color: rgba($beige-light, .5);
+$modal-background-background-color: rgba($beige-light, 0.5);
 
 // Update some of Bulma's component variables
 $body-background-color: $beige-lighter;
@@ -73,4 +73,8 @@ section#exp {
 
 .media {
   margin-bottom: 48px;
+}
+
+.tag a {
+  color: inherit;
 }
