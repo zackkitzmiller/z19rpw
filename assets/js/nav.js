@@ -21,5 +21,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
-
+  console.log('nav init');
 });
