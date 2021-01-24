@@ -5,6 +5,10 @@
 
 zack kitzmiller's personal website
 
+also:
+- shouldigetthecovidvaccine.com
+- thetrumphealthcareplan.com
+
 ## Pull Requests
 
 As I've always done in the past, pull requests are welcome. I'm not a designer, and I don't really care. If you want to make some improvements or.. make things worse, go ahead. Pull down the repo, make some changes, and I'll merge them in. GitHub actions will take care of the release.
@@ -52,7 +56,7 @@ Releases are handled by GitHub actions. You can see the build configuration at `
 
 ## Architecture
 
-z19rpw is currently hosted on a Raspberry Pi cluster that sits on my desk. It's a 10 node configuration running Kubernetes with routing handled by Traefik. DNS is served by Google Cloud DNS.
+z19rpw is currently hosted on a Raspberry Pi cluster that sits on my desk. It's a 10 node configuration running Kubernetes with routing handled by Traefik. DNS is served by Google Cloud DNS. 
 
 ## Varnish
 
