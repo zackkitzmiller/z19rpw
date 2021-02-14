@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout Codebase
         uses: actions/checkout@v1
-      - name: authmeup
+      - name: Authenticate with Dockerhub
         env:
           DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
