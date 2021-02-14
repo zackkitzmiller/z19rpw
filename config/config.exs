@@ -21,7 +21,7 @@ config :z19rpw, env: Mix.env()
 config :z19rpw, Z19rpwWeb.Endpoint,
   url: [host: "127.0.0.1"],
   secret_key_base: "QM/B52O3HH0VhIN+6ENj1rh/kkBP3/LQdC/zNhTTicdnsQphALeKyFVIW3/KmCiR",
-  render_errors: [view: Z19rpwWeb.ErrorView, accepts: ~w(json), layout: false],
+  render_errors: [view: Z19rpwWeb.ErrorView, accepts: ~w(json html), layout: false],
   pubsub_server: Z19rpw.PubSub,
   live_view: [signing_salt: "EZFfpWSw"],
   instrumenters: [NewRelic.Phoenix.Instrumenter]

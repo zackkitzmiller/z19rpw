@@ -17,4 +17,10 @@ defmodule Z19rpwWeb.IndexViewTest do
     conn = get(conn |> struct(%{host: "shouldigetthecovidvaccine.com"}), "/")
     assert html_response(conn, 200) =~ "<title>should i get the covid vaccine</title>"
   end
+
+  test "404 renders html", %{conn: conn} do
+    assert_error_sent 404, fn ->
+      get(conn, "/this-isnt-a-page")
+    end
+  end
 end
