@@ -1,9 +1,9 @@
-name: "does it blend?"
+name: "Pre-Merge Checks"
 
 on: [push]
 
 jobs:
-  compile-on-three:
+  unit-tests:
     runs-on: ubuntu-latest
 
     strategy:
@@ -19,7 +19,7 @@ jobs:
         image: memcached
 
     steps:
-      - name: git the code
+      - name: Checkout Codebase
         uses: actions/checkout@v2
 
       - name: Retrieve Mix Dependencies Cache
@@ -35,7 +35,7 @@ jobs:
           mix local.rebar --force
           mix local.hex --force
           mix deps.get
-      - name: burnbabyburn
+      - name: Run Test Suite
         run: |
           mix local.rebar --force
           mix local.hex --force

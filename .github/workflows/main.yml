@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: git the code
+      - name: Checkout Codebase
         uses: actions/checkout@v1
       - name: authmeup
         env:
@@ -17,7 +17,7 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         run: |
           echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
-      - name: mixelixir
+      - name: Prepare Elixir Environment
         uses: actions/setup-elixir@v1
         with:
           elixir-version: "1.11.1"
@@ -28,27 +28,26 @@ jobs:
         with:
           path: deps
           key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles(format('{0}{1}', github.workspace, '/mix.lock')) }}
-
       - name: Install Dependencies
         if: steps.mix-cache.outputs.cache-hit != 'true'
         run: |
           mix local.rebar --force
           mix local.hex --force
           mix deps.get
-      - name: Use Node.js ${{ env.NODE_VERSION }}
+      - name: Install Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - name: bigassets
+      - name: Build Assets
         run: |
           npm --prefix ./assets ci --progress=false --no-audit --loglevel=error
           npm run --prefix ./assets deploy
-      - name: arm64 for build
+      - name: Prepare Build for ARM64
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: build and pu5h
+      - name: Build Image and Push to Dockerhub
         run: |
           docker buildx build \
           --platform=linux/arm64 \
@@ -58,18 +57,12 @@ jobs:
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
-      - name: derploy
+      - name: Deploy
         uses: Consensys/kubernetes-action@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
           args: rollout restart deployment z19rpw
-      - name: flushcache
-        uses: Consensys/kubernetes-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: rollout restart deployment varnish-proxy
       - name: Mark Deploy (Sentry)
         uses: getsentry/action-release@v1.0.0
         env:
@@ -78,3 +71,9 @@ jobs:
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         with:
           environment: production
+      - name: Flush Varnish Cache
+        uses: Consensys/kubernetes-action@master
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        with:
+          args: rollout restart deployment varnish-proxy
