@@ -4,9 +4,6 @@ defmodule Z19rpwWeb.FormComponentTest do
   """
   use Z19rpwWeb.ConnCase, async: true
 
-  # import Plug.Conn
-  import Phoenix.ConnTest
-  import Phoenix.LiveViewTest
   import Z19rpwWeb.PostLive.FormComponent
 
   alias Z19rpw.Blog
@@ -48,7 +45,7 @@ defmodule Z19rpwWeb.FormComponentTest do
       {:ok, conn: conn, authed_conn: authed_conn}
     end
 
-    test "handles simple validation", %{conn: conn} do
+    test "handles simple validation", %{conn: _conn} do
       assert {:noreply, _} =
                handle_event(
                  "validate",
@@ -58,16 +55,5 @@ defmodule Z19rpwWeb.FormComponentTest do
                  }
                )
     end
-
-    # test "handles simple validation", %{conn: conn} do
-    #   assert {:noreply, _} =
-    #            handle_event(
-    #              "validate",
-    #              %{"post" => %{:post => %{:body => "body", :title => "title"}}},
-    #              %Phoenix.LiveView.Socket{
-    #                :assigns => %{:post => %Blog.Post{:body => "bodasdfy", :title => "titasdfle"}}
-    #              }
-    #            )
-    # end
   end
 end

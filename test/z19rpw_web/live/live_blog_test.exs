@@ -79,6 +79,14 @@ defmodule Z19rpwWeb.BlogViewTest do
       assert {:ok, _, _} = live(conn)
     end
 
+    test "bad post 404s", %{conn: conn} do
+      post_fixture()
+
+      assert_error_sent 404, fn ->
+        get(conn, "/posts/creating-new-things-but-no-thing")
+      end
+    end
+
     test "shows loging screen if not authed", %{conn: conn} do
       post = post_fixture()
       conn = get(conn, "/posts/creating-new-things/edit")
