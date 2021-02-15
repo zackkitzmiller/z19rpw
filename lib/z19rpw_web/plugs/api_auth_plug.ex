@@ -41,13 +41,11 @@ defmodule Z19rpwWeb.APIAuthPlug do
       |> Conn.put_private(:api_access_token, sign_token(conn, access_token, config))
       |> Conn.put_private(:api_renewal_token, sign_token(conn, renewal_token, config))
 
+    # The store caches will use their default `:ttl` settting. To change the
+    # `:ttl`, `Keyword.put(store_config, :ttl, :timer.minutes(10))` can be
+    # passed in as the first argument instead of `store_config`.
     CredentialsCache.put(store_config, access_token, {user, [renewal_token: renewal_token]})
-
-    PersistentSessionCache.put(
-      store_config,
-      renewal_token,
-      {[id: user.id], [access_token: access_token]}
-    )
+    PersistentSessionCache.put(store_config, renewal_token, {user, [access_token: access_token]})
 
     {conn, user}
   end
@@ -87,20 +85,13 @@ defmodule Z19rpwWeb.APIAuthPlug do
 
     with {:ok, signed_token} <- fetch_access_token(conn),
          {:ok, token} <- verify_token(conn, signed_token, config),
-         {clauses, metadata} <- PersistentSessionCache.get(store_config, token) do
+         {user, metadata} <- PersistentSessionCache.get(store_config, token) do
       CredentialsCache.delete(store_config, metadata[:access_token])
       PersistentSessionCache.delete(store_config, token)
 
-      load_and_create_session(conn, {clauses, metadata}, config)
+      create(conn, user, config)
     else
       _any -> {conn, nil}
-    end
-  end
-
-  defp load_and_create_session(conn, {clauses, _metadata}, config) do
-    case Pow.Operations.get_by(clauses, config) do
-      nil -> {conn, nil}
-      user -> create(conn, user, config)
     end
   end
 
@@ -121,8 +112,8 @@ defmodule Z19rpwWeb.APIAuthPlug do
     do: Plug.verify_token(conn, signing_salt(), token, config)
 
   defp store_config(config) do
-    backend = Config.get(config, :cache_store_backend, Pow.Store.Backend.MnesiaCache)
+    backend = Config.get(config, :cache_store_backend, Pow.Store.Backend.EtsCache)
 
-    [backend: backend]
+    [backend: backend, pow_config: config]
   end
 end
