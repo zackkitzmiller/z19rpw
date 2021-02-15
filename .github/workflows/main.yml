@@ -54,6 +54,7 @@ jobs:
           --build-arg aws_secret=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
           --build-arg aws_key=${{ secrets.AWS_ACCESS_KEY_ID }} \
           --build-arg sendgrid_api_key=${{ secrets.SENDGRID_API_KEY }} \
+          --build-arg sentry_dsn=${{ secrets.SENTRY_DSN }} \
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest

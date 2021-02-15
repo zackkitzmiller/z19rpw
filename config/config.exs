@@ -23,8 +23,7 @@ config :z19rpw, Z19rpwWeb.Endpoint,
   secret_key_base: "QM/B52O3HH0VhIN+6ENj1rh/kkBP3/LQdC/zNhTTicdnsQphALeKyFVIW3/KmCiR",
   render_errors: [view: Z19rpwWeb.ErrorView, accepts: ~w(json html), layout: false],
   pubsub_server: Z19rpw.PubSub,
-  live_view: [signing_salt: "EZFfpWSw"],
-  instrumenters: [NewRelic.Phoenix.Instrumenter]
+  live_view: [signing_salt: "EZFfpWSw"]
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -70,6 +69,17 @@ config :ex_aws, :s3,
 config :z19rpw, Z19rpw.Mailer,
   adapter: Bamboo.SendGridAdapter,
   api_key: System.get_env("SENDGRID_API_KEY", "testkey")
+
+config :sentry,
+  dsn: System.get_env("SENTRY_DSN", "sentry://no-dsn"),
+  environment_name: System.get_env("MIX_ENV") || "development",
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!(),
+  tags: %{
+    env: "production"
+  },
+  filter: Z19rpw.SentryEventFilter,
+  included_environments: ["prod"]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

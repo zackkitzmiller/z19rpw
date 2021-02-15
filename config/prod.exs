@@ -21,16 +21,6 @@ config :libcluster,
   ],
   debug: true
 
-config :sentry,
-  dsn: "https://398fd199b5e749159ed2ad90687a3123@o473296.ingest.sentry.io/5508084",
-  environment_name: :prod,
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!(),
-  tags: %{
-    env: "production"
-  },
-  included_environments: [:prod]
-
 config :logger,
   backends: [:console, Sentry.LoggerBackend]
 
