@@ -24,7 +24,7 @@ defmodule Z19rpw.Blog do
 
   @decorate write_through()
   def get_post_by_slug!(slug) do
-    Repo.one!(from p in Post, where: p.slug == ^slug) |> Repo.preload([:likes, :user])
+    Repo.one!(from(p in Post, where: p.slug == ^slug)) |> Repo.preload([:likes, :user])
   end
 
   def create_post(attrs \\ %{}, %User{} = current_user) do
@@ -64,8 +64,9 @@ defmodule Z19rpw.Blog do
 
   def like_post(%Post{} = post, %User{} = user) do
     case Repo.one(
-           from l in Like,
+           from(l in Like,
              where: l.user_id == ^user.id and l.post_id == ^post.id
+           )
          ) do
       nil ->
         Repo.insert!(%Like{post: post, user: user})
