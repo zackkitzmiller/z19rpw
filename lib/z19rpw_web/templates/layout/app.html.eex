@@ -12,7 +12,7 @@
     <%= csrf_meta_tag() %>
     <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <link async defer href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"></script>
     <script defer type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
     <%= if "prod" == Application.get_env(:z19rpw, :env) do   %>
@@ -38,11 +38,15 @@
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
             <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
           </a>
         </div>
 
         <div id="z4xw3tb4r" class="navbar-menu">
           <div class="navbar-start">
+            <%= link to: "https://www.etsy.com/listing/975575008/raspberry-pi-kubernetes-cluster-4-node?ref=z19r", class: "navbar-item", target: "_blank" do %>
+              buy a&nbsp;<span class="icon"><i class="fab fa-raspberry-pi"></i></span>&nbsp;cluster
+            <% end %>
             <%= link "blog", to: Routes.post_index_path(@conn, :index), class: "navbar-item" %>
             <%= link "mentorship", to: Routes.page_path(@conn, :coffee), class: "navbar-item" %>
             <a href="#" class="navbar-item" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/zkitzmiller/let-s-get-coffee?hide_gdpr_banner=1'});return false;">let's get coffee</a>
