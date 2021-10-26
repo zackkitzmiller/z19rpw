@@ -47,7 +47,7 @@
       <div class="column is-half">
         <div class="media">
           <div class="media-left">
-            <figure class="image is-128x128">
+            <figure class="image is-96x96">
               <img src="<%= Z19rpwWeb.CDNHelpers.cdn_path("gbo.png") %>" alt="grabango">
             </figure>
           </div>
