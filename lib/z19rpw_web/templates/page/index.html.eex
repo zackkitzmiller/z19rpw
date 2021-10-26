@@ -52,9 +52,9 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="is-size-3"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
-            <p class="is-size-5">technical architect</p>
-            <p class="is-size-5">june '20 &ndash; current</p>
+            <p class="is-size-4"><%= link("grabango", to: "https://grabango.com", target: "_blank") %></p>
+            <p class="is-size-6">technical architect</p>
+            <p class="is-size-6">june '20 &ndash; oct '21</p>
           </div>
         </div>
         <div class="media">
