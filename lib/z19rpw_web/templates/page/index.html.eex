@@ -44,7 +44,21 @@
       <div class="column is-half">
         <p class="title">Experience</p>
       </div>
+
       <div class="column is-half">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-96x96">
+              <img src="<%= Z19rpwWeb.CDNHelpers.cdn_path("peek.png") %>" alt="peek">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="is-size-4"><%= link("peek", to: "https://peek.com", target: "_blank") %></p>
+            <p class="is-size-6">architect</p>
+            <p class="is-size-6">oct '21 &ndash; current</p>
+          </div>
+        </div>
+
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
@@ -57,22 +71,24 @@
             <p class="is-size-6">june '20 &ndash; oct '21</p>
           </div>
         </div>
+
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
               <img src="<%= Z19rpwWeb.CDNHelpers.cdn_path("venmo.png") %>"" alt="venmo">
             </figure>
-            </div>
-            <div class="media-content">
-              <p class="is-size-4"><%= link("venmo", to: "https://venmo.com", target: "_blank") %></p>
-              <p class="is-size-6">member of the technical staff ii</p>
-              <p class="is-size-6">sept '19 &ndash; jun '20</p>
-            </div>
           </div>
+          <div class="media-content">
+            <p class="is-size-4"><%= link("venmo", to: "https://venmo.com", target: "_blank") %></p>
+            <p class="is-size-6">member of the technical staff ii</p>
+            <p class="is-size-6">sept '19 &ndash; jun '20</p>
+          </div>
+        </div>
+
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
-              <img src="<%= Z19rpwWeb.CDNHelpers.cdn_path("seatgeek.png") %>"" alt="seatgeek">
+              <img src="<%= Z19rpwWeb.CDNHelpers.cdn_path("seatgeek-gatorade.png") %>"" alt="seatgeek">
             </figure>
           </div>
           <div class="media-content">
@@ -81,6 +97,7 @@
             <p class="is-size-6">jan '12 &ndash; sept '19</p>
           </div>
         </div>
+
         <div class="media">
           <div class="media-left">
             <figure class="image is-96x96">
