@@ -10,9 +10,16 @@ defmodule Z19rpwWeb.PageController do
       "shouldigetthecovidvaccine.com" ->
         render(conn |> put_layout(false), "vaccine.html")
 
+      "jordanhuskeynudeleaks.com" ->
+        render(conn |> put_layout(false), "jordan.html")
+
       _ ->
         render(conn, "index.html")
     end
+  end
+
+  def jordan(conn, _params) do
+    render(conn |> put_layout(false), "jordan.html")
   end
 
   def thc(conn, _params) do
