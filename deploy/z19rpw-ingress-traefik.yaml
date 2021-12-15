@@ -189,3 +189,26 @@ spec:
     - hosts:
         - jordanhuskeynudeleaks.com
       secretName: jordanhuskeynudeleaks-com-tls
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ecu-ingress
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/frontend-entry-points: http, https
+    traefik.ingress.kubernetes.io/redirect-entry-point: https
+spec:
+  rules:
+    - host: willmy062020plusecugotorussia.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: varnish-svc
+              servicePort: 80
+  tls:
+    - hosts:
+        - willmy062020plusecugotorussia.com
+      secretName: willmy062020plusecugotorussia-com-tls

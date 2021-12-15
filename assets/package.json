@@ -3,7 +3,7 @@
   "description": " ",
   "license": "MIT",
   "dependencies": {
-    "bulma": "^0.9.0",
+    "bulma": "^0.9.3",
     "highlight.js": "^10.4.1",
     "nprogress": "^0.2.0",
     "phoenix": "file:../deps/phoenix",

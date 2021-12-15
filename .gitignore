@@ -35,3 +35,4 @@ Mnesia.*
 priv/static/css/
 priv/static/js/
 .env
+.DS_Store
