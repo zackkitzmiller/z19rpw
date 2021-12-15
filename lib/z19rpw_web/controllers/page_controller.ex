@@ -13,6 +13,9 @@ defmodule Z19rpwWeb.PageController do
       "jordanhuskeynudeleaks.com" ->
         render(conn |> put_layout(false), "jordan.html")
 
+      "willmy062020plusecugotorussia.com" ->
+        render(conn |> put_layout(false), "ecu-russia.html")
+
       _ ->
         render(conn, "index.html")
     end
@@ -20,6 +23,10 @@ defmodule Z19rpwWeb.PageController do
 
   def jordan(conn, _params) do
     render(conn |> put_layout(false), "jordan.html")
+  end
+
+  def russia(conn, _params) do
+    render(conn |> put_layout(false), "ecu-russia.html")
   end
 
   def thc(conn, _params) do
