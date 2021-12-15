@@ -18,9 +18,14 @@ defmodule Z19rpwWeb.IndexViewTest do
     assert html_response(conn, 200) =~ "<title>should i get the covid vaccine</title>"
   end
 
+  test "peek renders", %{conn: conn} do
+    conn = get(conn, "/")
+    assert html_response(conn, 200) =~ "peek.ong"
+  end
+
   test "404 renders html", %{conn: conn} do
-    assert_error_sent 404, fn ->
+    assert_error_sent(404, fn ->
       get(conn, "/this-isnt-a-page")
-    end
+    end)
   end
 end
