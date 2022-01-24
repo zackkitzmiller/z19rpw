@@ -8,13 +8,22 @@ defmodule Z19rpwWeb.PageController do
         |> redirect(to: "/thc")
 
       "shouldigetthecovidvaccine.com" ->
-        render(conn |> put_layout(false), "vaccine.html")
+        render(
+          conn |> put_resp_header("cache-control", "max-age=86400") |> put_layout(false),
+          "vaccine.html"
+        )
 
       "jordanhuskeynudeleaks.com" ->
-        render(conn |> put_layout(false), "jordan.html")
+        render(
+          conn |> put_resp_header("cache-control", "max-age=86400") |> put_layout(false),
+          "jordan.html"
+        )
 
       "willmy062020plusecugotorussia.com" ->
-        render(conn |> put_layout(false), "ecu-russia.html")
+        render(
+          conn |> put_resp_header("cache-control", "max-age=86400") |> put_layout(false),
+          "ecu-russia.html"
+        )
 
       _ ->
         render(conn, "index.html")
@@ -22,11 +31,17 @@ defmodule Z19rpwWeb.PageController do
   end
 
   def jordan(conn, _params) do
-    render(conn |> put_layout(false), "jordan.html")
+    render(
+      conn |> put_layout(false),
+      "jordan.html"
+    )
   end
 
   def russia(conn, _params) do
-    render(conn |> put_layout(false), "ecu-russia.html")
+    render(
+      conn |> put_layout(false),
+      "ecu-russia.html"
+    )
   end
 
   def thc(conn, _params) do
