@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>2021 Supra EC2 Status</title>
+    <title>2021 Supra ECU Status</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
@@ -37,29 +37,6 @@ body {
 
 p, h2 { margin: 0; }
 
-#hero,
-.step {
-  border-bottom: 1px solid #ffffff33;
-  padding: 16px 0;
-}
-.step-num {
-  color: #ffffff66;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .03em;
-  text-transform: uppercase;
-}
-
-.badge-here {
-  background: #ff3caccc;
-  border-radius: 4px;
-  display: inline-block;
-  font-size: 12px;
-  letter-spacing: .03em;
-  margin: .5em 0 .5em -1em;
-  padding: .5em 1em;
-}
-
 h1 {
   font-size: 48px;
   font-weight: 800;
@@ -84,32 +61,34 @@ h1 {
       </div>
       <div class="step">
         <h2 class="step-num">Step 1</h2>
-        <p class="step-p">It's locked AF -> tune with JB4</p>
+        <p class="step-p step-done">It's locked AF -> tune with JB4</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 2</h2>
-        <p class="step-p">ECU to Russia, cloned to spare 2020, full unlock -> Full custom tuning (FCT)</p>
+        <p class="step-p step-done">ECU to Russia, cloned to spare 2020, full unlock -> Full custom tuning (FCT&mdash;Map Switching, Reflex, Port Injection etc.)</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 3</h2>
         <div class="badge-here">YOU ARE HERE</div>
-        <p class="step-p">ECU to Russia, no cloning, partial unlock -> Off-the-shelf (OTS) tunes only</p>
+        <p class="step-p">ECU to Russia, no cloning, partial unlock -> Calibration tunes only</p>
+        <p class="step-p is-italic step-done" style="text-align: center;">&mdash;OR&mdash;</p>
+        <p class="step-p">ECU to Russia, cloned to spare 2020, full unlock -> FCT</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 4</h2>
-        <p class="step-p">ECU to Russia, full unlock -> OTS + FCT</p>
+        <p class="step-p step-next">ECU to Russia, full unlock -> FCT</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 5</h2>
-        <p class="step-p">Domestic unlock, partial -> OTS only</p>
+        <p class="step-p step-next">Domestic unlock, partial -> Calibration tunes only</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 6</h2>
-        <p class="step-p">Domestic unlock, full -> OTS + FCT</p>
+        <p class="step-p step-next">Domestic unlock, full -> FCT</p>
       </div>
       <div class="step">
         <h2 class="step-num">Step 7</h2>
-        <p class="step-p">Full unlock over OBD2 -> OTS + FCT</p>
+        <p class="step-p step-next">Full unlock over OBD2 -> FCT</p>
       </div>
       <h1>Do <em>all</em> 06.2020+ ECUs Still Need To Go To Russia for Flash Tuning?</h1>
       <div class="huge-ass-flag">🇷🇺 Yes 🇷🇺</div>

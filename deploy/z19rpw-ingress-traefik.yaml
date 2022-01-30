@@ -91,7 +91,7 @@ spec:
         paths:
           - path: /
             backend:
-              serviceName: minio-1606771947
+              serviceName: minio-1640209474
               servicePort: 9000
   tls:
     - hosts:
