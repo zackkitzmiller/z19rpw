@@ -15,7 +15,7 @@ backend lolkat {
 }
 
 backend cdn {
-  .host = "minio-1606771947.minio";
+  .host = "minio-1640209474.minio";
   .port = "9000";
 }
 
@@ -40,6 +40,12 @@ sub vcl_recv {
   if (req.http.Host ~ "z19r.pw") {
     std.log("setting backend to z19rpw");
     set req.backend_hint = z19rpw;
+  }
+
+  if (req.http.Host ~ "willmy062020plusecugotorussia.com") {
+    std.log("ecu");
+    unset req.http.Cookie;
+    return (hash);
   }
 
   if (req.http.Host ~ "lolkat.fyi") {
@@ -69,7 +75,7 @@ sub vcl_recv {
     return (hash);
   }
 
-  if (req.url ~ "\.(png|jpg|gif|jpeg|css|js)") {
+  if (req.url ~ "\.(png|jpg|mp4|gif|jpeg|css|js)") {
     std.log("processing for z19r assets");
     unset req.http.Cookie;
     return (hash);
@@ -90,7 +96,7 @@ sub vcl_deliver {
 
 sub vcl_backend_response {
   std.log(bereq.url);
-  if (bereq.url ~ "qr" || bereq.url ~ "\.(png|jpg|jpeg|css|js)") {
+  if (bereq.url ~ "/" || bereq.url ~ "qr" || bereq.url ~ "\.(png|jpg|jpeg|css|js)") {
     unset beresp.http.set-cookie;
     set beresp.http.Cache-Control = "max-age=3600";
     set beresp.ttl = 1h;
