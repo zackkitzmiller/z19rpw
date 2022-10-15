@@ -50,6 +50,13 @@ defmodule Z19rpwWeb.PageController do
     )
   end
 
+  def flow(conn, _params) do
+    render(
+      conn |> put_layout(false),
+      "flow.html"
+    )
+  end
+
   def thc(conn, _params) do
     conn
     |> redirect(external: "https://www.nytimes.com/2020/11/07/us/politics/biden-election.html")

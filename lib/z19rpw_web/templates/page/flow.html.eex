@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Is My MKV Supra an A91 or A90 Flow Chart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3PC6C2250C"></script>
+    <link rel="stylesheet" href="/css/app.css"/>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3PC6C2250C');
+    </script>
+
+  <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; }
+
+body {
+  /* https://cssgradient.io/gradient-backgrounds/ */
+  background-color: #FF3CAC;
+  background-image: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  color: #fff;
+  font: 600 14px/1.5 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, 'Apple Color Emoji', Arial, sans-serif, 'Segoe UI Emoji', 'Segoe UI Symbol';
+  text-rendering: geometricPrecision;
+}
+
+#content {
+  margin: 0 auto;
+  max-width: 600px;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+p, h2 { margin: 0; }
+
+h1 {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+  padding: 32px 0;
+}
+
+.huge-ass-flag {
+  font-size: 100px;
+  line-height: 1;
+}
+.update {
+  margin-top: 2px;
+  font-weight: bold;
+  margin-left: -10px;
+  margin-bottom: 10px;
+  display: block;
+  border-bottom: 1px solid lightpink;
+}
+.update-body {
+  font-weight: 1;
+  margin-bottom: 14px;
+  display: block;
+}
+  </style>
+
+  </head>
+  <body>
+    <div id="content">
+      <div id="hero">
+        <h1><i>A91 or Nah?</i></h1>
+        <p>Use this handly flow chart to determine if your car is an A91 or just a poor&ndash;ass A90</p>
+
+      </div>
+      <div id="flow-chart">
+        <img src="https://storage.googleapis.com/a90garbage/flow.png">
+      </div>
+    </div>
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script>
+      ScrollReveal().reveal('.step', {
+        cleanup: true,
+        distance: '10%',
+        interval: 100,
+        origin: 'bottom',
+      });
+    </script>
+  </body>
+</html>
