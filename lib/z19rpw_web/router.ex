@@ -56,6 +56,7 @@ defmodule Z19rpwWeb.Router do
     get "/thc", PageController, :thc
     get "/jordan", PageController, :jordan
     get "/russia", PageController, :russia
+    get "/flow", PageController, :flow
     get "/bye", PageController, :err
     get "/coffee", PageController, :coffee
     get "/mentorship", PageController, :mentoring
