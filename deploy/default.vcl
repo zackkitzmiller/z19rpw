@@ -44,12 +44,14 @@ sub vcl_recv {
 
   if (req.http.Host ~ "ismymkvsupraana91.com") {
     std.log("a91");
+    # set req.backend_hint = z19rpw;
     unset req.http.Cookie;
     return (hash);
   }
 
   if (req.http.Host ~ "willmy062020plusecugotorussia.com") {
     std.log("ecu");
+    # set req.backend_hint = z19rpw;
     unset req.http.Cookie;
     return (hash);
   }
