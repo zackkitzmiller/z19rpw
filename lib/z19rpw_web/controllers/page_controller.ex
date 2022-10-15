@@ -25,6 +25,12 @@ defmodule Z19rpwWeb.PageController do
           "ecu-russia.html"
         )
 
+      "willmy062020plusecugotorussia.com" ->
+        render(
+          conn |> put_resp_header("cache-control", "max-age=86400") |> put_layout(false),
+          "flow.html"
+        )
+
       _ ->
         render(conn, "index.html")
     end
