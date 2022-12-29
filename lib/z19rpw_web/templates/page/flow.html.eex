@@ -61,11 +61,20 @@ h1 {
   margin-bottom: 14px;
   display: block;
 }
+
+#banner {
+    border-bottom: 1px solid lightpink;
+}
   </style>
 
   </head>
   <body>
     <div id="content">
+      <div class="message is-danger">
+        <div class="message-body">
+        Find this site helpful? <a href="https://www.etsy.com/clusterd/listing/1381618729/no-jz-t-shirt?utm_source=Copy&utm_medium=ListingManager&utm_campaign=a91&utm_term=so.lmsm&share_time=1672331612926">Buy a shirt!</a>
+        </div>
+      </div>
       <div id="hero">
         <h1><i>A91 or Nah?</i></h1>
         <p>Use this handly flow chart to determine if your car is an A91 or just a poor&ndash;ass A90</p>

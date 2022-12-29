@@ -8,7 +8,7 @@ jobs:
 
     strategy:
       matrix:
-        elixir: ["1.14"]
+        elixir: ["1.11"]
         otp: ["24"]
 
     container: elixir:${{ matrix.elixir }}
@@ -53,7 +53,7 @@ jobs:
 
     strategy:
       matrix:
-        elixir: ["1.14"]
+        elixir: ["1.11"]
         otp: ["24"]
 
     steps:
