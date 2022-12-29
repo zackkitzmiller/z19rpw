@@ -20,8 +20,8 @@ jobs:
       - name: Prepare Elixir Environment
         uses: erlef/setup-elixir@v1
         with:
-          elixir-version: "1.11.1"
-          otp-version: "23"
+          elixir-version: "1.11"
+          otp-version: "23.3.4"
       - name: Retrieve Mix Dependencies Cache
         uses: actions/cache@v1
         id: mix-cache

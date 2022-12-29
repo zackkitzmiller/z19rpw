@@ -61,6 +61,12 @@ h1 {
   margin-bottom: 14px;
   display: block;
 }
+.tshirt {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+}
   </style>
 
   </head>
@@ -71,11 +77,11 @@ h1 {
         Updates
         </div>
         <div class="message-body">
+          <span class="update-body">
+            Find this site helpful? <a href="https://www.etsy.com/clusterd/listing/1381618729/no-jz-t-shirt?utm_source=Copy&utm_medium=ListingManager&utm_campaign=ecu&utm_term=so.lmsm&share_time=1672331612926">Buy a shirt!</a>
+          </span>
           <span class="update">11-11-2022</span>
           <span class="update-body">It appears the manual transmission cars are <strong>now</strong> eligible for unlocking <strong>only</strong>.</span>
-
-          <span class="update">10-11-2022</span>
-          <span class="update-body">Femto is accepting all orders to their Finland location <a href="https://www.instagram.com/femtoevo/" target="_blank">@femotoevo</a>. Message them for more details.</span>
         </div>
       </article>
       <div id="hero">
