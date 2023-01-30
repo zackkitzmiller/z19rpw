@@ -6,6 +6,7 @@ import { Socket } from "phoenix"
 import { LiveSocket } from "phoenix_live_view"
 import hljs from "highlight.js"
 import "./nav"
+import bulmaCollapsible from '@creativebulma/bulma-collapsible';
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 
