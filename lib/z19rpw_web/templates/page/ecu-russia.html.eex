@@ -58,7 +58,7 @@ h1 {
   border-bottom: 1px solid lightpink;
 }
 .update-body {
-  font-weight: 1;
+  font-weight: normal;
   margin-bottom: 14px;
   display: block;
 }
@@ -93,6 +93,9 @@ h1 {
           <span style="justify-content: right;"><button class="delete" aria-label="delete" onclick="return this.parentNode.parentNode.parentNode.remove();"></button></span>
         </div>
         <div class="message-body">
+          <span class="update">05-10-2023</span>
+          <span class="update-body">BM3 CustomROM is <strong>Now Available</strong>. This means Flex Fuel, Anit-Lag, and Map Switching is now available with just an unlock. This still will require your ECU to go to Femto in Finland. If you have already unlocked your ECU with Femto, it will have to <strong>return</strong> to have BM3 CustomROM installed.</span>
+
           <span class="update">11-11-2022</span>
           <span class="update-body">It appears the manual transmission cars are <strong>now</strong> eligible for unlocking <strong>only</strong>.</span>
         </div>
@@ -114,10 +117,19 @@ h1 {
       </div>
       <div class="step">
         <h2 class="step-num">Step 3</h2>
+        <p class="step-p step-done">ECU to Femto, no cloning, partial unlock -> Calibration tunes only</p>
+        <p class="step-p is-italic step-done" style="text-align: center;">&mdash;OR&mdash;</p>
+        <p class="step-p step-done">ECU to Femto, cloned to spare 2020, full unlock -> FCT</p>
+      </div>
+      <div class="step">
+        <h2 class="step-num">Step 3a</h2>
         <div class="badge-here">YOU ARE HERE</div>
         <p class="step-p">ECU to Femto, no cloning, partial unlock -> Calibration tunes only</p>
         <p class="step-p is-italic step-done" style="text-align: center;">&mdash;OR&mdash;</p>
         <p class="step-p">ECU to Femto, cloned to spare 2020, full unlock -> FCT</p>
+        <p class="step-p is-italic step-done" style="text-align: center;">&mdash;OR&mdash;</p>
+        <p class="step-p">ECU to Femto, BM3 CustomROM &nbsp; <a href="https://www.instagram.com/p/CsFETGLJ2iF/" target="_blank">More Info Here&hellip;</a></p>
+
       </div>
       <div class="step">
         <h2 class="step-num">Step 4</h2>
