@@ -57,7 +57,7 @@ jobs:
           --output "type=image,push=true" \
           --file ./Dockerfile . \
           --tag $(echo "${{ secrets.DOCKERHUB_USERNAME }}" | tr '[:upper:]' '[:lower:]')/z19rpw:latest
-      - name: Kubernetes kubectl Action without aws
+      - name: Restart z19rpw Deployment
         uses: fno/kubernetes-action-no-aws@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
@@ -72,7 +72,7 @@ jobs:
         with:
           environment: production
       - name: Flush Varnish Cache
-        uses: Consensys/kubernetes-action@master
+        uses: fno/kubernetes-action-no-aws@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
