@@ -55,7 +55,7 @@
           <div class="media-content">
             <p class="is-size-4"><%= link("peek", to: "https://peek.com", target: "_blank") %></p>
             <p class="is-size-6">architect</p>
-            <p class="is-size-6">oct '21 &ndash; current</p>
+            <p class="is-size-6">oct '21 &ndash; Feb '23</p>
           </div>
         </div>
 
